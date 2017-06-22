@@ -22,7 +22,7 @@ import java.io.IOException;
 public class PrintUtil {
 
     /**
-     * 打印
+     * 把渠道商返回的字符串进行打印
      *
      * @param str 渠道给的一堆文字
      */
@@ -92,12 +92,12 @@ public class PrintUtil {
     /**
      * 打印图片
      *
-     * @param inputStream 图片的输入流
-     * @param width       宽度
-     * @param height      高度
-     * @param type        图片的格式
+     * @param fileInputStream 图片的输入流
+     * @param width           宽度
+     * @param height          高度
+     * @param type            图片的格式
      */
-    public static void printImage(FileInputStream inputStream, Integer width, Integer height, String type) {
+    public static void printImage(FileInputStream fileInputStream, Integer width, Integer height, String type) {
         try {
             DocFlavor dof = null;
             if (type.endsWith(".gif")) {
@@ -115,7 +115,7 @@ public class PrintUtil {
             DocAttributeSet das = new HashDocAttributeSet();
             // 设置打印纸张的大小（以毫米为单位）
             das.add(new MediaPrintableArea(0, 0, width, height, MediaPrintableArea.MM));
-            FileInputStream fin = inputStream;
+            FileInputStream fin = fileInputStream;
             Doc doc = new SimpleDoc(fin, dof, das);
             DocPrintJob job = ps.createPrintJob();
             job.print(doc, pras);
@@ -130,10 +130,10 @@ public class PrintUtil {
     /**
      * 打印图片 默认10X15
      *
-     * @param inputStream 输入流
-     * @param type        图片的格式
+     * @param fileInputStream 输入流
+     * @param type            图片的格式
      */
-    public static void printImage(FileInputStream inputStream, String type) {
-        printImage(inputStream, 100, 150, type);
+    public static void printImage(FileInputStream fileInputStream, String type) {
+        printImage(fileInputStream, 100, 150, type);
     }
 }
