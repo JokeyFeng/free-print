@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sellercube.usermanager.server.base.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="com.sellercube.usermanager.server.base.entity.User">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="updator" jdbcType="VARCHAR" property="updator"/>
+        <result column="del_time" jdbcType="TIMESTAMP" property="delTime"/>
+        <result column="is_delete" jdbcType="BIT" property="isDelete"/>
+        <result column="deltor" jdbcType="VARCHAR" property="deltor"/>
+        <result column="role" jdbcType="VARCHAR" property="role"/>
+        <result column="access_token" jdbcType="VARCHAR" property="accessToken"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, name, account, password, email, create_time, creator, update_time, updator, del_time, 
+    is_delete, deltor, role, access_token
+  </sql>
+    <select id="findByAccountAndPwd" resultMap="BaseResultMap">
+        SELECT name,account,email,role,access_token FROM user WHERE account=#{account} AND password=#{password}
+
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.sellercube.usermanager.server.base.entity.User">
+    insert into user (id, name, account, 
+      password, email, create_time, 
+      creator, update_time, updator, 
+      del_time, is_delete, deltor, 
+      role, access_token)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{creator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updator,jdbcType=VARCHAR}, 
+      #{delTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=BIT}, #{deltor,jdbcType=VARCHAR}, 
+      #{role,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.sellercube.usermanager.server.base.entity.User">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="email != null">
+                email,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="creator != null">
+                creator,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="updator != null">
+                updator,
+            </if>
+            <if test="delTime != null">
+                del_time,
+            </if>
+            <if test="isDelete != null">
+                is_delete,
+            </if>
+            <if test="deltor != null">
+                deltor,
+            </if>
+            <if test="role != null">
+                role,
+            </if>
+            <if test="accessToken != null">
+                access_token,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creator != null">
+                #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updator != null">
+                #{updator,jdbcType=VARCHAR},
+            </if>
+            <if test="delTime != null">
+                #{delTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDelete != null">
+                #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="deltor != null">
+                #{deltor,jdbcType=VARCHAR},
+            </if>
+            <if test="role != null">
+                #{role,jdbcType=VARCHAR},
+            </if>
+            <if test="accessToken != null">
+                #{accessToken,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sellercube.usermanager.server.base.entity.User">
+        update user
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="email != null">
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="creator != null">
+                creator = #{creator,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updator != null">
+                updator = #{updator,jdbcType=VARCHAR},
+            </if>
+            <if test="delTime != null">
+                del_time = #{delTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDelete != null">
+                is_delete = #{isDelete,jdbcType=BIT},
+            </if>
+            <if test="deltor != null">
+                deltor = #{deltor,jdbcType=VARCHAR},
+            </if>
+            <if test="role != null">
+                role = #{role,jdbcType=VARCHAR},
+            </if>
+            <if test="accessToken != null">
+                access_token = #{accessToken,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sellercube.usermanager.server.base.entity.User">
+    update user
+    set name = #{name,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      creator = #{creator,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      updator = #{updator,jdbcType=VARCHAR},
+      del_time = #{delTime,jdbcType=TIMESTAMP},
+      is_delete = #{isDelete,jdbcType=BIT},
+      deltor = #{deltor,jdbcType=VARCHAR},
+      role = #{role,jdbcType=VARCHAR},
+      access_token = #{accessToken,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
