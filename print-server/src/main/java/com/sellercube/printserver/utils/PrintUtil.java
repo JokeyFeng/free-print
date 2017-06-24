@@ -47,11 +47,11 @@ public class PrintUtil {
      */
     public static void printImage(String fileName, Integer width, Integer height) throws Exception {
         DocFlavor dof = null;
-        if (fileName.endsWith(".gif")) {
+        if (fileName.toLowerCase().endsWith(".gif")) {
             dof = DocFlavor.INPUT_STREAM.GIF;
-        } else if (fileName.endsWith(".jpg")) {
+        } else if (fileName.toLowerCase().endsWith(".jpg")) {
             dof = DocFlavor.INPUT_STREAM.JPEG;
-        } else if (fileName.endsWith(".png")) {
+        } else if (fileName.toLowerCase().endsWith(".png")) {
             dof = DocFlavor.INPUT_STREAM.PNG;
         }
         PrintService ps = PrintServiceLookup.lookupDefaultPrintService();
@@ -88,11 +88,11 @@ public class PrintUtil {
      */
     public static void printImage(FileInputStream fileInputStream, Integer width, Integer height, String type) throws Exception {
         DocFlavor dof = null;
-        if (type.endsWith(".gif")) {
+        if (type.toLowerCase().equals("gif")) {
             dof = DocFlavor.INPUT_STREAM.GIF;
-        } else if (type.endsWith(".jpg")) {
+        } else if (type.toLowerCase().endsWith("jpg")) {
             dof = DocFlavor.INPUT_STREAM.JPEG;
-        } else if (type.endsWith(".png")) {
+        } else if (type.toLowerCase().endsWith("png")) {
             dof = DocFlavor.INPUT_STREAM.PNG;
         }
         PrintService ps = PrintServiceLookup.lookupDefaultPrintService();
@@ -121,7 +121,7 @@ public class PrintUtil {
     }
 
     /**
-     * 打印PDF
+     * 打印PDF 电脑需要安装Adobe Acrobat Reader DC
      *
      * @param path pdf路径
      */
