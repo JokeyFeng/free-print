@@ -2,6 +2,7 @@ package com.sellercube.usermanager.server.base.service;
 
 import com.sellercube.usermanager.server.base.entity.Opreator;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -20,5 +21,5 @@ public interface OpreatorService {
 
     int updateByPrimaryKey(Opreator record);
 
-    List<Opreator> list();
+    List<Opreator> list(HttpServletRequest request);
 }

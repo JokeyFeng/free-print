@@ -19,19 +19,20 @@ import java.util.Objects;
 @Component
 public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
 
-    private static final Logger log= LoggerFactory.getLogger(AuthHandlerInterceptor.class);
+    private static final Logger log = LoggerFactory.getLogger(AuthHandlerInterceptor.class);
 
     @Value("${access.token}")
     private String secret;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getRequestURI().contains("swagger") || request.getRequestURI().contains("/v2/api-docs")) {
+        if (request.getRequestURI().contains("swagger") || request.getRequestURI().contains("login")
+                || request.getRequestURI().contains("/v2/api-docs")) {
             return true;
         }
 
         String token = request.getHeader("Authorization");
-        if (!Objects.equals(secret,token)){
+        if (!Objects.equals(secret, token)) {
             log.error("auth fail");
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json;charset=UTF-8");

@@ -4,6 +4,8 @@ package com.sellercube.usermanager.server.base.mapper;
 import com.sellercube.usermanager.server.base.entity.Opreator;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface OpreatorMapper {
     int deleteByPrimaryKey(Integer id);
@@ -17,4 +19,6 @@ public interface OpreatorMapper {
     int updateByPrimaryKeySelective(Opreator record);
 
     int updateByPrimaryKey(Opreator record);
+
+    List<Opreator> list();
 }

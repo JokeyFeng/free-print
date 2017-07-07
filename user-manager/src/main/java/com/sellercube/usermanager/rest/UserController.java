@@ -9,6 +9,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by Chenjing on 2017/6/20.
  */
@@ -54,7 +56,7 @@ public class UserController {
 
     @GetMapping("/operators")
     @ApiOperation(value = "获取所有操作员")
-    private Result list() {
-        return ResultUtil.success(opreatorService.list());
+    private Result list(HttpServletRequest request) {
+        return ResultUtil.success(opreatorService.list(request));
     }
 }

@@ -1,11 +1,14 @@
 package com.sellercube.usermanager.server.base.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sellercube.usermanager.server.base.entity.Opreator;
 import com.sellercube.usermanager.server.base.mapper.OpreatorMapper;
 import com.sellercube.usermanager.server.base.service.OpreatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -48,7 +51,9 @@ public class OpreatorServiceImpl implements OpreatorService {
     }
 
     @Override
-    public List<Opreator> list() {
-        return null;
+    public List<Opreator> list(HttpServletRequest request) {
+        PageHelper.startPage(Integer.valueOf(request.getParameter("offset")),
+                Integer.valueOf(request.getParameter("limit")));
+        return opreatorMapper.list();
     }
 }
