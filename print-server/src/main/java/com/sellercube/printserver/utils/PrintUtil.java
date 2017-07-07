@@ -12,6 +12,7 @@ import javax.print.attribute.standard.MediaPrintableArea;
 import javax.print.attribute.standard.OrientationRequested;
 import javax.print.attribute.standard.PrintQuality;
 import java.io.FileInputStream;
+import java.io.InputStream;
 
 /**
  * 打印工具类
@@ -81,12 +82,12 @@ public class PrintUtil {
     /**
      * 打印图片
      *
-     * @param fileInputStream 图片的输入流
+     * @param inputStream 图片的输入流
      * @param width           宽度 mm
      * @param height          高度 mm
      * @param type            图片的格式
      */
-    public static void printImage(FileInputStream fileInputStream, Integer width, Integer height, String type) throws Exception {
+    public static void printImage(InputStream inputStream, Integer width, Integer height, String type) throws Exception {
         DocFlavor dof = null;
         if (type.toLowerCase().equals("gif")) {
             dof = DocFlavor.INPUT_STREAM.GIF;
@@ -103,21 +104,20 @@ public class PrintUtil {
         DocAttributeSet das = new HashDocAttributeSet();
         // 设置打印纸张的大小（以毫米为单位）
         das.add(new MediaPrintableArea(0, 0, width, height, MediaPrintableArea.MM));
-        FileInputStream fin = fileInputStream;
-        Doc doc = new SimpleDoc(fin, dof, das);
+        Doc doc = new SimpleDoc(inputStream, dof, das);
         DocPrintJob job = ps.createPrintJob();
         job.print(doc, pras);
-        fin.close();
+        inputStream.close();
     }
 
     /**
      * 打印图片 默认100X150
      *
-     * @param fileInputStream 输入流
+     * @param inputStream 输入流
      * @param type            图片的格式
      */
-    public static void printImage(FileInputStream fileInputStream, String type) throws Exception {
-        printImage(fileInputStream, 100, 150, type);
+    public static void printImage(InputStream inputStream, String type) throws Exception {
+        printImage(inputStream, 100, 150, type);
     }
 
     /**

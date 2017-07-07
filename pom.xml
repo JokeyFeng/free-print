@@ -17,6 +17,7 @@
         <module>api-gateway</module>
         <module>print-server</module>
         <module>user-manager</module>
+        <module>admin-monitor</module>
     </modules>
 
     <parent>
