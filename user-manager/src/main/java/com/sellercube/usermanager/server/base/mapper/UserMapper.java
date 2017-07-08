@@ -32,4 +32,8 @@ public interface UserMapper {
     List<User> searchByCondition(@Param("account") String account,@Param("username") String name);
 
     List<User> list();
+
+    int countByNameRepeat(String name);
+
+    int countByAccountRepeat(String account);
 }

@@ -3,7 +3,7 @@ package com.sellercube.usermanager.server.base.entity;
 import java.io.Serializable;
 import java.util.Date;
 
-public class printType implements Serializable {
+public class PrintType implements Serializable {
     private Integer id;
 
     private String typeName;

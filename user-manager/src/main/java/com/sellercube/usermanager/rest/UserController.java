@@ -1,6 +1,7 @@
 package com.sellercube.usermanager.rest;
 
 import com.fasterxml.jackson.annotation.JsonView;
+import com.google.common.collect.ImmutableMap;
 import com.sellercube.common.entity.Result;
 import com.sellercube.common.entity.View;
 import com.sellercube.common.utils.ResultUtil;
@@ -49,7 +50,7 @@ public class UserController {
     @JsonView(View.BaseView.class)
     private Result list(@RequestParam(value = "pageNum", required = false) String pageNum,
                         @RequestParam(value = "limit", required = false) String limit) {
-        return ResultUtil.success(userService.list(pageNum,limit));
+        return ResultUtil.success(userService.list(pageNum, limit));
     }
 
     @GetMapping("/users/search")
@@ -59,6 +60,13 @@ public class UserController {
                           @RequestParam(value = "account", required = false) String account,
                           @RequestParam(value = "pageNum", required = false) String pageNum,
                           @RequestParam(value = "limit", required = false) String limit) throws Exception {
-        return ResultUtil.success(userService.search(username, account,pageNum,limit));
+        return ResultUtil.success(userService.search(username, account, pageNum, limit));
+    }
+
+    @GetMapping("/user/repeat")
+    @ApiOperation(value = "判断用户名和登录名是否重复", notes = "一次传入一个参数,否则将以参数为name的结果为准")
+    private Result update(@RequestParam(value = "name", required = false) String name,
+                          @RequestParam(value = "account", required = false) String account) throws Exception {
+        return ResultUtil.success(ImmutableMap.of("isRepeat",userService.isConditionRepeat(name,account)));
     }
 }
