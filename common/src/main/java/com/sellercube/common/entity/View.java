@@ -5,7 +5,7 @@ package com.sellercube.common.entity;
  * jsonview
  */
 public class View {
-    public static class BaseView {}
-    public static class Summary extends BaseView{}
-    public static class Public extends Summary {}
+    public interface BaseView extends ResultJsonView.BaseView {}
+    public interface Summary extends BaseView{}
+    public interface Public extends Summary {}
 }

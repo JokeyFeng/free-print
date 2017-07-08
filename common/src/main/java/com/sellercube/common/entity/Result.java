@@ -1,13 +1,22 @@
 package com.sellercube.common.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import java.io.Serializable;
+
 /**
  * Created by chenjing on 2017/5/3.
  * 统一返回结果
  */
-public class Result<T> {
+public class Result<T> implements Serializable {
+    @JsonView(ResultJsonView.BaseView.class)
     private Integer code;
+
+    @JsonView(ResultJsonView.BaseView.class)
     private String msg;
-    private  T data;
+
+    @JsonView(ResultJsonView.BaseView.class)
+    private T data;
 
     public Integer getCode() {
         return code;

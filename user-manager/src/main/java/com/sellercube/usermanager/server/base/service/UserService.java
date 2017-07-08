@@ -1,6 +1,9 @@
 package com.sellercube.usermanager.server.base.service;
 
+import com.github.pagehelper.PageInfo;
 import com.sellercube.usermanager.server.base.entity.User;
+
+import java.util.List;
 
 /**
  * Created by Chenjing on 2017/6/20.
@@ -26,4 +29,8 @@ public interface UserService {
      * @return
      */
     User login(String account, String password) throws Exception;
+
+    List<User> list(String pageNum, String limit);
+
+    PageInfo<User> search(String username, String account,String pageNum,String limit);
 }

@@ -1,6 +1,7 @@
 package com.sellercube.usermanager.server.base.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sellercube.common.utils.MD5Util;
 import com.sellercube.usermanager.server.base.entity.User;
 import com.sellercube.usermanager.server.base.mapper.UserMapper;
@@ -11,7 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * Created by Chenjing on 2017/6/20.
@@ -66,5 +70,21 @@ public class UserServiceImpl implements UserService {
         }
         user.setAccessToken(token);
         return user;
+    }
+
+    @Override
+    public List<User> list(String pageNum,String limit) {
+        Optional<String> pageNum1 = Optional.ofNullable(pageNum);
+        Optional<String> limit1 = Optional.ofNullable(limit);
+        PageHelper.startPage(Integer.valueOf(pageNum1.orElse("1")),Integer.valueOf(limit1.orElse("10")));
+        return userMapper.list();
+    }
+
+    @Override
+    public PageInfo<User> search(String username, String account,String pageNum,String limit) {
+        Optional<String> pageNum1 = Optional.ofNullable(pageNum);
+        Optional<String> limit1 = Optional.ofNullable(limit);
+        PageHelper.startPage(Integer.valueOf(pageNum1.orElse("1")),Integer.valueOf(limit1.orElse("10")));
+        return new PageInfo<>(userMapper.searchByCondition(account,username));
     }
 }

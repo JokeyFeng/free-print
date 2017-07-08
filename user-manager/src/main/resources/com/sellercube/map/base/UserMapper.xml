@@ -21,8 +21,29 @@
     id, name, account, password, email, create_time, creator, update_time, updator, del_time, 
     is_delete, deltor, role, access_token
   </sql>
+
+    <select id="searchByCondition" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        WHERE 1=1
+        <if test="username != null">
+            AND name like CONCAT('%',#{username},'%')
+        </if>
+
+        <if test="account != null">
+            AND account like CONCAT('%',#{account},'%')
+        </if>
+    </select>
+
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+
+    </select>
     <select id="findByAccountAndPwd" resultMap="BaseResultMap">
-        SELECT name,account,email,role,access_token FROM user WHERE account=#{account} AND password=#{password}
+        SELECT <include refid="Base_Column_List"/> FROM user WHERE account=#{account} AND password=#{password}
 
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

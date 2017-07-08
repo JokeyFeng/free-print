@@ -1,35 +1,39 @@
 package com.sellercube.usermanager.server.base.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.sellercube.common.entity.View;
+
 import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable {
+    @JsonView(View.BaseView.class)
     private Integer id;
-
+    @JsonView(View.BaseView.class)
     private String name;
-
+    @JsonView(View.BaseView.class)
     private String account;
 
     private String password;
-
+    @JsonView(View.BaseView.class)
     private String email;
-
+    @JsonView(View.BaseView.class)
     private Date createTime;
-
+    @JsonView(View.BaseView.class)
     private String creator;
-
+    @JsonView(View.BaseView.class)
     private Date updateTime;
-
+    @JsonView(View.BaseView.class)
     private String updator;
-
+    @JsonView(View.BaseView.class)
     private Date delTime;
-
+    @JsonView(View.BaseView.class)
     private Boolean isDelete;
-
+    @JsonView(View.BaseView.class)
     private String deltor;
-
+    @JsonView(View.BaseView.class)
     private String role;
-
+    @JsonView(View.BaseView.class)
     private String accessToken;
 
     public Integer getId() {

@@ -5,6 +5,8 @@ import com.sellercube.usermanager.server.base.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 @Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -26,4 +28,8 @@ public interface UserMapper {
      * @return
      */
     User findByAccountAndPwd(@Param("account") String account, @Param("password") String password);
+
+    List<User> searchByCondition(@Param("account") String account,@Param("username") String name);
+
+    List<User> list();
 }
