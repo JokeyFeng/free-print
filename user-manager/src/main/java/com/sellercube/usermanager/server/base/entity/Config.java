@@ -6,7 +6,7 @@ import java.util.Date;
 public class Config implements Serializable {
     private Integer id;
 
-    private Integer ip;
+    private String ip;
 
     private String remark;
 
@@ -36,11 +36,11 @@ public class Config implements Serializable {
         this.id = id;
     }
 
-    public Integer getIp() {
+    public String getIp() {
         return ip;
     }
 
-    public void setIp(Integer ip) {
+    public void setIp(String ip) {
         this.ip = ip;
     }
 

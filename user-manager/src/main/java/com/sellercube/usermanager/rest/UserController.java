@@ -43,7 +43,7 @@ public class UserController {
 
     @DeleteMapping("/users/{id}")
     @ApiOperation(value = "删除操作员", notes = "根据id删除操作员")
-    private Result delte(@PathVariable Integer id) {
+    private Result delte(@PathVariable("id") Integer id) {
         return ResultUtil.success(userService.deleteByPrimaryKey(id));
     }
 

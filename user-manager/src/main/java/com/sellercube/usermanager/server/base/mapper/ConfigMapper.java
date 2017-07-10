@@ -3,6 +3,9 @@ package com.sellercube.usermanager.server.base.mapper;
 
 import com.sellercube.usermanager.server.base.entity.Config;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface ConfigMapper {
@@ -17,4 +20,10 @@ public interface ConfigMapper {
     int updateByPrimaryKeySelective(Config record);
 
     int updateByPrimaryKey(Config record);
+
+    List<Config> list();
+
+    List<Config> searchByCondition(@Param("printName") String printName, @Param("ip") String ip, @Param("mac") String mac);
+
+    int countByPrintNameRepeat(String printName);
 }
