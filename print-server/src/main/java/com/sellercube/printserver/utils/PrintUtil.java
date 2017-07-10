@@ -89,11 +89,11 @@ public class PrintUtil {
      */
     public static void printImage(InputStream inputStream, Integer width, Integer height, String type) throws Exception {
         DocFlavor dof = null;
-        if (type.toLowerCase().equals("gif")) {
+        if (type.toLowerCase().equals(".gif")) {
             dof = DocFlavor.INPUT_STREAM.GIF;
-        } else if (type.toLowerCase().endsWith("jpg")) {
+        } else if (type.toLowerCase().endsWith(".jpg")) {
             dof = DocFlavor.INPUT_STREAM.JPEG;
-        } else if (type.toLowerCase().endsWith("png")) {
+        } else if (type.toLowerCase().endsWith(".png")) {
             dof = DocFlavor.INPUT_STREAM.PNG;
         }
         PrintService ps = PrintServiceLookup.lookupDefaultPrintService();

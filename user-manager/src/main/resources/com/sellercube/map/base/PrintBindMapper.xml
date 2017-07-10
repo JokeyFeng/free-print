@@ -20,6 +20,57 @@
     id, config_id, print_type_id, is_enable, user_id, file, create_time, creator, update_time, 
     updator, del_time, deletor, is_delete
   </sql>
+  <!--配置一个resultMap 指定返回的类型 -->
+  <resultMap id="JsonResult" type="com.sellercube.usermanager.vo.JsonResult">
+    <id column="print_name" property="printName" jdbcType="VARCHAR"/>
+    <result column="type_name" property="typeName" jdbcType="VARCHAR" />
+    <result column="is_enable" property="isEnable" jdbcType="BIT" />
+    <result column="name" property="name" jdbcType="VARCHAR"/>
+    <result column="creator" property="creator" jdbcType="VARCHAR"/>
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    <result column="updator" property="editor" jdbcType="VARCHAR"/>
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+  </resultMap>
+  <select id="searchByCondition" resultMap="JsonResult">
+    SELECT con.print_name
+			,pt.type_name
+			,pb.is_enable
+			,u.name
+			,pb.creator
+			,pb.create_time
+			,pb.updator
+			,pb.update_time
+    FROM print_bind pb
+	INNER JOIN config con
+		ON pb.config_id = con.id
+	INNER JOIN print_type pt
+		ON pb.print_type_id = pt.id
+	LEFT JOIN user u
+		ON pb.user_id = u.id
+    WHERE pb.config_id = #{configId}
+        AND pb.print_type_id = #{typeId}
+        AND pb.is_enable = #{isEnable}
+        AND pb.user_id = #{userId};
+  </select>
+
+  <select id="list" resultMap="JsonResult">
+    SELECT con.print_name
+			,pt.type_name
+			,pb.is_enable
+			,u.name
+			,pb.creator
+			,pb.create_time
+			,pb.updator
+			,pb.update_time
+    FROM print_bind pb
+	INNER JOIN config con
+		ON pb.config_id = con.id
+	INNER JOIN print_type pt
+		ON pb.print_type_id = pt.id
+	LEFT JOIN user u
+		ON pb.user_id = u.id;
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
