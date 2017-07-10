@@ -1,3 +1,4 @@
+/*
 
 package com.sellercube.usermanager.interceptor;
 
@@ -9,15 +10,12 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-
+*/
 /**
  * Created by chenjing on 2017/7/7.
- */
+ *//*
+
 
 @Component
 @Aspect
@@ -26,20 +24,23 @@ public class LogRecord {
 
     ThreadLocal<Long> startTime = new ThreadLocal<>();
 
-    @Pointcut("execution(public * com.sellercube.usermanager.rest.*.*(..))")
+    @Pointcut("execution(private * com.sellercube.usermanager.rest..*(..))")
     public void log() {
     }
 
 
     @Before("log()")
     public void before(JoinPoint joinPoint) throws Exception {
-        startTime.set(System.currentTimeMillis());
+        System.out.println("hello");
+*/
+/*        startTime.set(System.currentTimeMillis());
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         logger.info("【request url : " + request.getRequestURL().toString() + "http_method : " + request.getMethod()
                 + "IP : " + request.getRemoteAddr() + "class_method : "
                 + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName() + "args : "
-                + Arrays.toString(joinPoint.getArgs())+"】");
+                + Arrays.toString(joinPoint.getArgs())+"】");*//*
+
     }
 
     @AfterReturning(returning = "ret", pointcut = "log()")
@@ -48,3 +49,4 @@ public class LogRecord {
     }
 }
 
+*/
