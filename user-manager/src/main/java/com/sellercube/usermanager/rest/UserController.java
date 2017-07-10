@@ -6,6 +6,7 @@ import com.sellercube.common.entity.Result;
 import com.sellercube.common.entity.View;
 import com.sellercube.common.utils.ResultUtil;
 import com.sellercube.usermanager.server.base.entity.User;
+import com.sellercube.usermanager.server.base.entity.UserDTO;
 import com.sellercube.usermanager.server.base.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ public class UserController {
 
     @PutMapping("/users/{id}")
     @ApiOperation(value = "更新操作员", notes = "传入json对象根据id更新操作员信息")
-    private Result update(@RequestBody User user, @PathVariable("id") Integer id) {
+    private Result update(@RequestBody UserDTO user, @PathVariable("id") Integer id) throws Exception {
         user.setId(id);
         return ResultUtil.success(userService.updateByPrimaryKeySelective(user));
     }
@@ -44,6 +45,12 @@ public class UserController {
     @ApiOperation(value = "删除操作员", notes = "根据id删除操作员")
     private Result delte(@PathVariable Integer id) {
         return ResultUtil.success(userService.deleteByPrimaryKey(id));
+    }
+
+    @DeleteMapping("/users")
+    @ApiOperation(value = "批量删除操作员", notes = "多个id用逗号分隔")
+    private Result a(@RequestBody String ids) {
+        return ResultUtil.success(userService.deleteByPrimaryKey(ids));
     }
 
     @GetMapping("/users")

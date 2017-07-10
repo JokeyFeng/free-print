@@ -2,6 +2,7 @@ package com.sellercube.usermanager.server.base.service;
 
 import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.User;
+import com.sellercube.usermanager.server.base.entity.UserDTO;
 
 /**
  * Created by Chenjing on 2017/6/20.
@@ -9,13 +10,15 @@ import com.sellercube.usermanager.server.base.entity.User;
 public interface UserService {
     int deleteByPrimaryKey(Integer id);
 
+    int deleteByPrimaryKey(String ids);
+
     int insert(User record);
 
     int insertSelective(User record);
 
     User selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeySelective(User record);
+    int updateByPrimaryKeySelective(UserDTO record) throws Exception;
 
     int updateByPrimaryKey(User record);
 
