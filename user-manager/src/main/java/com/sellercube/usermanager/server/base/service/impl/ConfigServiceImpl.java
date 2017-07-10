@@ -23,9 +23,14 @@ public class ConfigServiceImpl implements ConfigService {
     private ConfigMapper configMapper;
 
     @Override
-    public int deleteByPrimaryKey(String ids) {
+    public int deleteByPrimaryKeyALL(String ids) {
         SplitUtil.split(",", ids).forEach(x -> configMapper.deleteByPrimaryKey(Integer.valueOf(x)));
         return 1;
+    }
+
+    @Override
+    public int deleteByPrimaryKey(Integer id) {
+        return configMapper.deleteByPrimaryKey(id);
     }
 
     @Override
