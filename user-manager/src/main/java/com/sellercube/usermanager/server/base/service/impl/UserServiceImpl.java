@@ -2,8 +2,10 @@ package com.sellercube.usermanager.server.base.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.sellercube.common.utils.MD5Util;
+import com.sellercube.common.utils.SplitUtil;
 import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.User;
+import com.sellercube.usermanager.server.base.entity.UserDTO;
 import com.sellercube.usermanager.server.base.mapper.UserMapper;
 import com.sellercube.usermanager.server.base.service.UserService;
 import org.slf4j.Logger;
@@ -12,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -36,12 +41,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public int deleteByPrimaryKey(String ids) {
+        SplitUtil.split(",", ids).forEach(x -> userMapper.deleteByPrimaryKey(Integer.valueOf(x)));
+        return 1;
+    }
+
+    @Override
     public int insert(User record) {
+        record.setCreateTime(new Date());
+        record.setUpdateTime(new Date());
         return userMapper.insert(record);
     }
 
     @Override
     public int insertSelective(User record) {
+        record.setCreateTime(new Date());
+        record.setUpdateTime(new Date());
         return userMapper.insertSelective(record);
     }
 
@@ -51,12 +66,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateByPrimaryKeySelective(User record) {
+    public int updateByPrimaryKeySelective(UserDTO record) throws Exception {
+        Optional<User> user = Optional.ofNullable(userMapper.findByAccountAndPwd(record.getAccount(), MD5Util.encryption(record.getPassword())));
+        user.orElseThrow(Exception::new);
+        record.setUpdateTime(new Date());
+        record.setPassword(MD5Util.encryption(record.getNewPassword()));
         return userMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(User record) {
+        record.setUpdateTime(new Date());
         return userMapper.updateByPrimaryKey(record);
     }
 

@@ -8,6 +8,7 @@ import com.sellercube.usermanager.server.base.service.PrintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -26,11 +27,15 @@ public class PrintServiceImpl implements PrintService {
 
     @Override
     public int insert(PrintType record) {
+        record.setCreateTime(new Date());
+        record.setUpdateTime(new Date());
         return printTypeMapper.insert(record);
     }
 
     @Override
     public int insertSelective(PrintType record) {
+        record.setCreateTime(new Date());
+        record.setUpdateTime(new Date());
         return printTypeMapper.insertSelective(record);
     }
 
@@ -41,11 +46,13 @@ public class PrintServiceImpl implements PrintService {
 
     @Override
     public int updateByPrimaryKeySelective(PrintType record) {
+        record.setUpdateTime(new Date());
         return printTypeMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(PrintType record) {
+        record.setUpdateTime(new Date());
         return printTypeMapper.updateByPrimaryKey(record);
     }
 
