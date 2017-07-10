@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="config_id" jdbcType="INTEGER" property="configId" />
     <result column="print_type_id" jdbcType="INTEGER" property="printTypeId" />
-    <result column="is_enable" jdbcType="VARCHAR" property="isEnable" />
+    <result column="is_enable" jdbcType="BIT" property="isEnable" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="file" jdbcType="VARCHAR" property="file" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -14,7 +14,7 @@
     <result column="updator" jdbcType="VARCHAR" property="updator" />
     <result column="del_time" jdbcType="TIMESTAMP" property="delTime" />
     <result column="deletor" jdbcType="VARCHAR" property="deletor" />
-    <result column="is_delete" jdbcType="VARCHAR" property="isDelete" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
   </resultMap>
   <sql id="Base_Column_List">
     id, config_id, print_type_id, is_enable, user_id, file, create_time, creator, update_time, 
@@ -37,10 +37,10 @@
       updator, del_time, deletor, 
       is_delete)
     values (#{id,jdbcType=INTEGER}, #{configId,jdbcType=INTEGER}, #{printTypeId,jdbcType=INTEGER}, 
-      #{isEnable,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, #{file,jdbcType=VARCHAR}, 
+      #{isEnable,jdbcType=BIT}, #{userId,jdbcType=INTEGER}, #{file,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{creator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{updator,jdbcType=VARCHAR}, #{delTime,jdbcType=TIMESTAMP}, #{deletor,jdbcType=VARCHAR}, 
-      #{isDelete,jdbcType=VARCHAR})
+      #{isDelete,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.sellercube.usermanager.server.base.entity.PrintBind">
     insert into print_bind
@@ -96,7 +96,7 @@
         #{printTypeId,jdbcType=INTEGER},
       </if>
       <if test="isEnable != null">
-        #{isEnable,jdbcType=VARCHAR},
+        #{isEnable,jdbcType=BIT},
       </if>
       <if test="userId != null">
         #{userId,jdbcType=INTEGER},
@@ -123,7 +123,7 @@
         #{deletor,jdbcType=VARCHAR},
       </if>
       <if test="isDelete != null">
-        #{isDelete,jdbcType=VARCHAR},
+        #{isDelete,jdbcType=BIT},
       </if>
     </trim>
   </insert>
@@ -137,7 +137,7 @@
         print_type_id = #{printTypeId,jdbcType=INTEGER},
       </if>
       <if test="isEnable != null">
-        is_enable = #{isEnable,jdbcType=VARCHAR},
+        is_enable = #{isEnable,jdbcType=BIT},
       </if>
       <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
@@ -164,7 +164,7 @@
         deletor = #{deletor,jdbcType=VARCHAR},
       </if>
       <if test="isDelete != null">
-        is_delete = #{isDelete,jdbcType=VARCHAR},
+        is_delete = #{isDelete,jdbcType=BIT},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -173,7 +173,7 @@
     update print_bind
     set config_id = #{configId,jdbcType=INTEGER},
       print_type_id = #{printTypeId,jdbcType=INTEGER},
-      is_enable = #{isEnable,jdbcType=VARCHAR},
+      is_enable = #{isEnable,jdbcType=BIT},
       user_id = #{userId,jdbcType=INTEGER},
       file = #{file,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -182,7 +182,7 @@
       updator = #{updator,jdbcType=VARCHAR},
       del_time = #{delTime,jdbcType=TIMESTAMP},
       deletor = #{deletor,jdbcType=VARCHAR},
-      is_delete = #{isDelete,jdbcType=VARCHAR}
+      is_delete = #{isDelete,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

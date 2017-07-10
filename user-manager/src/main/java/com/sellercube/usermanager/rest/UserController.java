@@ -22,6 +22,7 @@ public class UserController {
 
     @PostMapping("/login")
     @ApiOperation(value = "登录接口")
+    @JsonView(View.BaseView.class)
     private Result login(@RequestParam("username") String username, @RequestParam("password") String password) throws Exception {
         return ResultUtil.success(userService.login(username, password));
     }

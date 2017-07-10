@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
@@ -19,8 +18,8 @@ public class UserManagerApplication extends WebMvcConfigurerAdapter {
     @Autowired
     AuthHandlerInterceptor authHandlerInterceptor;
 
-    public void addInterceptors(InterceptorRegistry registry) {
+/*    public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authHandlerInterceptor)
                 .addPathPatterns("/**");
-    }
+    }*/
 }
