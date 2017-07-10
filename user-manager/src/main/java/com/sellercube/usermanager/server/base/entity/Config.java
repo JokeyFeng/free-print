@@ -12,7 +12,7 @@ public class Config implements Serializable {
 
     private String mac;
 
-    private Integer printTypeName;
+    private String printName;
 
     private Date cretaeTime;
 
@@ -60,12 +60,12 @@ public class Config implements Serializable {
         this.mac = mac == null ? null : mac.trim();
     }
 
-    public Integer getPrintTypeName() {
-        return printTypeName;
+    public String getPrintName() {
+        return printName;
     }
 
-    public void setPrintTypeName(Integer printTypeName) {
-        this.printTypeName = printTypeName;
+    public void setPrintName(String printName) {
+        this.printName = printName == null ? null : printName.trim();
     }
 
     public Date getCretaeTime() {
@@ -131,7 +131,7 @@ public class Config implements Serializable {
                 ", ip=" + ip +
                 ", remark='" + remark + '\'' +
                 ", mac='" + mac + '\'' +
-                ", printTypeName=" + printTypeName +
+                ", printName='" + printName + '\'' +
                 ", cretaeTime=" + cretaeTime +
                 ", creator='" + creator + '\'' +
                 ", updateTime=" + updateTime +
