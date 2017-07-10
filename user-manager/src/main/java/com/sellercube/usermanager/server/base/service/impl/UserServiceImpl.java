@@ -8,7 +8,6 @@ import com.sellercube.usermanager.server.base.mapper.UserMapper;
 import com.sellercube.usermanager.server.base.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

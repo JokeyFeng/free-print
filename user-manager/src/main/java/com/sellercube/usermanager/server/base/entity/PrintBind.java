@@ -1,16 +1,15 @@
 package com.sellercube.usermanager.server.base.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class PrintBind implements Serializable {
+public class PrintBind {
     private Integer id;
 
     private Integer configId;
 
     private Integer printTypeId;
 
-    private String isEnable;
+    private Boolean isEnable;
 
     private Integer userId;
 
@@ -28,7 +27,7 @@ public class PrintBind implements Serializable {
 
     private String deletor;
 
-    private String isDelete;
+    private Boolean isDelete;
 
     public Integer getId() {
         return id;
@@ -54,12 +53,12 @@ public class PrintBind implements Serializable {
         this.printTypeId = printTypeId;
     }
 
-    public String getIsEnable() {
+    public Boolean getIsEnable() {
         return isEnable;
     }
 
-    public void setIsEnable(String isEnable) {
-        this.isEnable = isEnable == null ? null : isEnable.trim();
+    public void setIsEnable(Boolean isEnable) {
+        this.isEnable = isEnable;
     }
 
     public Integer getUserId() {
@@ -126,30 +125,11 @@ public class PrintBind implements Serializable {
         this.deletor = deletor == null ? null : deletor.trim();
     }
 
-    public String getIsDelete() {
+    public Boolean getIsDelete() {
         return isDelete;
     }
 
-    public void setIsDelete(String isDelete) {
-        this.isDelete = isDelete == null ? null : isDelete.trim();
-    }
-
-    @Override
-    public String toString() {
-        return "PrintBind{" +
-                "id=" + id +
-                ", configId=" + configId +
-                ", printTypeId=" + printTypeId +
-                ", isEnable='" + isEnable + '\'' +
-                ", userId=" + userId +
-                ", file='" + file + '\'' +
-                ", createTime=" + createTime +
-                ", creator='" + creator + '\'' +
-                ", updateTime=" + updateTime +
-                ", updator='" + updator + '\'' +
-                ", delTime=" + delTime +
-                ", deletor='" + deletor + '\'' +
-                ", isDelete='" + isDelete + '\'' +
-                '}';
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
     }
 }
