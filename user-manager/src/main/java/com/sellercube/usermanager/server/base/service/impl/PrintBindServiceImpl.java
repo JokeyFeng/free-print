@@ -1,6 +1,7 @@
 package com.sellercube.usermanager.server.base.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.sellercube.common.utils.SplitUtil;
 import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.PrintBind;
 import com.sellercube.usermanager.server.base.mapper.PrintBindMapper;
@@ -27,7 +28,7 @@ public class PrintBindServiceImpl implements PrintBindService {
     @Override
     public int insert(PrintBind record) throws Exception {
         List<JsonResult> list = printBindMapper.searchByCondition(record.getConfigId(), record.getPrintTypeId(), record.getIsEnable(), record.getUserId());
-        if (list.size() == 0) {
+        if (list.size() != 0) {
             throw new Exception("保存失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
         }
         record.setCreateTime(new Date());
@@ -38,7 +39,7 @@ public class PrintBindServiceImpl implements PrintBindService {
     @Override
     public int insertSelective(PrintBind record) throws Exception{
         List<JsonResult> list = printBindMapper.searchByCondition(record.getConfigId(), record.getPrintTypeId(), record.getIsEnable(), record.getUserId());
-        if (list.size() == 0) {
+        if (list.size() != 0) {
             throw new Exception("保存失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
         }
         record.setCreateTime(new Date());
@@ -49,6 +50,15 @@ public class PrintBindServiceImpl implements PrintBindService {
     @Override
     public int deleteByPrimaryKey(Integer id) {
         return printBindMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int deleteByKeys(String ids) {
+        List<String> keys = SplitUtil.split(",", ids);
+        for (String key : keys) {
+            printBindMapper.deleteByPrimaryKey(Integer.valueOf(key));
+        }
+        return 1;
     }
 
     @Override
