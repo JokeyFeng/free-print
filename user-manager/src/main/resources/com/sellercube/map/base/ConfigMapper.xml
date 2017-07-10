@@ -15,10 +15,37 @@
     <result column="deletor" jdbcType="VARCHAR" property="deletor" />
     <result column="is_delete" jdbcType="BIT" property="isDelete" />
   </resultMap>
+
   <sql id="Base_Column_List">
     id, ip, remark, mac, print_name, cretae_time, creator, update_time, updator, del_time, 
     deletor, is_delete
   </sql>
+
+  <select id="list" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from config
+  </select>
+
+  <select id="searchByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from config
+    WHERE 1=1
+    <if test="printName != null">
+      AND printName like CONCAT('%',#{printName},'%')
+    </if>
+
+    <if test="ip != null">
+      AND ip like CONCAT('%',#{ip},'%')
+    </if>
+
+    <if test="mac != null">
+      AND mac like CONCAT('%',#{mac},'%')
+    </if>
+  </select>
+
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
