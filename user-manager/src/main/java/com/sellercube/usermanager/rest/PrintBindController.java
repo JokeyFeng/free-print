@@ -23,12 +23,14 @@ public class PrintBindController {
 
     @PostMapping("/printbind")
     @ApiOperation(value = "新增【打印绑定】的信息", notes = "传入json对象进行新增操作")
-    public Result insert(@RequestBody PrintBind printBind){        return ResultUtil.success(printBindService.insert(printBind));
+    public Result insert(@RequestBody PrintBind printBind) throws Exception {
+        return ResultUtil.success(printBindService.insert(printBind));
     }
 
     @PutMapping("/printbind/{id}")
     @ApiOperation(value = "修改【打印绑定】的信息", notes = "传入json对象根据id更新【打印绑定】的信息")
-    public Result update(@RequestBody PrintBind printBind,@PathVariable("id")Integer id){        printBind.setId(id);
+    public Result update(@RequestBody PrintBind printBind,@PathVariable("id")Integer id) throws Exception {
+        printBind.setId(id);
         return ResultUtil.success(printBindService.updateByPrimaryKeySelective(printBind));
     }
 
