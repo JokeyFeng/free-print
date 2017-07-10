@@ -7,7 +7,7 @@ import com.sellercube.usermanager.server.base.entity.Config;
  * Created by Chenjing on 2017/7/8.
  */
 public interface ConfigService {
-    int deleteByPrimaryKey(Integer id);
+    int deleteByPrimaryKey(String ids);
 
     int insert(Config record);
 

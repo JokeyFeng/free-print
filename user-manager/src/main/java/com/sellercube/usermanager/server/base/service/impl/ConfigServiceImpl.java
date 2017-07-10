@@ -1,6 +1,7 @@
 package com.sellercube.usermanager.server.base.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.sellercube.common.utils.SplitUtil;
 import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.mapper.ConfigMapper;
 import com.sellercube.usermanager.server.base.service.ConfigService;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sellercube.usermanager.server.base.entity.Config;
 
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -20,17 +23,20 @@ public class ConfigServiceImpl implements ConfigService {
     private ConfigMapper configMapper;
 
     @Override
-    public int deleteByPrimaryKey(Integer id) {
-        return configMapper.deleteByPrimaryKey(id);
+    public int deleteByPrimaryKey(String ids) {
+        SplitUtil.split(",", ids).forEach(x -> configMapper.deleteByPrimaryKey(Integer.valueOf(x)));
+        return 1;
     }
 
     @Override
     public int insert(Config record) {
+        record.setCretaeTime(new Date());
         return configMapper.insert(record);
     }
 
     @Override
     public int insertSelective(Config record) {
+        record.setCretaeTime(new Date());
         return configMapper.insertSelective(record);
     }
 
@@ -41,11 +47,13 @@ public class ConfigServiceImpl implements ConfigService {
 
     @Override
     public int updateByPrimaryKeySelective(Config record) {
+        record.setUpdateTime(new Date());
         return configMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(Config record) {
+        record.setUpdateTime(new Date());
         return configMapper.updateByPrimaryKey(record);
     }
 

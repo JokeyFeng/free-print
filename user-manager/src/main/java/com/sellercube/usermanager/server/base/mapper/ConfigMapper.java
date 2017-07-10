@@ -23,7 +23,7 @@ public interface ConfigMapper {
 
     List<Config> list();
 
-    List<Config> searchByCondition(@Param("printName") String printTypeName, @Param("ip") String ip, @Param("mac") String mac);
+    List<Config> searchByCondition(@Param("printName") String printName, @Param("ip") String ip, @Param("mac") String mac);
 
-    int countByPrintNameRepeat(String name);
+    int countByPrintNameRepeat(String printName);
 }
