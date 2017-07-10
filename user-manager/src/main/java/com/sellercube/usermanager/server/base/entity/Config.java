@@ -6,11 +6,13 @@ import java.util.Date;
 public class Config implements Serializable {
     private Integer id;
 
-    private Integer opreatorId;
+    private Integer ip;
 
-    private Integer ipId;
+    private String remark;
 
-    private Integer printTypeId;
+    private String mac;
+
+    private Integer printTypeName;
 
     private Date cretaeTime;
 
@@ -34,28 +36,36 @@ public class Config implements Serializable {
         this.id = id;
     }
 
-    public Integer getOpreatorId() {
-        return opreatorId;
+    public Integer getIp() {
+        return ip;
     }
 
-    public void setOpreatorId(Integer opreatorId) {
-        this.opreatorId = opreatorId;
+    public void setIp(Integer ip) {
+        this.ip = ip;
     }
 
-    public Integer getIpId() {
-        return ipId;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setIpId(Integer ipId) {
-        this.ipId = ipId;
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 
-    public Integer getPrintTypeId() {
-        return printTypeId;
+    public String getMac() {
+        return mac;
     }
 
-    public void setPrintTypeId(Integer printTypeId) {
-        this.printTypeId = printTypeId;
+    public void setMac(String mac) {
+        this.mac = mac == null ? null : mac.trim();
+    }
+
+    public Integer getPrintTypeName() {
+        return printTypeName;
+    }
+
+    public void setPrintTypeName(Integer printTypeName) {
+        this.printTypeName = printTypeName;
     }
 
     public Date getCretaeTime() {
@@ -110,13 +120,18 @@ public class Config implements Serializable {
         return isDelete;
     }
 
+    public void setIsDelete(Boolean isDelete) {
+        this.isDelete = isDelete;
+    }
+
     @Override
     public String toString() {
         return "Config{" +
                 "id=" + id +
-                ", opreatorId=" + opreatorId +
-                ", ipId=" + ipId +
-                ", printTypeId=" + printTypeId +
+                ", ip=" + ip +
+                ", remark='" + remark + '\'' +
+                ", mac='" + mac + '\'' +
+                ", printTypeName=" + printTypeName +
                 ", cretaeTime=" + cretaeTime +
                 ", creator='" + creator + '\'' +
                 ", updateTime=" + updateTime +
@@ -125,9 +140,5 @@ public class Config implements Serializable {
                 ", deletor='" + deletor + '\'' +
                 ", isDelete=" + isDelete +
                 '}';
-    }
-
-    public void setIsDelete(Boolean isDelete) {
-        this.isDelete = isDelete;
     }
 }
