@@ -13,8 +13,8 @@ import com.sellercube.usermanager.vo.JsonResult;
 public interface PrintBindService {
 
     /**新增打印绑定**/
-    int insert(PrintBind record);
-    int insertSelective(PrintBind record);
+    int insert(PrintBind record) throws Exception;
+    int insertSelective(PrintBind record) throws Exception;
 
     /**根据主键删除打印绑定**/
     int deleteByPrimaryKey(Integer id);
@@ -23,8 +23,8 @@ public interface PrintBindService {
     PrintBind selectByPrimaryKey(Integer id);
 
     /**根据主键修改**/
-    int updateByPrimaryKey(PrintBind record);
-    int updateByPrimaryKeySelective(PrintBind record);
+    int updateByPrimaryKey(PrintBind record) throws Exception;
+    int updateByPrimaryKeySelective(PrintBind record) throws Exception;
 
     /**根据多重条件进行查询**/
     PageInfo<JsonResult> searchByCondition(Integer configId

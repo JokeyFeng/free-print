@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Author:Administrator
@@ -24,14 +25,22 @@ public class PrintBindServiceImpl implements PrintBindService {
     private PrintBindMapper printBindMapper;
 
     @Override
-    public int insert(PrintBind record) {
+    public int insert(PrintBind record) throws Exception {
+        List<JsonResult> list = printBindMapper.searchByCondition(record.getConfigId(), record.getPrintTypeId(), record.getIsEnable(), record.getUserId());
+        if (list.size() == 0) {
+            throw new Exception("保存失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
+        }
         record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
         return printBindMapper.insert(record);
     }
 
     @Override
-    public int insertSelective(PrintBind record) {
+    public int insertSelective(PrintBind record) throws Exception{
+        List<JsonResult> list = printBindMapper.searchByCondition(record.getConfigId(), record.getPrintTypeId(), record.getIsEnable(), record.getUserId());
+        if (list.size() == 0) {
+            throw new Exception("保存失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
+        }
         record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
         return printBindMapper.insertSelective(record);
@@ -48,13 +57,21 @@ public class PrintBindServiceImpl implements PrintBindService {
     }
 
     @Override
-    public int updateByPrimaryKey(PrintBind record) {
+    public int updateByPrimaryKey(PrintBind record) throws Exception {
+        List<JsonResult> list = printBindMapper.searchByCondition(record.getConfigId(), record.getPrintTypeId(), record.getIsEnable(), record.getUserId());
+        if (list.size() == 0) {
+            throw new Exception("修改失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
+        }
         record.setUpdateTime(new Date());
         return printBindMapper.updateByPrimaryKey(record);
     }
 
     @Override
-    public int updateByPrimaryKeySelective(PrintBind record) {
+    public int updateByPrimaryKeySelective(PrintBind record) throws Exception {
+        List<JsonResult> list = printBindMapper.searchByCondition(record.getConfigId(), record.getPrintTypeId(), record.getIsEnable(), record.getUserId());
+        if (list.size() == 0) {
+            throw new Exception("修改失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
+        }
         record.setUpdateTime(new Date());
         return printBindMapper.updateByPrimaryKeySelective(record);
     }
