@@ -54,10 +54,7 @@ public class PrintBindServiceImpl implements PrintBindService {
 
     @Override
     public int deleteByKeys(String ids) {
-        List<String> keys = SplitUtil.split(",", ids);
-        for (String key : keys) {
-            printBindMapper.deleteByPrimaryKey(Integer.valueOf(key));
-        }
+        SplitUtil.split(",", ids).forEach(x -> printBindMapper.deleteByPrimaryKey(Integer.valueOf(x)));
         return 1;
     }
 
