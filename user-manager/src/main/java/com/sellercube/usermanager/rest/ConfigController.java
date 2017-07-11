@@ -60,9 +60,10 @@ public class ConfigController {
     }
 
     @GetMapping("/configs/repeat")
-    @ApiOperation(value = "判断打印机名称是否重复", notes = "一次传入一个参数,否则将以参数为name的结果为准")
-    private Result update(@RequestParam(value = "printName", required = false) String printName) throws Exception {
-        return ResultUtil.success(configService.isConditionRepeat(printName));
+    @ApiOperation(value = "判断打印机名称和IP是否重复", notes = "一个一个传入,否则以printName为准")
+    private Result update(@RequestParam(value = "printName", required = false) String printName,
+                          @RequestParam(value = "ip", required = false) String ip) throws Exception {
+        return ResultUtil.success(configService.isConditionRepeat(printName, ip));
     }
 
 
