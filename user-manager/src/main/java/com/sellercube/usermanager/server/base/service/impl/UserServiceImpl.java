@@ -50,7 +50,8 @@ public class UserServiceImpl implements UserService {
     public int insert(User record) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
-        record.setPassword(MD5Util.encryption(record.getPassword()));
+        String password = record.getPassword();
+        record.setPassword(MD5Util.encryption(password));
         return userMapper.insert(record);
     }
 
