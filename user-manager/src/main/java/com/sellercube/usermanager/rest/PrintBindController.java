@@ -2,10 +2,8 @@ package com.sellercube.usermanager.rest;
 
 import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
-import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.PrintBind;
 import com.sellercube.usermanager.server.base.service.PrintBindService;
-import com.sellercube.usermanager.vo.JsonResult;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -21,40 +19,39 @@ public class PrintBindController {
     @Autowired
     private PrintBindService printBindService;
 
-    @PostMapping("/printbind")
+    @PostMapping("/binding")
     @ApiOperation(value = "新增【打印绑定】的信息", notes = "传入json对象进行新增操作")
     public Result insert(@RequestBody PrintBind printBind) throws Exception {
         return ResultUtil.success(printBindService.insert(printBind));
     }
 
-    @PutMapping("/printbinds/{id}")
+    @PutMapping("/bindings/{id}")
     @ApiOperation(value = "修改【打印绑定】的信息", notes = "传入json对象根据id更新【打印绑定】的信息")
     public Result update(@RequestBody PrintBind printBind, @PathVariable("id") Integer id) throws Exception {
         printBind.setId(id);
         return ResultUtil.success(printBindService.updateByPrimaryKeySelective(printBind));
     }
 
-    @DeleteMapping("/printbinds/{id}")
+    @DeleteMapping("/bindings/{id}")
     @ApiOperation(value = "删除【打印绑定】的信息", notes = "根据id删除【打印绑定】的信息")
     private Result deleteById(@PathVariable("id") Integer id) {
         return ResultUtil.success(printBindService.deleteByPrimaryKey(id));
     }
 
-    @DeleteMapping("/printbinds")
+    @DeleteMapping("/bindings")
     @ApiOperation(value = "删除【打印绑定】的信息", notes = "批量删除【打印绑定】的信息")
     private Result deleteByIds(@RequestBody String ids) {
         return ResultUtil.success(printBindService.deleteByKeys(ids));
     }
 
-    @GetMapping("/printbinds")
+    @GetMapping("/bindings")
     @ApiOperation(value = "分页获取所有【打印绑定】的信息")
     private Result getByPage(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                              @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit) {
-        PageInfo<JsonResult> pageInfo = printBindService.getByPage(pageNum, limit);
-        return ResultUtil.success(pageInfo);
+        return ResultUtil.success(printBindService.getByPage(pageNum, limit));
     }
 
-    @GetMapping("/printbind/search")
+    @GetMapping("/bindings/search")
     @ApiOperation(value = "根据条件搜索【打印绑定】的信息", notes = "根据传入的条件来进行搜索")
     private Result searchByCondition(@RequestParam(value = "configId", required = false) Integer configId,
                                      @RequestParam(value = "typeId", required = false) Integer typeId,
