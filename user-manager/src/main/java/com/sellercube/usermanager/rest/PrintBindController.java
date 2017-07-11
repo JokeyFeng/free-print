@@ -27,8 +27,9 @@ public class PrintBindController {
 
     @PutMapping("/bindings/{id}")
     @ApiOperation(value = "修改【打印绑定】的信息", notes = "传入json对象根据id更新【打印绑定】的信息")
-    public Result update(@RequestBody PrintBind printBind,@PathVariable("id")Integer id)throws Exception{         
-    printBind.setId(id);        return ResultUtil.success(printBindService.updateByPrimaryKeySelective(printBind));
+    public Result update(@RequestBody PrintBind printBind, @PathVariable("id") Integer id) throws Exception {
+        printBind.setId(id);
+        return ResultUtil.success(printBindService.updateByPrimaryKeySelective(printBind));
     }
 
     @DeleteMapping("/bindings/{id}")
