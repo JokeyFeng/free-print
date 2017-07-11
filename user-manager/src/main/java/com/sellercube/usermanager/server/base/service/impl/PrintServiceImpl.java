@@ -1,6 +1,7 @@
 package com.sellercube.usermanager.server.base.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.sellercube.common.utils.SplitUtil;
 import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.PrintType;
 import com.sellercube.usermanager.server.base.mapper.PrintTypeMapper;
@@ -23,6 +24,12 @@ public class PrintServiceImpl implements PrintService {
     @Override
     public int deleteByPrimaryKey(Integer id) {
         return printTypeMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public int deleteByPrimaryKey(String ids) {
+        SplitUtil.split(",", ids).forEach(x -> printTypeMapper.deleteByPrimaryKey(Integer.valueOf(x)));
+        return 1;
     }
 
     @Override
@@ -70,5 +77,10 @@ public class PrintServiceImpl implements PrintService {
         Optional<String> limit = Optional.ofNullable(var2);
         PageHelper.startPage(Integer.valueOf(pageNum.orElse("1")), Integer.valueOf(limit.orElse("10")));
         return new PageInfo<>(printTypeMapper.list());
+    }
+
+    @Override
+    public boolean countByName(String name) {
+        return printTypeMapper.countByName(name) > 0 ? true : false;
     }
 }

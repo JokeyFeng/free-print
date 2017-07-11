@@ -7,6 +7,8 @@ import com.sellercube.usermanager.server.base.entity.PrintType;
  * Created by Chenjing on 2017/7/8.
  */
 public interface PrintService {
+    int deleteByPrimaryKey(String ids);
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(PrintType record);
@@ -22,4 +24,6 @@ public interface PrintService {
     PageInfo<PrintType> searchByName(String name, String pageNum, String limit);
 
     PageInfo<PrintType> list(String pageNum, String limit);
+
+    boolean countByName(String name);
 }

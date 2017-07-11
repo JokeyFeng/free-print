@@ -111,6 +111,7 @@ public class UserServiceImpl implements UserService {
         Optional<String> name = Optional.ofNullable(var1);
         Optional<String> account = Optional.ofNullable(var2);
         int nameResult = name.map(x -> userMapper.countByNameRepeat(x)).orElse(-1);
+        System.out.println(nameResult);
         int result = nameResult == -1 ? account.map(x -> userMapper.countByAccountRepeat(x)).orElse(-1) : nameResult;
         if (result == -1) {
             throw new Exception("请传入参数");

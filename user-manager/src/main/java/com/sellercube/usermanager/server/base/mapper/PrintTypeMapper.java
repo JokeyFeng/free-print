@@ -23,4 +23,6 @@ public interface PrintTypeMapper {
     List<PrintType> searchByName(String name);
 
     List<PrintType> list();
+
+    int countByName(String name);
 }

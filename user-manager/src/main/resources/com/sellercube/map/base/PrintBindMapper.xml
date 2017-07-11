@@ -47,10 +47,10 @@
 		ON pb.print_type_id = pt.id
 	LEFT JOIN user u
 		ON pb.user_id = u.id
-    WHERE pb.config_id = #{configId}
-        AND pb.print_type_id = #{typeId}
-        AND pb.is_enable = #{isEnable}
-        AND pb.user_id = #{userId}
+    WHERE pb.config_id = #{config_id}
+        AND pb.print_type_id = #{type_id}
+        AND pb.is_enable = #{is_enable}
+        AND pb.user_id = #{user_id}
   </select>
 
   <select id="list" resultMap="JsonResult">

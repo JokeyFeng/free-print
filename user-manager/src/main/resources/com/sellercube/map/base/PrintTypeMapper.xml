@@ -15,7 +15,9 @@
   <sql id="Base_Column_List">
     id, type_name, create_time, creator, update_time, updator, del_time, deletor, is_delete
   </sql>
-
+<select id="countByName" resultType="java.lang.Integer">
+    select COUNT(1) from print_type WHERE type_name=#{name}
+</select>
     <select id="list" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List" />

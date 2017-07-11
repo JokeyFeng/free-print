@@ -3,6 +3,7 @@ package com.sellercube.usermanager.server.base.service;
 import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.PrintBind;
 import com.sellercube.usermanager.vo.JsonResult;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Author:Administrator
@@ -14,15 +15,18 @@ public interface PrintBindService {
 
     /**
      * 新增打印绑定信息
-     * @param record
+     *
+     * @param
      * @return
      * @throws Exception
      */
-    int insert(PrintBind record) throws Exception;
-    int insertSelective(PrintBind record) throws Exception;
+    int insert(Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file,String creator) throws Exception;
+
+    int insertSelective(Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file,String creator) throws Exception;
 
     /**
      * 根据主键删除打印绑定信息
+     *
      * @param id
      * @return
      */
@@ -30,6 +34,7 @@ public interface PrintBindService {
 
     /**
      * 批量删除
+     *
      * @param ids
      * @return
      */
@@ -37,6 +42,7 @@ public interface PrintBindService {
 
     /**
      * 根据主键查询
+     *
      * @param id
      * @return
      */
@@ -44,15 +50,18 @@ public interface PrintBindService {
 
     /**
      * 根据主键修改
-     * @param record
+     *
+     * @param
      * @return
      * @throws Exception
      */
-    int updateByPrimaryKey(PrintBind record) throws Exception;
-    int updateByPrimaryKeySelective(PrintBind record) throws Exception;
+    int updateByPrimaryKey(Integer id,Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file,String updator) throws Exception;
+
+    int updateByPrimaryKeySelective(Integer id,Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file,String updator) throws Exception;
 
     /**
      * 根据多重条件进行查询
+     *
      * @param configId
      * @param typeId
      * @param isEnable
@@ -62,13 +71,14 @@ public interface PrintBindService {
      * @return
      */
     PageInfo<JsonResult> searchByCondition(Integer configId
-                                        , Integer typeId
-                                        , boolean isEnable
-                                        , Integer userId
-                                        , Integer pageNum, Integer PageSize);
+            , Integer typeId
+            , boolean isEnable
+            , Integer userId
+            , Integer pageNum, Integer PageSize);
 
     /**
      * 分页查询
+     *
      * @param pageNum
      * @param pageSize
      * @return

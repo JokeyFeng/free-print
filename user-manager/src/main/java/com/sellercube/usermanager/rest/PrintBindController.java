@@ -2,11 +2,11 @@ package com.sellercube.usermanager.rest;
 
 import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
-import com.sellercube.usermanager.server.base.entity.PrintBind;
 import com.sellercube.usermanager.server.base.service.PrintBindService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * Author:Administrator
@@ -21,15 +21,25 @@ public class PrintBindController {
 
     @PostMapping("/binding")
     @ApiOperation(value = "新增【打印绑定】的信息", notes = "传入json对象进行新增操作")
-    public Result insert(@RequestBody PrintBind printBind) throws Exception {
-        return ResultUtil.success(printBindService.insert(printBind));
+    public Result insert(@RequestParam("printNameId") Integer printNameId,
+                         @RequestParam("printTypeId") Integer printTypeId,
+                         @RequestParam("isEnable") boolean isEnable,
+                         @RequestParam("userId") Integer userId,
+                         @RequestParam("file") MultipartFile file,
+                         @RequestParam("creator") String creator) throws Exception {
+        return ResultUtil.success(printBindService.insertSelective(printNameId, printTypeId, isEnable, userId, file, creator));
     }
 
     @PutMapping("/bindings/{id}")
     @ApiOperation(value = "修改【打印绑定】的信息", notes = "传入json对象根据id更新【打印绑定】的信息")
-    public Result update(@RequestBody PrintBind printBind, @PathVariable("id") Integer id) throws Exception {
-        printBind.setId(id);
-        return ResultUtil.success(printBindService.updateByPrimaryKeySelective(printBind));
+    public Result update(@PathVariable("id") Integer id,
+                         @RequestParam("printNameId") Integer printNameId,
+                         @RequestParam("printTypeId") Integer printTypeId,
+                         @RequestParam("isEnable") boolean isEnable,
+                         @RequestParam("userId") Integer userId,
+                         @RequestParam(value = "file", required = false) MultipartFile file,
+                         @RequestParam("updator") String updator) throws Exception {
+        return ResultUtil.success(printBindService.updateByPrimaryKeySelective(id, printNameId, printTypeId, isEnable, userId, file, updator));
     }
 
     @DeleteMapping("/bindings/{id}")

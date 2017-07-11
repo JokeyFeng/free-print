@@ -132,4 +132,18 @@ public class PrintBind {
     public void setIsDelete(Boolean isDelete) {
         this.isDelete = isDelete;
     }
+
+    public PrintBind(Integer configId, Integer printTypeId, Boolean isEnable, Integer userId, String file, Date createTime, String creator, Date updateTime, String updator) {
+        this.configId = configId;
+        this.printTypeId = printTypeId;
+        this.isEnable = isEnable;
+        this.userId = userId;
+        this.file = file;
+        this.createTime = createTime;
+        this.creator = creator;
+        this.updateTime = updateTime;
+        this.updator = updator;
+    }
+
+    public PrintBind(){}
 }

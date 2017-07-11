@@ -1,5 +1,6 @@
 package com.sellercube.usermanager.rest;
 
+import com.google.common.collect.ImmutableMap;
 import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
 import com.sellercube.usermanager.server.base.entity.PrintType;
@@ -35,7 +36,7 @@ public class PrintController {
     @ApiOperation(value = "获取所有的打印机类型")
     private Result insert(@RequestParam(value = "pageNum", required = false) String pageNum,
                           @RequestParam(value = "limit", required = false) String limit) {
-        return ResultUtil.success(printService.list(pageNum,limit));
+        return ResultUtil.success(printService.list(pageNum, limit));
     }
 
     @PutMapping("/printtypes/{id}")
@@ -49,5 +50,17 @@ public class PrintController {
     @ApiOperation(value = "删除打印机类型", notes = "根据id删除打印机类型")
     private Result del(@PathVariable String id) {
         return ResultUtil.success(printService.deleteByPrimaryKey(Integer.valueOf(id)));
+    }
+
+    @DeleteMapping("/printtypes")
+    @ApiOperation(value = "删除打印机类型", notes = "批量删除打印机类型，多个id用逗号分隔")
+    private Result b(@RequestBody String ids) {
+        return ResultUtil.success(printService.deleteByPrimaryKey(ids));
+    }
+
+    @GetMapping("/printtypes/repeat")
+    @ApiOperation(value = "判断是否重复", notes = "根据打印类型名称判断是否重复")
+    private Result a(@RequestParam("printTypeName") String name) {
+        return ResultUtil.success(ImmutableMap.of("isRepeat", printService.countByName(name)));
     }
 }

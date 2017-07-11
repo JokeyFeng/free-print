@@ -9,9 +9,14 @@ import com.sellercube.usermanager.server.base.service.PrintBindService;
 import com.sellercube.usermanager.vo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Author:Administrator
@@ -26,24 +31,30 @@ public class PrintBindServiceImpl implements PrintBindService {
     private PrintBindMapper printBindMapper;
 
     @Override
-    public int insert(PrintBind record) throws Exception {
-        List<JsonResult> list = printBindMapper.searchByCondition(record.getConfigId(), record.getPrintTypeId(), record.getIsEnable(), record.getUserId());
-        if (list.size() != 0) {
+    public int insert(Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String creator) throws Exception {
+        List<JsonResult> list = printBindMapper.searchByCondition(printNameId, printTypeId, isEnable, userId);
+        if (null != list && !list.isEmpty()) {
             throw new Exception("保存失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
         }
-        record.setCreateTime(new Date());
-        record.setUpdateTime(new Date());
+        String uuid = UUID.randomUUID().toString();
+        String suffix = SplitUtil.split(".", file.getOriginalFilename()).get(1);
+        File dest = new File("/uploadFile/" + uuid + "." + suffix);
+        file.transferTo(dest);
+        PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), new Date(), creator, new Date(), null);
         return printBindMapper.insert(record);
     }
 
     @Override
-    public int insertSelective(PrintBind record) throws Exception{
-        List<JsonResult> list = printBindMapper.searchByCondition(record.getConfigId(), record.getPrintTypeId(), record.getIsEnable(), record.getUserId());
-        if (list.size() != 0) {
+    public int insertSelective(Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String creator) throws Exception {
+        List<JsonResult> list = printBindMapper.searchByCondition(printNameId, printTypeId, isEnable, userId);
+        if (null != list && !list.isEmpty()) {
             throw new Exception("保存失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
         }
-        record.setCreateTime(new Date());
-        record.setUpdateTime(new Date());
+        String uuid = UUID.randomUUID().toString();
+        String suffix = SplitUtil.split(".", file.getOriginalFilename()).get(1);
+        File dest = new File("/uploadFile/" + uuid + "." + suffix);
+        file.transferTo(dest);
+        PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), new Date(), creator, new Date(), null);
         return printBindMapper.insertSelective(record);
     }
 
@@ -64,39 +75,61 @@ public class PrintBindServiceImpl implements PrintBindService {
     }
 
     @Override
-    public int updateByPrimaryKey(PrintBind record) throws Exception {
-        List<JsonResult> list = printBindMapper.searchByCondition(record.getConfigId(), record.getPrintTypeId(), record.getIsEnable(), record.getUserId());
-        if (list.size() == 0) {
-            throw new Exception("修改失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
+    public int updateByPrimaryKey(Integer id, Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String updator) throws Exception {
+        List<JsonResult> list = printBindMapper.searchByCondition(printNameId, printTypeId, isEnable, userId);
+        if (null != list && !list.isEmpty()) {
+            throw new Exception("保存失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
         }
-        record.setUpdateTime(new Date());
-        return printBindMapper.updateByPrimaryKey(record);
+        if (file == null || file.isEmpty()) {
+            PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, null, null, null, new Date(), updator);
+            record.setId(id);
+            return printBindMapper.updateByPrimaryKey(record);
+        } else {
+            String uuid = UUID.randomUUID().toString();
+            String suffix = SplitUtil.split(".", file.getOriginalFilename()).get(1);
+            File dest = new File("/uploadFile/" + uuid + "." + suffix);
+            file.transferTo(dest);
+            PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), null, null, new Date(), updator);
+            record.setId(id);
+            return printBindMapper.updateByPrimaryKey(record);
+        }
     }
 
     @Override
-    public int updateByPrimaryKeySelective(PrintBind record) throws Exception {
-        List<JsonResult> list = printBindMapper.searchByCondition(record.getConfigId(), record.getPrintTypeId(), record.getIsEnable(), record.getUserId());
-        if (list.size() == 0) {
-            throw new Exception("修改失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
+    public int updateByPrimaryKeySelective(Integer id, Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String updator) throws Exception {
+        List<JsonResult> list = printBindMapper.searchByCondition(printNameId, printTypeId, isEnable, userId);
+        if (null != list && !list.isEmpty()) {
+            throw new Exception("保存失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
         }
-        record.setUpdateTime(new Date());
-        return printBindMapper.updateByPrimaryKeySelective(record);
+        if (file == null || file.isEmpty()) {
+            PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, null, null, null, new Date(), updator);
+            record.setId(id);
+            return printBindMapper.updateByPrimaryKeySelective(record);
+        } else {
+            String uuid = UUID.randomUUID().toString();
+            String suffix = SplitUtil.split(".", file.getOriginalFilename()).get(1);
+            File dest = new File("/uploadFile/" + uuid + "." + suffix);
+            file.transferTo(dest);
+            PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), null, null, new Date(), updator);
+            record.setId(id);
+            return printBindMapper.updateByPrimaryKeySelective(record);
+        }
     }
 
     @Override
     public PageInfo<JsonResult> searchByCondition(Integer configId
-                                                , Integer typeId
-                                                , boolean isEnable
-                                                , Integer userId
-                                                , Integer pageNum, Integer PageSize) {
-        PageHelper.startPage(pageNum,PageSize);
-        return new PageInfo<>(printBindMapper.searchByCondition(configId,typeId,isEnable,userId));
+            , Integer typeId
+            , boolean isEnable
+            , Integer userId
+            , Integer pageNum, Integer PageSize) {
+        PageHelper.startPage(pageNum, PageSize);
+        return new PageInfo<>(printBindMapper.searchByCondition(configId, typeId, isEnable, userId));
     }
 
 
     @Override
     public PageInfo<JsonResult> getByPage(Integer pageNum, Integer pageSize) {
-        PageHelper.startPage(pageNum,pageSize);
+        PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(printBindMapper.list());
     }
 }
