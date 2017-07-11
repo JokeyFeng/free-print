@@ -47,16 +47,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int insert(User record) {
+    public int insert(User record) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
+        record.setPassword(MD5Util.encryption(record.getPassword()));
         return userMapper.insert(record);
     }
 
     @Override
-    public int insertSelective(User record) {
+    public int insertSelective(User record) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
+        record.setPassword(MD5Util.encryption(record.getPassword()));
         return userMapper.insertSelective(record);
     }
 

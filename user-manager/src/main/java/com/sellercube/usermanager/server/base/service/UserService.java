@@ -4,6 +4,9 @@ import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.User;
 import com.sellercube.usermanager.server.base.entity.UserDTO;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 /**
  * Created by Chenjing on 2017/6/20.
  */
@@ -12,9 +15,9 @@ public interface UserService {
 
     int deleteByPrimaryKey(String ids);
 
-    int insert(User record);
+    int insert(User record) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
-    int insertSelective(User record);
+    int insertSelective(User record) throws UnsupportedEncodingException, NoSuchAlgorithmException;
 
     User selectByPrimaryKey(Integer id);
 

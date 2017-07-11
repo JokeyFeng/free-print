@@ -12,6 +12,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+
 /**
  * Created by Chenjing on 2017/6/20.
  */
@@ -30,7 +33,7 @@ public class UserController {
 
     @PostMapping("/user")
     @ApiOperation(value = "新增操作员", notes = "传入json对象进行新增操作")
-    private Result insert(@RequestBody User user) {
+    private Result insert(@RequestBody User user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         return ResultUtil.success(userService.insert(user));
     }
 

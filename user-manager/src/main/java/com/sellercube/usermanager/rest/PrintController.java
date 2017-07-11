@@ -40,10 +40,10 @@ public class PrintController {
     }
 
     @PutMapping("/printtypes/{id}")
-    @ApiOperation(value = "根据名称查询打印机类型", notes = "根据id修改打印机类型，传入json对象")
+    @ApiOperation(value = "修改打印机类型", notes = "根据id修改打印机类型，传入json对象")
     private Result put(@PathVariable("id") String id, @RequestBody PrintType printType) {
         printType.setId(Integer.valueOf(id));
-        return ResultUtil.success(printService.updateByPrimaryKey(printType));
+        return ResultUtil.success(printService.updateByPrimaryKeySelective(printType));
     }
 
     @DeleteMapping("/printtypes/{id}")
