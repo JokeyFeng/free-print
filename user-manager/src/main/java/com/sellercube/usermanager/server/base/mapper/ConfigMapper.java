@@ -26,4 +26,6 @@ public interface ConfigMapper {
     List<Config> searchByCondition(@Param("printName") String printName, @Param("ip") String ip, @Param("mac") String mac);
 
     int countByPrintNameRepeat(String printName);
+
+    int countByIpRepeat(String ip);
 }

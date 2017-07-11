@@ -52,6 +52,13 @@
     where print_name = #{printName}
   </select>
 
+  <select id="countByIpRepeat" resultType="java.lang.Integer">
+    select
+    COUNT(1)
+    from config
+    where ip = #{ip}
+  </select>
+
 
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

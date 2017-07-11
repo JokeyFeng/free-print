@@ -3,14 +3,13 @@ package com.sellercube.usermanager.server.base.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.sellercube.common.utils.SplitUtil;
 import com.sellercube.usermanager.common.PageInfo;
+import com.sellercube.usermanager.server.base.entity.Config;
 import com.sellercube.usermanager.server.base.mapper.ConfigMapper;
 import com.sellercube.usermanager.server.base.service.ConfigService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.sellercube.usermanager.server.base.entity.Config;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -79,13 +78,14 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     @Override
-    public boolean isConditionRepeat(String printName) throws Exception {
+    public boolean isConditionRepeat(String printName, String var) throws Exception {
         Optional<String> name = Optional.ofNullable(printName);
-        int result = name.map(x -> configMapper.countByPrintNameRepeat(x)).orElse(-1);
-//        int result = nameResult == -1 ? account.map(x -> userMapper.countByAccountRepeat(x)).orElse(-1) : nameResult;
-        if (result == -1) {
-            throw new Exception("请传入参数");
-        }
-        return result > 0 ? true : false;
+        Optional<String> ip = Optional.ofNullable(var);
+        int nameResult = name.map(x -> configMapper.countByPrintNameRepeat(x)).orElse(-1);
+        int ipResult = ip.map(x -> configMapper.countByIpRepeat(x)).orElse(-1);
+
+        int result = nameResult == -1 ? ipResult : nameResult;
+
+        return result == 0 ? false : true;
     }
 }

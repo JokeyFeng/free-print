@@ -26,5 +26,5 @@ public interface ConfigService {
 
     PageInfo<Config> search(String printName,String ip,String mac, String pageNum, String limit);
 
-    boolean isConditionRepeat(String printName) throws Exception;
+    boolean isConditionRepeat(String printName,String ip) throws Exception;
 }
