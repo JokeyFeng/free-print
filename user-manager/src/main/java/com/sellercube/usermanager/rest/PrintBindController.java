@@ -72,4 +72,10 @@ public class PrintBindController {
         return ResultUtil.success(printBindService.searchByCondition(configId, typeId, isEnable, userId, pageNum, limit));
     }
 
+    @GetMapping("/bindings/dropdown")
+    @ApiOperation(value = "绑定页面下拉菜单的选项")
+    private Result a() {
+        return ResultUtil.success(printBindService.dropdwon());
+    }
+
 }

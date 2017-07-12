@@ -1,10 +1,16 @@
 package com.sellercube.usermanager.server.base.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
+import com.google.common.collect.Maps;
 import com.sellercube.common.utils.SplitUtil;
 import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.PrintBind;
+import com.sellercube.usermanager.server.base.mapper.ConfigMapper;
 import com.sellercube.usermanager.server.base.mapper.PrintBindMapper;
+import com.sellercube.usermanager.server.base.mapper.PrintTypeMapper;
+import com.sellercube.usermanager.server.base.mapper.UserMapper;
+import com.sellercube.usermanager.server.base.service.ConfigService;
 import com.sellercube.usermanager.server.base.service.PrintBindService;
 import com.sellercube.usermanager.vo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +22,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -29,6 +36,15 @@ public class PrintBindServiceImpl implements PrintBindService {
 
     @Autowired
     private PrintBindMapper printBindMapper;
+
+    @Autowired
+    private ConfigMapper configMapper;
+
+    @Autowired
+    private PrintTypeMapper printTypeMapper;
+
+    @Autowired
+    private UserMapper userMapper;
 
     @Override
     public int insert(Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String creator) throws Exception {
@@ -131,5 +147,20 @@ public class PrintBindServiceImpl implements PrintBindService {
     public PageInfo<JsonResult> getByPage(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(printBindMapper.list());
+    }
+
+    @Override
+    public Map<String, JSONObject> dropdwon() {
+        JSONObject var1 = new JSONObject();
+        JSONObject var2 = new JSONObject();
+        JSONObject var3 = new JSONObject();
+        Map<String, JSONObject> map = Maps.newHashMap();
+        configMapper.list().forEach(x -> var1.put(x.getId().toString(), x.getPrintName()));
+        map.put("printName", var1);
+        printTypeMapper.list().forEach(x -> var2.put(x.getId().toString(), x.getTypeName()));
+        map.put("printType", var2);
+        userMapper.list().forEach(x -> var3.put(x.getId().toString(), x.getName()));
+        map.put("userName", var3);
+        return map;
     }
 }

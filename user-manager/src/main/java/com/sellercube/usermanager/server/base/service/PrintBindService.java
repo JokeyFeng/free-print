@@ -1,9 +1,12 @@
 package com.sellercube.usermanager.server.base.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.PrintBind;
 import com.sellercube.usermanager.vo.JsonResult;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Map;
 
 /**
  * Author:Administrator
@@ -84,4 +87,6 @@ public interface PrintBindService {
      * @return
      */
     PageInfo<JsonResult> getByPage(Integer pageNum, Integer pageSize);
+
+    Map<String,JSONObject> dropdwon();
 }

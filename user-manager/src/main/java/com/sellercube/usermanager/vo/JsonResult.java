@@ -10,6 +10,17 @@ import java.util.Date;
  * Version:1.0.0
  */
 public class JsonResult implements Serializable {
+
+    private Integer id;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     /**打印机名称**/
     private String printName;
     /**打印类型**/

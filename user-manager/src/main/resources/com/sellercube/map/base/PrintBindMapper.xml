@@ -22,7 +22,8 @@
   </sql>
   <!--配置一个resultMap 指定返回的类型 -->
   <resultMap id="JsonResult" type="com.sellercube.usermanager.vo.JsonResult">
-    <id column="print_name" property="printName" jdbcType="VARCHAR"/>
+      <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="print_name" property="printName" jdbcType="VARCHAR"/>
     <result column="type_name" property="typeName" jdbcType="VARCHAR" />
     <result column="is_enable" property="isEnable" jdbcType="BIT" />
     <result column="name" property="operator" jdbcType="VARCHAR"/>
@@ -32,7 +33,7 @@
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
   </resultMap>
   <select id="searchByCondition" resultMap="JsonResult">
-    SELECT con.print_name
+    SELECT pb.id,con.print_name
 			,pt.type_name
 			,pb.is_enable
 			,u.name
@@ -54,7 +55,8 @@
   </select>
 
   <select id="list" resultMap="JsonResult">
-    SELECT con.print_name
+    SELECT pb.id
+    ,con.print_name
 			,pt.type_name
 			,pb.is_enable
 			,u.name
