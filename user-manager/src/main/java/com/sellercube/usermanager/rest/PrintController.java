@@ -20,13 +20,13 @@ public class PrintController {
 
     @PostMapping("/printtype")
     @ApiOperation(value = "新增打印类型", notes = "传入json对象进行新增操作")
-    private Result insert(@RequestBody PrintType printType) {
+    public Result insert(@RequestBody PrintType printType) {
         return ResultUtil.success(printService.insert(printType));
     }
 
     @GetMapping("/printtypes/search")
     @ApiOperation(value = "根据名称查询打印机类型")
-    private Result insert(@RequestParam("name") String name,
+    public Result insert(@RequestParam("name") String name,
                           @RequestParam(value = "pageNum", required = false) String pageNum,
                           @RequestParam(value = "limit", required = false) String limit) {
         return ResultUtil.success(printService.searchByName(name, pageNum, limit));
@@ -34,21 +34,21 @@ public class PrintController {
 
     @GetMapping("/printtypes")
     @ApiOperation(value = "获取所有的打印机类型")
-    private Result insert(@RequestParam(value = "pageNum", required = false) String pageNum,
+    public Result insert(@RequestParam(value = "pageNum", required = false) String pageNum,
                           @RequestParam(value = "limit", required = false) String limit) {
         return ResultUtil.success(printService.list(pageNum, limit));
     }
 
     @PutMapping("/printtypes/{id}")
     @ApiOperation(value = "修改打印机类型", notes = "根据id修改打印机类型，传入json对象")
-    private Result put(@PathVariable("id") String id, @RequestBody PrintType printType) {
+    public Result put(@PathVariable("id") String id, @RequestBody PrintType printType) {
         printType.setId(Integer.valueOf(id));
         return ResultUtil.success(printService.updateByPrimaryKeySelective(printType));
     }
 
     @DeleteMapping("/printtypes/{id}")
     @ApiOperation(value = "删除打印机类型", notes = "根据id删除打印机类型")
-    private Result del(@PathVariable String id) {
+    public Result del(@PathVariable String id) {
         return ResultUtil.success(printService.deleteByPrimaryKey(Integer.valueOf(id)));
     }
 
@@ -60,7 +60,7 @@ public class PrintController {
 
     @GetMapping("/printtypes/repeat")
     @ApiOperation(value = "判断是否重复", notes = "根据打印类型名称判断是否重复")
-    private Result a(@RequestParam("printTypeName") String name) {
+    public Result a(@RequestParam("printTypeName") String name) {
         return ResultUtil.success(ImmutableMap.of("isRepeat", printService.countByName(name)));
     }
 }

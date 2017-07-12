@@ -19,39 +19,39 @@ public class ConfigController {
 
     @PostMapping("/config")
     @ApiOperation(value = "新增配置", notes = "传入json对象进行新增操作")
-    private Result insert(@RequestBody Config config) throws Exception {
+    public Result insert(@RequestBody Config config) throws Exception {
         return ResultUtil.success(configService.insert(config));
     }
 
     @PutMapping("/configs/{id}")
     @ApiOperation(value = "更新配置", notes = "传入json对象根据id更新操作员信息")
-    private Result update(@RequestBody Config config, @PathVariable("id") Integer id) {
+    public Result update(@RequestBody Config config, @PathVariable("id") Integer id) {
         config.setId(id);
         return ResultUtil.success(configService.updateByPrimaryKeySelective(config));
     }
 
     @DeleteMapping("/configs")
     @ApiOperation(value = "批量删除配置", notes = "根据id批量删除 格式：1,2,3,4")
-    private Result delteAll(@RequestBody String ids) {
+    public Result delteAll(@RequestBody String ids) {
         return ResultUtil.success(configService.deleteByPrimaryKeyALL(ids));
     }
 
     @DeleteMapping("/configs/{id}")
     @ApiOperation(value = "删除配置", notes = "根据id删除配置")
-    private Result delte(@PathVariable Integer id) {
+    public Result delte(@PathVariable Integer id) {
         return ResultUtil.success(configService.deleteByPrimaryKey(id));
     }
 
     @GetMapping("/configs")
     @ApiOperation(value = "获取所有配置")
-    private Result list(@RequestParam(value = "pageNum", required = false) String pageNum,
+    public Result list(@RequestParam(value = "pageNum", required = false) String pageNum,
                         @RequestParam(value = "limit", required = false) String limit) {
         return ResultUtil.success(configService.list(pageNum, limit));
     }
 
     @GetMapping("/configs/search")
     @ApiOperation(value = "搜索配置", notes = "根据打印机名称、IP、MAC地址搜索配置")
-    private Result search(@RequestParam(value = "printName", required = false) String printName,
+    public Result search(@RequestParam(value = "printName", required = false) String printName,
                           @RequestParam(value = "ip", required = false) String ip,
                           @RequestParam(value = "mac", required = false) String mac,
                           @RequestParam(value = "pageNum", required = false) String pageNum,
@@ -61,7 +61,7 @@ public class ConfigController {
 
     @GetMapping("/configs/repeat")
     @ApiOperation(value = "判断打印机名称和IP是否重复", notes = "一个一个传入,否则以printName为准")
-    private Result update(@RequestParam(value = "printName", required = false) String printName,
+    public Result update(@RequestParam(value = "printName", required = false) String printName,
                           @RequestParam(value = "ip", required = false) String ip) throws Exception {
         return ResultUtil.success(configService.isConditionRepeat(printName, ip));
     }

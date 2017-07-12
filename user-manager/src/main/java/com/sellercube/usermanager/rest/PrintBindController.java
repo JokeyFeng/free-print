@@ -44,26 +44,26 @@ public class PrintBindController {
 
     @DeleteMapping("/bindings/{id}")
     @ApiOperation(value = "删除【打印绑定】的信息", notes = "根据id删除【打印绑定】的信息")
-    private Result deleteById(@PathVariable("id") Integer id) {
+    public Result deleteById(@PathVariable("id") Integer id) {
         return ResultUtil.success(printBindService.deleteByPrimaryKey(id));
     }
 
     @DeleteMapping("/bindings")
     @ApiOperation(value = "删除【打印绑定】的信息", notes = "批量删除【打印绑定】的信息")
-    private Result deleteByIds(@RequestBody String ids) {
+    public Result deleteByIds(@RequestBody String ids) {
         return ResultUtil.success(printBindService.deleteByKeys(ids));
     }
 
     @GetMapping("/bindings")
     @ApiOperation(value = "分页获取所有【打印绑定】的信息")
-    private Result getByPage(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+    public Result getByPage(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                              @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit) {
         return ResultUtil.success(printBindService.getByPage(pageNum, limit));
     }
 
     @GetMapping("/bindings/search")
     @ApiOperation(value = "根据条件搜索【打印绑定】的信息", notes = "根据传入的条件来进行搜索")
-    private Result searchByCondition(@RequestParam(value = "configId", required = false) Integer configId,
+    public Result searchByCondition(@RequestParam(value = "configId", required = false) Integer configId,
                                      @RequestParam(value = "typeId", required = false) Integer typeId,
                                      @RequestParam(value = "isEnable", required = false) boolean isEnable,
                                      @RequestParam(value = "userId", required = false) Integer userId,
@@ -74,7 +74,7 @@ public class PrintBindController {
 
     @GetMapping("/bindings/dropdown")
     @ApiOperation(value = "绑定页面下拉菜单的选项")
-    private Result a() {
+    public Result a() {
         return ResultUtil.success(printBindService.dropdwon());
     }
 
