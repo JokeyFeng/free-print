@@ -1,6 +1,6 @@
 package com.sellercube.usermanager.server.base.service;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSONArray;
 import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.PrintBind;
 import com.sellercube.usermanager.vo.JsonResult;
@@ -88,5 +88,5 @@ public interface PrintBindService {
      */
     PageInfo<JsonResult> getByPage(Integer pageNum, Integer pageSize);
 
-    Map<String,JSONObject> dropdwon();
+    Map<String,JSONArray> dropdwon();
 }

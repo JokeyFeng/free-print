@@ -1,8 +1,10 @@
 package com.sellercube.usermanager.server.base.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Maps;
+import com.sellercube.common.function.Tuples;
 import com.sellercube.common.utils.SplitUtil;
 import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.PrintBind;
@@ -150,16 +152,16 @@ public class PrintBindServiceImpl implements PrintBindService {
     }
 
     @Override
-    public Map<String, JSONObject> dropdwon() {
-        JSONObject var1 = new JSONObject();
-        JSONObject var2 = new JSONObject();
-        JSONObject var3 = new JSONObject();
-        Map<String, JSONObject> map = Maps.newHashMap();
-        configMapper.list().forEach(x -> var1.put(x.getId().toString(), x.getPrintName()));
+    public Map<String, JSONArray> dropdwon() {
+        JSONArray var1 = new JSONArray();
+        JSONArray var2 = new JSONArray();
+        JSONArray var3 = new JSONArray();
+        Map<String, JSONArray> map = Maps.newHashMap();
+        configMapper.list().forEach(x -> var1.add(Tuples.of(x.getId(), x.getPrintName())));
         map.put("printName", var1);
-        printTypeMapper.list().forEach(x -> var2.put(x.getId().toString(), x.getTypeName()));
+        printTypeMapper.list().forEach(x -> var2.add(Tuples.of(x.getId().toString(), x.getTypeName())));
         map.put("printType", var2);
-        userMapper.list().forEach(x -> var3.put(x.getId().toString(), x.getName()));
+        userMapper.list().forEach(x -> var3.add(Tuples.of(x.getId().toString(), x.getName())));
         map.put("userName", var3);
         return map;
     }
