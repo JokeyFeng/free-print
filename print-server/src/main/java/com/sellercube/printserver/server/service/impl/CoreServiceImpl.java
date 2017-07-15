@@ -43,11 +43,11 @@ public class CoreServiceImpl implements CoreService {
         Result result;
         switch (from) {
             case "bg":
-                result = flytService.process(jsonObject);
+                result = banggoodService.process(jsonObject);
                 monitorMapper.deleteByPrimaryKey(monitorId);
                 break;
             case "ft":
-                result = banggoodService.process(jsonObject);
+                result = flytService.process(jsonObject);
                 monitorMapper.deleteByPrimaryKey(monitorId);
                 break;
             default:

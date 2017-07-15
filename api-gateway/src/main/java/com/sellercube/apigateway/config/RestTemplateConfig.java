@@ -2,7 +2,6 @@ package com.sellercube.apigateway.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -20,16 +19,6 @@ public class RestTemplateConfig {
     @Value("${rest.connection.read-timeout}")
     private Integer readTimeout;
 
-    @Bean
-    @LoadBalanced
-    public RestTemplate restTemplate(){
-        StringHttpMessageConverter m = new StringHttpMessageConverter(Charset.forName("UTF-8"));
-        return new RestTemplateBuilder()
-                .setConnectTimeout(connTimeout)
-                .setReadTimeout(readTimeout)
-                .additionalMessageConverters(m)
-                .build();
-    }
     @Bean
     public RestTemplate apiTemplate(){
         StringHttpMessageConverter m = new StringHttpMessageConverter(Charset.forName("UTF-8"));
