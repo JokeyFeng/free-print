@@ -65,7 +65,7 @@ public class PrintBindController {
     @ApiOperation(value = "根据条件搜索【打印绑定】的信息", notes = "根据传入的条件来进行搜索")
     public Result searchByCondition(@RequestParam(value = "configId", required = false) Integer configId,
                                      @RequestParam(value = "typeId", required = false) Integer typeId,
-                                     @RequestParam(value = "isEnable", required = false) boolean isEnable,
+                                     @RequestParam(value = "isEnable", required = false) Boolean isEnable,
                                      @RequestParam(value = "userId", required = false) Integer userId,
                                      @RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                      @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit) throws Exception {

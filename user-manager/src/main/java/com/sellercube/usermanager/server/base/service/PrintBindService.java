@@ -75,7 +75,7 @@ public interface PrintBindService {
      */
     PageInfo<JsonResult> searchByCondition(Integer configId
             , Integer typeId
-            , boolean isEnable
+            , Boolean isEnable
             , Integer userId
             , Integer pageNum, Integer PageSize);
 

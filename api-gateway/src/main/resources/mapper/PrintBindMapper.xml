@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sellercube.apigateway.server.mapper.PrintBindMapper">
+    <resultMap id="BaseResultMap" type="com.sellercube.apigateway.server.entity.PrintBind">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="config_id" jdbcType="INTEGER" property="configId"/>
+        <result column="print_type_id" jdbcType="INTEGER" property="printTypeId"/>
+        <result column="is_enable" jdbcType="BIT" property="isEnable"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="file" jdbcType="VARCHAR" property="file"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="creator" jdbcType="VARCHAR" property="creator"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="updator" jdbcType="VARCHAR" property="updator"/>
+        <result column="del_time" jdbcType="TIMESTAMP" property="delTime"/>
+        <result column="deletor" jdbcType="VARCHAR" property="deletor"/>
+        <result column="is_delete" jdbcType="BIT" property="isDelete"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, config_id, print_type_id, is_enable, user_id, file, create_time, creator, update_time, 
+    updator, del_time, deletor, is_delete
+  </sql>
+    <select id="listByConditon" resultType="java.lang.String">
+    SELECT con.ip
+    FROM print_bind pb
+	LEFT JOIN config con
+		ON pb.config_id = con.id
+	LEFT JOIN print_type pt
+		ON pb.print_type_id = pt.id
+	LEFT JOIN user u
+		ON pb.user_id = u.id
+		WHERE pb.is_enable=#{isEnable}
+		AND u.name=#{username} AND pt.type_name=#{printType}
+</select>
+</mapper>

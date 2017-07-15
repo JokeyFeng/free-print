@@ -1,4 +1,4 @@
-package com.sellercube.printserver.config;
+package com.sellercube.apigateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

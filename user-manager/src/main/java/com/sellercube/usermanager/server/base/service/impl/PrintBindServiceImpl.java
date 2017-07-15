@@ -137,7 +137,7 @@ public class PrintBindServiceImpl implements PrintBindService {
     @Override
     public PageInfo<JsonResult> searchByCondition(Integer configId
             , Integer typeId
-            , boolean isEnable
+            , Boolean isEnable
             , Integer userId
             , Integer pageNum, Integer PageSize) {
         PageHelper.startPage(pageNum, PageSize);
