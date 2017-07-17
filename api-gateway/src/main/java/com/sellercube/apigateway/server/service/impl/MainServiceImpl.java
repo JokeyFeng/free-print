@@ -13,6 +13,7 @@ import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +36,10 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public JSONObject process(JSONObject jsonObject) throws Exception {
+        System.out.println(URLEncoder.encode(jsonObject.toJSONString(), "UTF-8"));
+        System.out.println(URLEncoder.encode(jsonObject.toJSONString(), "GBK"));
+        System.out.println(URLEncoder.encode(jsonObject.toJSONString(), "GB2312"));
+        System.out.println(URLEncoder.encode(jsonObject.toJSONString(), "iso-8859-1"));
         //监控表增加记录
         Monitor monitor = new Monitor();
         monitor.setCreateTime(new Date());
@@ -48,7 +53,8 @@ public class MainServiceImpl implements MainService {
         headers.add("Accept", "application/json; charset=UTF-8");
         HttpEntity<String> httpEntity = new HttpEntity<>(jsonObject.toJSONString(), headers);
         //查询可用的IP
-        List<String> ips = printBindService.listByConditon(jsonObject.getString("operator"), "", true);
+        String printType = jsonObject.getString("type").equals("facelist") == true ? "面单" : "标签";
+        List<String> ips = printBindService.listByConditon(jsonObject.getString("userid"), printType, true);
         if (null != ips && !ips.isEmpty()) {
             if (ips.size() == 1) {
                 //单个ip
@@ -65,7 +71,7 @@ public class MainServiceImpl implements MainService {
             }
         } else {
             //没有找到ip地址
-            return (JSONObject) JSON.toJSON(ResultUtil.error("没有可用的IP"));
+            return (JSONObject) JSON.toJSON(ResultUtil.error("当前用户没有绑定打印机"));
         }
     }
 }

@@ -7,5 +7,5 @@ import java.util.List;
  */
 public interface PrintBindService {
 
-    List<String> listByConditon(String username, String printType, Boolean isEnable);
+    List<String> listByConditon(String userId, String printType, Boolean isEnable);
 }

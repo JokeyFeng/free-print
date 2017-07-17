@@ -11,12 +11,12 @@ public interface PrintBindMapper {
     /**
      * 根据条件查询ip
      *
-     * @param username  用户名
+     * @param userId  用户id
      * @param isEnable  是否启用
      * @param printType 打印类型
      * @return ip list
      */
-    List<String> listByConditon(@Param("username") String username,
+    List<String> listByConditon(@Param("userId") String userId,
                                 @Param("isEnable") Boolean isEnable,
                                 @Param("printType") String printType);
 }

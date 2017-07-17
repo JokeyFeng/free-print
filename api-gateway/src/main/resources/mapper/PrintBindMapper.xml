@@ -30,6 +30,6 @@
 	LEFT JOIN user u
 		ON pb.user_id = u.id
 		WHERE pb.is_enable=#{isEnable}
-		AND u.name=#{username} AND pt.type_name=#{printType}
+		AND u.id=#{userId} AND pt.type_name=#{printType}
 </select>
 </mapper>

@@ -18,10 +18,10 @@ import java.util.Objects;
 public class BanggoodServiceImpl implements BanggoodService {
     @Override
     public Result process(JSONObject jsonObject) throws Exception {
-        String pdfUrl = jsonObject.getString("PDFUrl");
+        String pdfUrl = jsonObject.getJSONObject("Data").getString("PDFUrl");
         String path = null;
         if (Objects.equals(null, pdfUrl)) {
-            return ResultUtil.error("打印失败");
+            return ResultUtil.error("打印失败，获取不到pdf的url");
         }
 
         if (pdfUrl.startsWith("http")) {

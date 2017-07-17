@@ -16,7 +16,7 @@ public class MainController {
     @Autowired
     private MainService mainService;
 
-    @PostMapping("/print")
+    @PostMapping(value = "/print")
     public JSONObject a(@RequestBody JSONObject jsonObject) throws Exception {
         return mainService.process(jsonObject);
     }

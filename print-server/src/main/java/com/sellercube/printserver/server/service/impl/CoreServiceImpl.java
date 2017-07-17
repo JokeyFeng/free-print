@@ -51,7 +51,7 @@ public class CoreServiceImpl implements CoreService {
                 monitorMapper.deleteByPrimaryKey(monitorId);
                 break;
             default:
-                result = ResultUtil.error("打印失败");
+                result = ResultUtil.error("打印失败，from字段不支持");
                 monitor.setStatus("打印失败");
                 monitorMapper.updateByPrimaryKeySelective(monitor);
                 break;
