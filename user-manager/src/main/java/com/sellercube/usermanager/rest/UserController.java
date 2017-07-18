@@ -24,12 +24,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/login")
+/*    @PostMapping("/login")
     @ApiOperation(value = "登录接口")
     @JsonView(View.BaseView.class)
     public Result login(@RequestParam("username") String username, @RequestParam("password") String password) throws Exception {
         return ResultUtil.success(userService.login(username, password));
-    }
+    }*/
 
     @PostMapping("/user")
     @ApiOperation(value = "新增操作员", notes = "传入json对象进行新增操作")

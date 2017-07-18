@@ -20,7 +20,7 @@ public class BanggoodServiceImpl implements BanggoodService {
     public Result process(JSONObject jsonObject) throws Exception {
         String pdfUrl = jsonObject.getJSONObject("Data").getString("PDFUrl");
         String path = null;
-        if (Objects.equals(null, pdfUrl)) {
+        if (Objects.equals(null, pdfUrl) || Objects.equals("", pdfUrl)) {
             return ResultUtil.error("打印失败，获取不到pdf的url");
         }
 
