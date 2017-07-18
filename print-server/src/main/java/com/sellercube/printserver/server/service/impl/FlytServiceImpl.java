@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.Objects;
 
 /**
- *
+ *飞特接口
  * Created by Chenjing on 2017/7/15.
  */
 @Service

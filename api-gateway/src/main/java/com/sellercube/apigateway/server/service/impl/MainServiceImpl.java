@@ -36,10 +36,6 @@ public class MainServiceImpl implements MainService {
 
     @Override
     public JSONObject process(JSONObject jsonObject) throws Exception {
-        System.out.println(URLEncoder.encode(jsonObject.toJSONString(), "UTF-8"));
-        System.out.println(URLEncoder.encode(jsonObject.toJSONString(), "GBK"));
-        System.out.println(URLEncoder.encode(jsonObject.toJSONString(), "GB2312"));
-        System.out.println(URLEncoder.encode(jsonObject.toJSONString(), "iso-8859-1"));
         //监控表增加记录
         Monitor monitor = new Monitor();
         monitor.setCreateTime(new Date());
