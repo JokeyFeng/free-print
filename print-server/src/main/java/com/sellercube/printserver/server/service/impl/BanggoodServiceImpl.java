@@ -10,6 +10,8 @@ import org.apache.commons.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Objects;
 
 /**
@@ -30,12 +32,21 @@ public class BanggoodServiceImpl implements BanggoodService {
         pdfUrl = convert(pdfUrl);
         switch (shipType) {
             case "UPSFedex"://Fedex
+                if (pdfUrl.startsWith("iVBORw0KGgo")) {
+                //base64 的图片
+                    InputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(pdfUrl));
+                    PrintUtil.printImage(inputStream, "png");
+                    break;
+                }
+                //base64 打印机指令
                 PrintUtil.printByString(new String(Base64.decodeBase64(pdfUrl)));
                 break;
             case "DHL":
+                //base64 pdf
                 PrintUtil.printPDF(CoreUtil.base64(pdfUrl, "pdf"));
                 break;
             case "DPD":
+                //base64 的打印机指令
                 PrintUtil.printByString(new String(Base64.decodeBase64(pdfUrl)));
                 return ResultUtil.error("抱歉，目前DPD渠道fds那边还未更新，所以不能打印");
             default:

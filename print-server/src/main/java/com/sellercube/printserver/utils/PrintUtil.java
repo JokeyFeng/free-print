@@ -48,11 +48,11 @@ public class PrintUtil {
      */
     public static void printImage(String fileName, Integer width, Integer height) throws Exception {
         DocFlavor dof = null;
-        if (fileName.toLowerCase().endsWith(".gif")) {
+        if (fileName.toLowerCase().endsWith("gif")) {
             dof = DocFlavor.INPUT_STREAM.GIF;
-        } else if (fileName.toLowerCase().endsWith(".jpg")) {
+        } else if (fileName.toLowerCase().endsWith("jpg")) {
             dof = DocFlavor.INPUT_STREAM.JPEG;
-        } else if (fileName.toLowerCase().endsWith(".png")) {
+        } else if (fileName.toLowerCase().endsWith("png")) {
             dof = DocFlavor.INPUT_STREAM.PNG;
         }
         PrintService ps = PrintServiceLookup.lookupDefaultPrintService();
@@ -89,11 +89,11 @@ public class PrintUtil {
      */
     public static void printImage(InputStream inputStream, Integer width, Integer height, String type) throws Exception {
         DocFlavor dof = null;
-        if (type.toLowerCase().equals(".gif")) {
+        if (type.toLowerCase().equals("gif")) {
             dof = DocFlavor.INPUT_STREAM.GIF;
-        } else if (type.toLowerCase().endsWith(".jpg")) {
+        } else if (type.toLowerCase().endsWith("jpg")) {
             dof = DocFlavor.INPUT_STREAM.JPEG;
-        } else if (type.toLowerCase().endsWith(".png")) {
+        } else if (type.toLowerCase().endsWith("png")) {
             dof = DocFlavor.INPUT_STREAM.PNG;
         }
         PrintService ps = PrintServiceLookup.lookupDefaultPrintService();

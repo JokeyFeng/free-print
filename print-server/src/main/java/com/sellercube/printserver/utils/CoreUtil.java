@@ -8,7 +8,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.io.FileOutputStream;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * 生成文件工具类
@@ -26,9 +25,8 @@ public class CoreUtil {
      * @return 文件路径
      */
     public static String base64(String str, String suffix) throws Exception {
-        String uuid = UUID.randomUUID().toString();
         byte[] bytes = Base64Util.decodeData(str);
-        String path = "D:/" + uuid + "." + suffix;
+        String path = "D:/document." + suffix;
         FileOutputStream fileOutputStream = new FileOutputStream(path);
         fileOutputStream.write(bytes);
         fileOutputStream.flush();
@@ -43,13 +41,12 @@ public class CoreUtil {
      */
     public static String download(String url, String suffix) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
-        String uuid = UUID.randomUUID().toString();
         HttpHeaders headers = new HttpHeaders();
         List<MediaType> list = Lists.newArrayList(MediaType.valueOf(APPLICATION_PDF));
         headers.setAccept(list);
         ResponseEntity<byte[]> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<byte[]>(headers), byte[].class);
         byte[] result = response.getBody();
-        String path = "D:/" + uuid + "." + suffix;
+        String path = "D:/document." + suffix;
         FileOutputStream fileOutputStream = new FileOutputStream(path);
         fileOutputStream.write(result);
         fileOutputStream.flush();
