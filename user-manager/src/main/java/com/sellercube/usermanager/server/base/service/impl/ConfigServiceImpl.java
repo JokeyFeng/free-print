@@ -35,12 +35,14 @@ public class ConfigServiceImpl implements ConfigService {
     @Override
     public int insert(Config record) {
         record.setCretaeTime(new Date());
+        record.setUpdateTime(new Date());
         return configMapper.insert(record);
     }
 
     @Override
     public int insertSelective(Config record) {
         record.setCretaeTime(new Date());
+        record.setUpdateTime(new Date());
         return configMapper.insertSelective(record);
     }
 

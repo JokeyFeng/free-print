@@ -50,8 +50,6 @@ public class UserServiceImpl implements UserService {
     public int insert(User record) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
-        String password = record.getPassword();
-        record.setPassword(MD5Util.encryption(password));
         return userMapper.insert(record);
     }
 
@@ -59,7 +57,6 @@ public class UserServiceImpl implements UserService {
     public int insertSelective(User record) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
-        record.setPassword(MD5Util.encryption(record.getPassword()));
         return userMapper.insertSelective(record);
     }
 
@@ -70,10 +67,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int updateByPrimaryKeySelective(UserDTO record) throws Exception {
-        Optional<User> user = Optional.ofNullable(userMapper.findByAccountAndPwd(record.getAccount(), MD5Util.encryption(record.getPassword())));
-        user.orElseThrow(Exception::new);
         record.setUpdateTime(new Date());
-        record.setPassword(MD5Util.encryption(record.getNewPassword()));
         return userMapper.updateByPrimaryKeySelective(record);
     }
 

@@ -20,7 +20,7 @@ public class ConfigController {
     @PostMapping("/config")
     @ApiOperation(value = "新增配置", notes = "传入json对象进行新增操作")
     public Result insert(@RequestBody Config config) throws Exception {
-        return ResultUtil.success(configService.insert(config));
+        return ResultUtil.success(configService.insertSelective(config));
     }
 
     @PutMapping("/configs/{id}")

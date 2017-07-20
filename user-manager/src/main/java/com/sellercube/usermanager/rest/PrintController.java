@@ -21,7 +21,7 @@ public class PrintController {
     @PostMapping("/printtype")
     @ApiOperation(value = "新增打印类型", notes = "传入json对象进行新增操作")
     public Result insert(@RequestBody PrintType printType) {
-        return ResultUtil.success(printService.insert(printType));
+        return ResultUtil.success(printService.insertSelective(printType));
     }
 
     @GetMapping("/printtypes/search")
@@ -54,7 +54,7 @@ public class PrintController {
 
     @DeleteMapping("/printtypes")
     @ApiOperation(value = "删除打印机类型", notes = "批量删除打印机类型，多个id用逗号分隔")
-    private Result b(@RequestBody String ids) {
+    public Result b(@RequestBody String ids) {
         return ResultUtil.success(printService.deleteByPrimaryKey(ids));
     }
 

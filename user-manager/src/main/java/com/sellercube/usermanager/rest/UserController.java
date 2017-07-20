@@ -34,7 +34,7 @@ public class UserController {
     @PostMapping("/user")
     @ApiOperation(value = "新增操作员", notes = "传入json对象进行新增操作")
     public Result insert(@RequestBody User user) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        return ResultUtil.success(userService.insert(user));
+        return ResultUtil.success(userService.insertSelective(user));
     }
 
     @PutMapping("/users/{id}")
