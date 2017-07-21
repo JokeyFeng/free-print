@@ -44,7 +44,7 @@ public class BanggoodServiceImpl implements BanggoodService {
                 if (pdfUrl.startsWith("iVBORw0KGgo")) {
                     //base64 的图片
                     InputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(pdfUrl));
-                    PrintUtil.printImage(inputStream, "png");
+                    PrintUtil.printImage(inputStream, "jpg");
                     break;
                 }
                 //base64 打印机指令
@@ -57,6 +57,7 @@ public class BanggoodServiceImpl implements BanggoodService {
             case "DPD":
                 //base64 的打印机指令
                 PrintUtil.printByString(new String(Base64.decodeBase64(pdfUrl)));
+                break;
             default:
                 Monitor monitor = new Monitor();
                 monitor.setId(monitorId);
