@@ -40,7 +40,7 @@ public class BanggoodServiceImpl implements BanggoodService {
         //还原特殊字符串
         pdfUrl = convert(pdfUrl);
         switch (shipType) {
-            case "UPSFedex"://Fedex
+            case "Fedex"://Fedex
                 if (pdfUrl.startsWith("iVBORw0KGgo")) {
                     //base64 的图片
                     InputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(pdfUrl));

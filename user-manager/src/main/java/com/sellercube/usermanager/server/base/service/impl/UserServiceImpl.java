@@ -96,11 +96,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public PageInfo<User> search(String username, String account, String pageNum, String limit) {
+    public PageInfo<User> search(String username, String pageNum, String limit) {
         Optional<String> pageNum1 = Optional.ofNullable(pageNum);
         Optional<String> limit1 = Optional.ofNullable(limit);
         PageHelper.startPage(Integer.valueOf(pageNum1.orElse("1")), Integer.valueOf(limit1.orElse("10")));
-        return new PageInfo<>(userMapper.searchByCondition(account, username));
+        return new PageInfo<>(userMapper.searchByCondition(username));
     }
 
     @Override

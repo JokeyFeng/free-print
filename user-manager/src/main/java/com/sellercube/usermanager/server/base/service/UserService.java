@@ -36,7 +36,7 @@ public interface UserService {
 
     PageInfo<User> list(String pageNum, String limit);
 
-    PageInfo<User> search(String username, String account, String pageNum, String limit);
+    PageInfo<User> search(String username, String pageNum, String limit);
 
     /**
      * 判断是否重复

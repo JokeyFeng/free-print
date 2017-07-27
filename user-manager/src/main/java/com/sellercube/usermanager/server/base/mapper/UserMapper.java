@@ -29,7 +29,7 @@ public interface UserMapper {
      */
     User findByAccountAndPwd(@Param("account") String account, @Param("password") String password);
 
-    List<User> searchByCondition(@Param("account") String account,@Param("username") String name);
+    List<User> searchByCondition(@Param("username") String name);
 
     List<User> list();
 

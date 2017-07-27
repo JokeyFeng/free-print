@@ -65,13 +65,12 @@ public class UserController {
     }
 
     @GetMapping("/users/search")
-    @ApiOperation(value = "搜索操作员", notes = "根据用户名或者登录名搜索操作员")
+    @ApiOperation(value = "搜索操作员", notes = "根据用户名搜索操作员")
     @JsonView(View.BaseView.class)
     public Result search(@RequestParam(value = "username", required = false) String username,
-                          @RequestParam(value = "account", required = false) String account,
                           @RequestParam(value = "pageNum", required = false) String pageNum,
                           @RequestParam(value = "limit", required = false) String limit) throws Exception {
-        return ResultUtil.success(userService.search(username, account, pageNum, limit));
+        return ResultUtil.success(userService.search(username, pageNum, limit));
     }
 
     @GetMapping("/user/repeat")

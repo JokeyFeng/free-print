@@ -45,10 +45,6 @@
         <if test="username != null">
             AND name like CONCAT('%',#{username},'%')
         </if>
-
-        <if test="account != null">
-            AND account like CONCAT('%',#{account},'%')
-        </if>
     </select>
 
     <select id="list" resultMap="BaseResultMap">
