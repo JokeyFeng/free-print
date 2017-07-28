@@ -14,7 +14,7 @@ public class Config implements Serializable {
 
     private String printName;
 
-    private Date cretaeTime;
+    private Date createTime;
 
     private String creator;
 
@@ -69,11 +69,11 @@ public class Config implements Serializable {
     }
 
     public Date getCretaeTime() {
-        return cretaeTime;
+        return createTime;
     }
 
     public void setCretaeTime(Date cretaeTime) {
-        this.cretaeTime = cretaeTime;
+        this.createTime = cretaeTime;
     }
 
     public String getCreator() {
@@ -132,7 +132,7 @@ public class Config implements Serializable {
                 ", remark='" + remark + '\'' +
                 ", mac='" + mac + '\'' +
                 ", printName='" + printName + '\'' +
-                ", cretaeTime=" + cretaeTime +
+                ", cretaeTime=" + createTime +
                 ", creator='" + creator + '\'' +
                 ", updateTime=" + updateTime +
                 ", updator='" + updator + '\'' +

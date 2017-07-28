@@ -1,7 +1,6 @@
 package com.sellercube.usermanager.server.base.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Maps;
 import com.sellercube.common.function.Tuples;
@@ -11,18 +10,19 @@ import com.sellercube.usermanager.server.base.entity.PrintBind;
 import com.sellercube.usermanager.server.base.mapper.ConfigMapper;
 import com.sellercube.usermanager.server.base.mapper.PrintBindMapper;
 import com.sellercube.usermanager.server.base.mapper.PrintTypeMapper;
-import com.sellercube.usermanager.server.base.mapper.UserMapper;
-import com.sellercube.usermanager.server.base.service.ConfigService;
 import com.sellercube.usermanager.server.base.service.PrintBindService;
+import com.sellercube.usermanager.server.base.service.UserService;
+import com.sellercube.usermanager.util.RedisUtil;
 import com.sellercube.usermanager.vo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.BufferedOutputStream;
+import javax.annotation.Resource;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -47,7 +47,10 @@ public class PrintBindServiceImpl implements PrintBindService {
     private PrintTypeMapper printTypeMapper;
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Override
     public int insert(Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String creator) throws Exception {
@@ -60,6 +63,7 @@ public class PrintBindServiceImpl implements PrintBindService {
         File dest = new File("/uploadFile/" + uuid + "." + suffix);
         file.transferTo(dest);
         PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), new Date(), creator, new Date(), null);
+        redisUtil.flushDB();
         return printBindMapper.insert(record);
     }
 
@@ -74,16 +78,19 @@ public class PrintBindServiceImpl implements PrintBindService {
         File dest = new File("/uploadFile/" + uuid + "." + suffix);
         file.transferTo(dest);
         PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), new Date(), creator, new Date(), null);
+        redisUtil.flushDB();
         return printBindMapper.insertSelective(record);
     }
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
+        redisUtil.flushDB();
         return printBindMapper.deleteByPrimaryKey(id);
     }
 
     @Override
     public int deleteByKeys(String ids) {
+        redisUtil.flushDB();
         SplitUtil.split(",", ids).forEach(x -> printBindMapper.deleteByPrimaryKey(Integer.valueOf(x)));
         return 1;
     }
@@ -102,6 +109,7 @@ public class PrintBindServiceImpl implements PrintBindService {
         if (file == null || file.isEmpty()) {
             PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, null, null, null, new Date(), updator);
             record.setId(id);
+            redisUtil.flushDB();
             return printBindMapper.updateByPrimaryKey(record);
         } else {
             String uuid = UUID.randomUUID().toString();
@@ -110,6 +118,7 @@ public class PrintBindServiceImpl implements PrintBindService {
             file.transferTo(dest);
             PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), null, null, new Date(), updator);
             record.setId(id);
+            redisUtil.flushDB();
             return printBindMapper.updateByPrimaryKey(record);
         }
     }
@@ -123,6 +132,7 @@ public class PrintBindServiceImpl implements PrintBindService {
         if (file == null || file.isEmpty()) {
             PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, null, null, null, new Date(), updator);
             record.setId(id);
+            redisUtil.flushDB();
             return printBindMapper.updateByPrimaryKeySelective(record);
         } else {
             String uuid = UUID.randomUUID().toString();
@@ -131,11 +141,13 @@ public class PrintBindServiceImpl implements PrintBindService {
             file.transferTo(dest);
             PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), null, null, new Date(), updator);
             record.setId(id);
+            redisUtil.flushDB();
             return printBindMapper.updateByPrimaryKeySelective(record);
         }
     }
 
     @Override
+    @Cacheable(value = "redisCache", keyGenerator = "keyGenerator",cacheManager = "cacheManager")
     public PageInfo<JsonResult> searchByCondition(Integer configId
             , Integer typeId
             , Boolean isEnable
@@ -147,12 +159,15 @@ public class PrintBindServiceImpl implements PrintBindService {
 
 
     @Override
+    @Cacheable(value = "redisCache", keyGenerator = "keyGenerator",cacheManager = "cacheManager")
     public PageInfo<JsonResult> getByPage(Integer pageNum, Integer pageSize) {
+        redisUtil.flushDB();
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(printBindMapper.list());
     }
 
     @Override
+    @Cacheable(value = "redisCache", keyGenerator = "keyGenerator",cacheManager = "cacheManager")
     public Map<String, JSONArray> dropdwon() {
         JSONArray var1 = new JSONArray();
         JSONArray var2 = new JSONArray();
@@ -162,7 +177,7 @@ public class PrintBindServiceImpl implements PrintBindService {
         map.put("printName", var1);
         printTypeMapper.list().forEach(x -> var2.add(Tuples.of(x.getId().toString(), x.getTypeName())));
         map.put("printType", var2);
-        userMapper.list().forEach(x -> var3.add(Tuples.of(x.getUserid().toString(), x.getUsername())));
+        userService.list().forEach(x -> var3.add(Tuples.of(x.getUserid().toString(), x.getUsername())));
         map.put("userName", var3);
         return map;
     }

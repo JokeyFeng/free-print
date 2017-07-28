@@ -7,7 +7,7 @@
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="mac" jdbcType="VARCHAR" property="mac" />
     <result column="print_name" jdbcType="VARCHAR" property="printName" />
-    <result column="cretae_time" jdbcType="TIMESTAMP" property="cretaeTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="creator" jdbcType="VARCHAR" property="creator" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="updator" jdbcType="VARCHAR" property="updator" />
@@ -17,7 +17,7 @@
   </resultMap>
 
   <sql id="Base_Column_List">
-    id, ip, remark, mac, print_name, cretae_time, creator, update_time, updator, del_time,
+    id, ip, remark, mac, print_name, create_time, creator, update_time, updator, del_time,
     deletor, is_delete
   </sql>
 
@@ -78,7 +78,7 @@
       del_time, deletor, is_delete
       )
     values (#{id,jdbcType=INTEGER}, #{ip,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},
-      #{mac,jdbcType=VARCHAR}, #{printName,jdbcType=VARCHAR}, #{cretaeTime,jdbcType=TIMESTAMP},
+      #{mac,jdbcType=VARCHAR}, #{printName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
       #{creator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updator,jdbcType=VARCHAR},
       #{delTime,jdbcType=TIMESTAMP}, #{deletor,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}
       )
@@ -101,7 +101,7 @@
       <if test="printName != null">
         print_name,
       </if>
-      <if test="cretaeTime != null">
+      <if test="createTime != null">
         cretae_time,
       </if>
       <if test="creator != null">
@@ -139,8 +139,8 @@
       <if test="printName != null">
         #{printName,jdbcType=VARCHAR},
       </if>
-      <if test="cretaeTime != null">
-        #{cretaeTime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="creator != null">
         #{creator,jdbcType=VARCHAR},
@@ -177,8 +177,8 @@
       <if test="printName != null">
         print_name = #{printName,jdbcType=VARCHAR},
       </if>
-      <if test="cretaeTime != null">
-        cretae_time = #{cretaeTime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        cretae_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="creator != null">
         creator = #{creator,jdbcType=VARCHAR},
@@ -207,7 +207,7 @@
       remark = #{remark,jdbcType=VARCHAR},
       mac = #{mac,jdbcType=VARCHAR},
       print_name = #{printName,jdbcType=VARCHAR},
-      cretae_time = #{cretaeTime,jdbcType=TIMESTAMP},
+      cretae_time = #{createTime,jdbcType=TIMESTAMP},
       creator = #{creator,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       updator = #{updator,jdbcType=VARCHAR},

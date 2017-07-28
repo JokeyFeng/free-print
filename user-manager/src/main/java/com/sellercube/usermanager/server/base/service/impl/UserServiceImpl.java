@@ -65,10 +65,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    @Cacheable(value = "redisCache", keyGenerator = "keyGenerator",cacheManager = "cacheManager")
-    public List<User> list() {
-        System.out.println("调用我了就是说明没去调用缓存");
-        return userMapper.list();
-    }
+    public List<User> list() { return userMapper.list(); }
 
 }

@@ -1,11 +1,11 @@
 package com.sellercube.usermanager.util;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Component;
 
-import java.io.Serializable;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class RedisUtil {
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String,Object> redisTemplate;
 
     /**
      * 批量删除对应的value
@@ -31,7 +31,7 @@ public class RedisUtil {
      * 批量删除key
      */
     public void removePattern(final String pattern) {
-        Set<Serializable> keys = redisTemplate.keys(pattern);
+        Set<String> keys = redisTemplate.keys(pattern);
         if (keys.size() > 0)
             redisTemplate.delete(keys);
     }
@@ -57,7 +57,7 @@ public class RedisUtil {
      */
     public Object get(final String key) {
         Object result;
-        ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+        ValueOperations<String, Object> operations = redisTemplate.opsForValue();
         result = operations.get(key);
         return result;
     }
@@ -68,7 +68,7 @@ public class RedisUtil {
     public boolean set(final String key, Object value) {
         boolean result = false;
         try {
-            ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+            ValueOperations<String, Object> operations = redisTemplate.opsForValue();
             operations.set(key, value);
             result = true;
         } catch (Exception e) {
@@ -83,7 +83,7 @@ public class RedisUtil {
     public boolean set(final String key, Object value, Long expireTime) {
         boolean result = false;
         try {
-            ValueOperations<Serializable, Object> operations = redisTemplate.opsForValue();
+            ValueOperations<String, Object> operations = redisTemplate.opsForValue();
             operations.set(key, value);
             redisTemplate.expire(key, expireTime, TimeUnit.SECONDS);
             result = true;
@@ -91,5 +91,12 @@ public class RedisUtil {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public long flushDB() {
+        return redisTemplate.execute((RedisCallback<Long>) c -> {
+            c.flushDb();
+            return 1L;
+        });
     }
 }
