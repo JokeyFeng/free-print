@@ -1,63 +1,77 @@
 package com.sellercube.usermanager.server.base.entity;
 
-import com.fasterxml.jackson.annotation.JsonView;
-import com.sellercube.common.entity.View;
-
 import java.io.Serializable;
 import java.util.Date;
 
 public class User implements Serializable {
-    @JsonView(View.BaseView.class)
-    private Integer id;
-    @JsonView(View.BaseView.class)
-    private String name;
-    @JsonView(View.BaseView.class)
-    private String account;
+    private Integer userid;
+
+    private Integer processcenterid;
+
+    private Integer defaultstorageid;
+
+    private Integer departmentid;
+
+    private String username;
 
     private String password;
-    @JsonView(View.BaseView.class)
+
     private String email;
-    @JsonView(View.BaseView.class)
-    private Date createTime;
-    @JsonView(View.BaseView.class)
-    private String creator;
-    @JsonView(View.BaseView.class)
-    private Date updateTime;
-    @JsonView(View.BaseView.class)
-    private String updator;
-    @JsonView(View.BaseView.class)
-    private Date delTime;
-    @JsonView(View.BaseView.class)
-    private Boolean isDelete;
-    @JsonView(View.BaseView.class)
-    private String deltor;
-    @JsonView(View.BaseView.class)
-    private String role;
-    @JsonView(View.BaseView.class)
-    private String accessToken;
 
-    public Integer getId() {
-        return id;
+    private Boolean islocked;
+
+    private Date lastlogintime;
+
+    private Integer deliveraddress;
+
+    private Integer defaultlanguageid;
+
+    private String newpassword;
+
+    private Short testusertype;
+
+    private String guid;
+
+    private Long synckey;
+
+    public Integer getUserid() {
+        return userid;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setUserid(Integer userid) {
+        this.userid = userid;
     }
 
-    public String getName() {
-        return name;
+    public Integer getProcesscenterid() {
+        return processcenterid;
     }
 
-    public void setName(String name) {
-        this.name = name == null ? null : name.trim();
+    public void setProcesscenterid(Integer processcenterid) {
+        this.processcenterid = processcenterid;
     }
 
-    public String getAccount() {
-        return account;
+    public Integer getDefaultstorageid() {
+        return defaultstorageid;
     }
 
-    public void setAccount(String account) {
-        this.account = account == null ? null : account.trim();
+    public void setDefaultstorageid(Integer defaultstorageid) {
+        this.defaultstorageid = defaultstorageid;
+    }
+
+    public Integer getDepartmentid() {
+        return departmentid;
+    }
+
+    public void setDepartmentid(Integer departmentid) {
+        this.departmentid = departmentid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getPassword() {
@@ -76,95 +90,88 @@ public class User implements Serializable {
         this.email = email == null ? null : email.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Boolean getIslocked() {
+        return islocked;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setIslocked(Boolean islocked) {
+        this.islocked = islocked;
     }
 
-    public String getCreator() {
-        return creator;
+    public Date getLastlogintime() {
+        return lastlogintime;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator == null ? null : creator.trim();
+    public void setLastlogintime(Date lastlogintime) {
+        this.lastlogintime = lastlogintime;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public Integer getDeliveraddress() {
+        return deliveraddress;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setDeliveraddress(Integer deliveraddress) {
+        this.deliveraddress = deliveraddress;
     }
 
-    public String getUpdator() {
-        return updator;
+    public Integer getDefaultlanguageid() {
+        return defaultlanguageid;
     }
 
-    public void setUpdator(String updator) {
-        this.updator = updator == null ? null : updator.trim();
+    public void setDefaultlanguageid(Integer defaultlanguageid) {
+        this.defaultlanguageid = defaultlanguageid;
     }
 
-    public Date getDelTime() {
-        return delTime;
+    public String getNewpassword() {
+        return newpassword;
     }
 
-    public void setDelTime(Date delTime) {
-        this.delTime = delTime;
+    public void setNewpassword(String newpassword) {
+        this.newpassword = newpassword == null ? null : newpassword.trim();
     }
 
-    public Boolean getIsDelete() {
-        return isDelete;
+    public Short getTestusertype() {
+        return testusertype;
     }
 
-    public void setIsDelete(Boolean isDelete) {
-        this.isDelete = isDelete;
+    public void setTestusertype(Short testusertype) {
+        this.testusertype = testusertype;
     }
 
-    public String getDeltor() {
-        return deltor;
+    public String getGuid() {
+        return guid;
     }
 
-    public void setDeltor(String deltor) {
-        this.deltor = deltor == null ? null : deltor.trim();
+    public void setGuid(String guid) {
+        this.guid = guid == null ? null : guid.trim();
     }
 
-    public String getRole() {
-        return role;
+    public Long getSynckey() {
+        return synckey;
     }
 
-    public void setRole(String role) {
-        this.role = role == null ? null : role.trim();
-    }
-
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken == null ? null : accessToken.trim();
+    public void setSynckey(Long synckey) {
+        this.synckey = synckey;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", account='" + account + '\'' +
+                "userid=" + userid +
+                ", processcenterid=" + processcenterid +
+                ", defaultstorageid=" + defaultstorageid +
+                ", departmentid=" + departmentid +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
-                ", createTime=" + createTime +
-                ", creator='" + creator + '\'' +
-                ", updateTime=" + updateTime +
-                ", updator='" + updator + '\'' +
-                ", delTime=" + delTime +
-                ", isDelete=" + isDelete +
-                ", deltor='" + deltor + '\'' +
-                ", role='" + role + '\'' +
-                ", accessToken='" + accessToken + '\'' +
+                ", islocked=" + islocked +
+                ", lastlogintime=" + lastlogintime +
+                ", deliveraddress=" + deliveraddress +
+                ", defaultlanguageid=" + defaultlanguageid +
+                ", newpassword='" + newpassword + '\'' +
+                ", testusertype=" + testusertype +
+                ", guid='" + guid + '\'' +
+                ", synckey=" + synckey +
                 '}';
     }
 }

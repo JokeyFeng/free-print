@@ -1,235 +1,220 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sellercube.usermanager.server.base.mapper.UserMapper">
-    <resultMap id="BaseResultMap" type="com.sellercube.usermanager.server.base.entity.User">
-        <id column="id" jdbcType="INTEGER" property="id"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="account" jdbcType="VARCHAR" property="account"/>
-        <result column="password" jdbcType="VARCHAR" property="password"/>
-        <result column="email" jdbcType="VARCHAR" property="email"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-        <result column="creator" jdbcType="VARCHAR" property="creator"/>
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="updator" jdbcType="VARCHAR" property="updator"/>
-        <result column="del_time" jdbcType="TIMESTAMP" property="delTime"/>
-        <result column="is_delete" jdbcType="BIT" property="isDelete"/>
-        <result column="deltor" jdbcType="VARCHAR" property="deltor"/>
-        <result column="role" jdbcType="VARCHAR" property="role"/>
-        <result column="access_token" jdbcType="VARCHAR" property="accessToken"/>
-    </resultMap>
-    <sql id="Base_Column_List">
-    id, name, account, password, email, create_time, creator, update_time, updator, del_time, 
-    is_delete, deltor, role, access_token
+  <resultMap id="BaseResultMap" type="com.sellercube.usermanager.server.base.entity.User">
+    <id column="UserId" jdbcType="INTEGER" property="userid" />
+    <result column="ProcessCenterId" jdbcType="INTEGER" property="processcenterid" />
+    <result column="DefaultStorageId" jdbcType="INTEGER" property="defaultstorageid" />
+    <result column="DepartmentId" jdbcType="INTEGER" property="departmentid" />
+    <result column="UserName" jdbcType="VARCHAR" property="username" />
+    <result column="Password" jdbcType="VARCHAR" property="password" />
+    <result column="Email" jdbcType="VARCHAR" property="email" />
+    <result column="Islocked" jdbcType="BIT" property="islocked" />
+    <result column="LastLoginTime" jdbcType="TIMESTAMP" property="lastlogintime" />
+    <result column="DeliverAddress" jdbcType="INTEGER" property="deliveraddress" />
+    <result column="DefaultLanguageId" jdbcType="INTEGER" property="defaultlanguageid" />
+    <result column="NewPassword" jdbcType="VARCHAR" property="newpassword" />
+    <result column="TestUserType" jdbcType="SMALLINT" property="testusertype" />
+    <result column="Guid" jdbcType="CHAR" property="guid" />
+    <result column="SyncKey" jdbcType="BIGINT" property="synckey" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    UserId, ProcessCenterId, DefaultStorageId, DepartmentId, UserName, Password, Email, 
+    Islocked, LastLoginTime, DeliverAddress, DefaultLanguageId, NewPassword, TestUserType, 
+    Guid, SyncKey
   </sql>
-
-    <select id="countByNameRepeat" resultType="java.lang.Integer">
-        select
-        COUNT(1)
-        from user
-        where name = #{name}
-    </select>
-
-    <select id="countByAccountRepeat" resultType="java.lang.Integer">
-        select
-        COUNT(1)
-        from user
-        where account = #{account}
-    </select>
-
-
-    <select id="searchByCondition" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        WHERE 1=1
-        <if test="username != null">
-            AND name like CONCAT('%',#{username},'%')
-        </if>
-    </select>
 
     <select id="list" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
-        from user
+        <include refid="Base_Column_List" />
+        from users
+    </select>
 
-    </select>
-    <select id="findByAccountAndPwd" resultMap="BaseResultMap">
-        SELECT <include refid="Base_Column_List"/> FROM user WHERE account=#{account} AND password=#{password}
-
-    </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where id = #{id,jdbcType=INTEGER}
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from users
+    where UserId = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from users
+    where UserId = #{userid,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.sellercube.usermanager.server.base.entity.User">
-    insert into user (id, name, account, 
-      password, email, create_time, 
-      creator, update_time, updator, 
-      del_time, is_delete, deltor, 
-      role, access_token)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
-      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{creator,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updator,jdbcType=VARCHAR}, 
-      #{delTime,jdbcType=TIMESTAMP}, #{isDelete,jdbcType=BIT}, #{deltor,jdbcType=VARCHAR}, 
-      #{role,jdbcType=VARCHAR}, #{accessToken,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.sellercube.usermanager.server.base.entity.User">
+    insert into users (UserId, ProcessCenterId, DefaultStorageId, 
+      DepartmentId, UserName, Password, 
+      Email, Islocked, LastLoginTime, 
+      DeliverAddress, DefaultLanguageId, NewPassword, 
+      TestUserType, Guid, SyncKey
+      )
+    values (#{userid,jdbcType=INTEGER}, #{processcenterid,jdbcType=INTEGER}, #{defaultstorageid,jdbcType=INTEGER}, 
+      #{departmentid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{islocked,jdbcType=BIT}, #{lastlogintime,jdbcType=TIMESTAMP}, 
+      #{deliveraddress,jdbcType=INTEGER}, #{defaultlanguageid,jdbcType=INTEGER}, #{newpassword,jdbcType=VARCHAR}, 
+      #{testusertype,jdbcType=SMALLINT}, #{guid,jdbcType=CHAR}, #{synckey,jdbcType=BIGINT}
+      )
   </insert>
-    <insert id="insertSelective" parameterType="com.sellercube.usermanager.server.base.entity.User">
-        insert into user
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="name != null">
-                name,
-            </if>
-            <if test="account != null">
-                account,
-            </if>
-            <if test="password != null">
-                password,
-            </if>
-            <if test="email != null">
-                email,
-            </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="creator != null">
-                creator,
-            </if>
-            <if test="updateTime != null">
-                update_time,
-            </if>
-            <if test="updator != null">
-                updator,
-            </if>
-            <if test="delTime != null">
-                del_time,
-            </if>
-            <if test="isDelete != null">
-                is_delete,
-            </if>
-            <if test="deltor != null">
-                deltor,
-            </if>
-            <if test="role != null">
-                role,
-            </if>
-            <if test="accessToken != null">
-                access_token,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="name != null">
-                #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="account != null">
-                #{account,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null">
-                #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="email != null">
-                #{email,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="creator != null">
-                #{creator,jdbcType=VARCHAR},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updator != null">
-                #{updator,jdbcType=VARCHAR},
-            </if>
-            <if test="delTime != null">
-                #{delTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="isDelete != null">
-                #{isDelete,jdbcType=BIT},
-            </if>
-            <if test="deltor != null">
-                #{deltor,jdbcType=VARCHAR},
-            </if>
-            <if test="role != null">
-                #{role,jdbcType=VARCHAR},
-            </if>
-            <if test="accessToken != null">
-                #{accessToken,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.sellercube.usermanager.server.base.entity.User">
-        update user
-        <set>
-            <if test="name != null">
-                name = #{name,jdbcType=VARCHAR},
-            </if>
-            <if test="account != null">
-                account = #{account,jdbcType=VARCHAR},
-            </if>
-            <if test="password != null">
-                password = #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="email != null">
-                email = #{email,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="creator != null">
-                creator = #{creator,jdbcType=VARCHAR},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updator != null">
-                updator = #{updator,jdbcType=VARCHAR},
-            </if>
-            <if test="delTime != null">
-                del_time = #{delTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="isDelete != null">
-                is_delete = #{isDelete,jdbcType=BIT},
-            </if>
-            <if test="deltor != null">
-                deltor = #{deltor,jdbcType=VARCHAR},
-            </if>
-            <if test="role != null">
-                role = #{role,jdbcType=VARCHAR},
-            </if>
-            <if test="accessToken != null">
-                access_token = #{accessToken,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.sellercube.usermanager.server.base.entity.User">
-    update user
-    set name = #{name,jdbcType=VARCHAR},
-      account = #{account,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      creator = #{creator,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      updator = #{updator,jdbcType=VARCHAR},
-      del_time = #{delTime,jdbcType=TIMESTAMP},
-      is_delete = #{isDelete,jdbcType=BIT},
-      deltor = #{deltor,jdbcType=VARCHAR},
-      role = #{role,jdbcType=VARCHAR},
-      access_token = #{accessToken,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
+  <insert id="insertSelective" parameterType="com.sellercube.usermanager.server.base.entity.User">
+    insert into users
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        UserId,
+      </if>
+      <if test="processcenterid != null">
+        ProcessCenterId,
+      </if>
+      <if test="defaultstorageid != null">
+        DefaultStorageId,
+      </if>
+      <if test="departmentid != null">
+        DepartmentId,
+      </if>
+      <if test="username != null">
+        UserName,
+      </if>
+      <if test="password != null">
+        Password,
+      </if>
+      <if test="email != null">
+        Email,
+      </if>
+      <if test="islocked != null">
+        Islocked,
+      </if>
+      <if test="lastlogintime != null">
+        LastLoginTime,
+      </if>
+      <if test="deliveraddress != null">
+        DeliverAddress,
+      </if>
+      <if test="defaultlanguageid != null">
+        DefaultLanguageId,
+      </if>
+      <if test="newpassword != null">
+        NewPassword,
+      </if>
+      <if test="testusertype != null">
+        TestUserType,
+      </if>
+      <if test="guid != null">
+        Guid,
+      </if>
+      <if test="synckey != null">
+        SyncKey,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userid != null">
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="processcenterid != null">
+        #{processcenterid,jdbcType=INTEGER},
+      </if>
+      <if test="defaultstorageid != null">
+        #{defaultstorageid,jdbcType=INTEGER},
+      </if>
+      <if test="departmentid != null">
+        #{departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="islocked != null">
+        #{islocked,jdbcType=BIT},
+      </if>
+      <if test="lastlogintime != null">
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveraddress != null">
+        #{deliveraddress,jdbcType=INTEGER},
+      </if>
+      <if test="defaultlanguageid != null">
+        #{defaultlanguageid,jdbcType=INTEGER},
+      </if>
+      <if test="newpassword != null">
+        #{newpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="testusertype != null">
+        #{testusertype,jdbcType=SMALLINT},
+      </if>
+      <if test="guid != null">
+        #{guid,jdbcType=CHAR},
+      </if>
+      <if test="synckey != null">
+        #{synckey,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sellercube.usermanager.server.base.entity.User">
+    update users
+    <set>
+      <if test="processcenterid != null">
+        ProcessCenterId = #{processcenterid,jdbcType=INTEGER},
+      </if>
+      <if test="defaultstorageid != null">
+        DefaultStorageId = #{defaultstorageid,jdbcType=INTEGER},
+      </if>
+      <if test="departmentid != null">
+        DepartmentId = #{departmentid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        UserName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        Password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="islocked != null">
+        Islocked = #{islocked,jdbcType=BIT},
+      </if>
+      <if test="lastlogintime != null">
+        LastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveraddress != null">
+        DeliverAddress = #{deliveraddress,jdbcType=INTEGER},
+      </if>
+      <if test="defaultlanguageid != null">
+        DefaultLanguageId = #{defaultlanguageid,jdbcType=INTEGER},
+      </if>
+      <if test="newpassword != null">
+        NewPassword = #{newpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="testusertype != null">
+        TestUserType = #{testusertype,jdbcType=SMALLINT},
+      </if>
+      <if test="guid != null">
+        Guid = #{guid,jdbcType=CHAR},
+      </if>
+      <if test="synckey != null">
+        SyncKey = #{synckey,jdbcType=BIGINT},
+      </if>
+    </set>
+    where UserId = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sellercube.usermanager.server.base.entity.User">
+    update users
+    set ProcessCenterId = #{processcenterid,jdbcType=INTEGER},
+      DefaultStorageId = #{defaultstorageid,jdbcType=INTEGER},
+      DepartmentId = #{departmentid,jdbcType=INTEGER},
+      UserName = #{username,jdbcType=VARCHAR},
+      Password = #{password,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Islocked = #{islocked,jdbcType=BIT},
+      LastLoginTime = #{lastlogintime,jdbcType=TIMESTAMP},
+      DeliverAddress = #{deliveraddress,jdbcType=INTEGER},
+      DefaultLanguageId = #{defaultlanguageid,jdbcType=INTEGER},
+      NewPassword = #{newpassword,jdbcType=VARCHAR},
+      TestUserType = #{testusertype,jdbcType=SMALLINT},
+      Guid = #{guid,jdbcType=CHAR},
+      SyncKey = #{synckey,jdbcType=BIGINT}
+    where UserId = #{userid,jdbcType=INTEGER}
   </update>
 </mapper>

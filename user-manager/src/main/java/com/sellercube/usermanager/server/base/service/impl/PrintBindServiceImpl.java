@@ -16,6 +16,7 @@ import com.sellercube.usermanager.server.base.service.ConfigService;
 import com.sellercube.usermanager.server.base.service.PrintBindService;
 import com.sellercube.usermanager.vo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -161,7 +162,7 @@ public class PrintBindServiceImpl implements PrintBindService {
         map.put("printName", var1);
         printTypeMapper.list().forEach(x -> var2.add(Tuples.of(x.getId().toString(), x.getTypeName())));
         map.put("printType", var2);
-        userMapper.list().forEach(x -> var3.add(Tuples.of(x.getId().toString(), x.getName())));
+        userMapper.list().forEach(x -> var3.add(Tuples.of(x.getUserid().toString(), x.getUsername())));
         map.put("userName", var3);
         return map;
     }

@@ -36,7 +36,7 @@
         SELECT pb.id,con.print_name
         ,pt.type_name
         ,pb.is_enable
-        ,u.name
+        ,u.username
         ,pb.creator
         ,pb.create_time
         ,pb.updator
@@ -46,7 +46,7 @@
         ON pb.config_id = con.id
         INNER JOIN print_type pt
         ON pb.print_type_id = pt.id
-        LEFT JOIN user u
+        LEFT JOIN users u
         ON pb.user_id = u.id
         WHERE 1=1
         <if test="config_id != null">
@@ -68,7 +68,7 @@
     ,con.print_name
 			,pt.type_name
 			,pb.is_enable
-			,u.name
+			,u.username
 			,pb.creator
 			,pb.create_time
 			,pb.updator
@@ -78,8 +78,8 @@
 		ON pb.config_id = con.id
 	INNER JOIN print_type pt
 		ON pb.print_type_id = pt.id
-	LEFT JOIN user u
-		ON pb.user_id = u.id
+	LEFT JOIN users u
+		ON pb.user_id = u.userid
   </select>
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
