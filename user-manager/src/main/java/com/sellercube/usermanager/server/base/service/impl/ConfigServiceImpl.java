@@ -42,7 +42,7 @@ public class ConfigServiceImpl implements ConfigService {
         record.setCretaeTime(new Date());
         record.setUpdateTime(new Date());
         record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
-        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
+        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
         return configMapper.insert(record);
     }
 
@@ -51,7 +51,7 @@ public class ConfigServiceImpl implements ConfigService {
         record.setCretaeTime(new Date());
         record.setUpdateTime(new Date());
         record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
-        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
+        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
         return configMapper.insertSelective(record);
     }
 

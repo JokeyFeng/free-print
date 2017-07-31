@@ -109,6 +109,7 @@ public class PrintBindServiceImpl implements PrintBindService {
         if (file == null || file.isEmpty()) {
             PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, null, null, null, new Date(), updator);
             record.setId(id);
+            record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(updator)).getUsername());
             return printBindMapper.updateByPrimaryKey(record);
         } else {
             String uuid = UUID.randomUUID().toString();
@@ -132,6 +133,7 @@ public class PrintBindServiceImpl implements PrintBindService {
         if (file == null || file.isEmpty()) {
             PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, null, null, null, new Date(), updator);
             record.setId(id);
+            record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(updator)).getUsername());
             return printBindMapper.updateByPrimaryKeySelective(record);
         } else {
             String uuid = UUID.randomUUID().toString();
