@@ -59,8 +59,8 @@ public class PrintBindServiceImpl implements PrintBindService {
         File dest = new File("/uploadFile/" + uuid + "." + suffix);
         file.transferTo(dest);
         PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), new Date(), creator, new Date(), null);
-        record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
-        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
+        record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(creator)).getUsername());
+        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(creator)).getUsername());
         return printBindMapper.insert(record);
     }
 
@@ -76,8 +76,8 @@ public class PrintBindServiceImpl implements PrintBindService {
         File dest = new File("/uploadFile/" + uuid + "." + suffix);
         file.transferTo(dest);
         PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), new Date(), creator, new Date(), null);
-        record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
-        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
+        record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(creator)).getUsername());
+        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(creator)).getUsername());
         return printBindMapper.insertSelective(record);
     }
 
@@ -117,7 +117,7 @@ public class PrintBindServiceImpl implements PrintBindService {
             file.transferTo(dest);
             PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), null, null, new Date(), updator);
             record.setId(id);
-            record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
+            record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(updator)).getUsername());
             return printBindMapper.updateByPrimaryKey(record);
         }
     }
@@ -140,7 +140,7 @@ public class PrintBindServiceImpl implements PrintBindService {
             file.transferTo(dest);
             PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), null, null, new Date(), updator);
             record.setId(id);
-            record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
+            record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(updator)).getUsername());
             return printBindMapper.updateByPrimaryKeySelective(record);
         }
     }
