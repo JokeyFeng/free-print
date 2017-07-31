@@ -41,7 +41,7 @@ public class PrintServiceImpl implements PrintService {
         record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
         record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
-        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
+        record.setUpdator(record.getCreator());
         return printTypeMapper.insert(record);
     }
 
@@ -50,7 +50,7 @@ public class PrintServiceImpl implements PrintService {
         record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
         record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
-        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
+        record.setUpdator(record.getCreator());
         return printTypeMapper.insertSelective(record);
     }
 
