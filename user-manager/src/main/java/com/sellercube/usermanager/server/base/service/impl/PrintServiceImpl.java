@@ -91,6 +91,6 @@ public class PrintServiceImpl implements PrintService {
 
     @Override
     public boolean countByName(String name) {
-        return printTypeMapper.countByName(name) > 0 ? true : false;
+        return printTypeMapper.countByName(name) > 0;
     }
 }
