@@ -73,7 +73,7 @@
   </delete>
   <insert id="insert" parameterType="com.sellercube.usermanager.server.base.entity.Config">
     insert into config (id, ip, remark,
-      mac, print_name, cretae_time,
+      mac, print_name, create_time,
       creator, update_time, updator,
       del_time, deletor, is_delete
       )
@@ -102,7 +102,7 @@
         print_name,
       </if>
       <if test="createTime != null">
-        cretae_time,
+        create_time,
       </if>
       <if test="creator != null">
         creator,
@@ -178,7 +178,7 @@
         print_name = #{printName,jdbcType=VARCHAR},
       </if>
       <if test="createTime != null">
-        cretae_time = #{createTime,jdbcType=TIMESTAMP},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
       <if test="creator != null">
         creator = #{creator,jdbcType=VARCHAR},
@@ -207,7 +207,7 @@
       remark = #{remark,jdbcType=VARCHAR},
       mac = #{mac,jdbcType=VARCHAR},
       print_name = #{printName,jdbcType=VARCHAR},
-      cretae_time = #{createTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
       creator = #{creator,jdbcType=VARCHAR},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       updator = #{updator,jdbcType=VARCHAR},
