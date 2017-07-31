@@ -15,13 +15,11 @@ import com.sellercube.usermanager.server.base.service.UserService;
 import com.sellercube.usermanager.util.RedisUtil;
 import com.sellercube.usermanager.vo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import java.io.File;
 import java.util.Date;
 import java.util.List;
@@ -49,10 +47,8 @@ public class PrintBindServiceImpl implements PrintBindService {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private RedisUtil redisUtil;
-
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int insert(Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String creator) throws Exception {
         List<JsonResult> list = printBindMapper.searchByCondition(printNameId, printTypeId, isEnable, userId);
         if (null != list && !list.isEmpty()) {
@@ -63,11 +59,13 @@ public class PrintBindServiceImpl implements PrintBindService {
         File dest = new File("/uploadFile/" + uuid + "." + suffix);
         file.transferTo(dest);
         PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), new Date(), creator, new Date(), null);
-        redisUtil.flushDB();
+        record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
+        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
         return printBindMapper.insert(record);
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int insertSelective(Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String creator) throws Exception {
         List<JsonResult> list = printBindMapper.searchByCondition(printNameId, printTypeId, isEnable, userId);
         if (null != list && !list.isEmpty()) {
@@ -78,19 +76,20 @@ public class PrintBindServiceImpl implements PrintBindService {
         File dest = new File("/uploadFile/" + uuid + "." + suffix);
         file.transferTo(dest);
         PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), new Date(), creator, new Date(), null);
-        redisUtil.flushDB();
+        record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
+        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
         return printBindMapper.insertSelective(record);
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int deleteByPrimaryKey(Integer id) {
-        redisUtil.flushDB();
         return printBindMapper.deleteByPrimaryKey(id);
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int deleteByKeys(String ids) {
-        redisUtil.flushDB();
         SplitUtil.split(",", ids).forEach(x -> printBindMapper.deleteByPrimaryKey(Integer.valueOf(x)));
         return 1;
     }
@@ -101,6 +100,7 @@ public class PrintBindServiceImpl implements PrintBindService {
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int updateByPrimaryKey(Integer id, Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String updator) throws Exception {
         List<JsonResult> list = printBindMapper.searchByCondition(printNameId, printTypeId, isEnable, userId);
         if (null != list && !list.isEmpty()) {
@@ -109,7 +109,6 @@ public class PrintBindServiceImpl implements PrintBindService {
         if (file == null || file.isEmpty()) {
             PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, null, null, null, new Date(), updator);
             record.setId(id);
-            redisUtil.flushDB();
             return printBindMapper.updateByPrimaryKey(record);
         } else {
             String uuid = UUID.randomUUID().toString();
@@ -118,12 +117,13 @@ public class PrintBindServiceImpl implements PrintBindService {
             file.transferTo(dest);
             PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), null, null, new Date(), updator);
             record.setId(id);
-            redisUtil.flushDB();
+            record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
             return printBindMapper.updateByPrimaryKey(record);
         }
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int updateByPrimaryKeySelective(Integer id, Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String updator) throws Exception {
         List<JsonResult> list = printBindMapper.searchByCondition(printNameId, printTypeId, isEnable, userId);
         if (null != list && !list.isEmpty()) {
@@ -132,7 +132,6 @@ public class PrintBindServiceImpl implements PrintBindService {
         if (file == null || file.isEmpty()) {
             PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, null, null, null, new Date(), updator);
             record.setId(id);
-            redisUtil.flushDB();
             return printBindMapper.updateByPrimaryKeySelective(record);
         } else {
             String uuid = UUID.randomUUID().toString();
@@ -141,13 +140,13 @@ public class PrintBindServiceImpl implements PrintBindService {
             file.transferTo(dest);
             PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), null, null, new Date(), updator);
             record.setId(id);
-            redisUtil.flushDB();
+            record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
             return printBindMapper.updateByPrimaryKeySelective(record);
         }
     }
 
     @Override
-    @Cacheable(value = "redisCache", keyGenerator = "keyGenerator",cacheManager = "cacheManager")
+    @Cacheable(value = "redisCache", keyGenerator = "keyGenerator", cacheManager = "cacheManager")
     public PageInfo<JsonResult> searchByCondition(Integer configId
             , Integer typeId
             , Boolean isEnable
@@ -159,15 +158,14 @@ public class PrintBindServiceImpl implements PrintBindService {
 
 
     @Override
-    @Cacheable(value = "redisCache", keyGenerator = "keyGenerator",cacheManager = "cacheManager")
+    @Cacheable(value = "redisCache", keyGenerator = "keyGenerator", cacheManager = "cacheManager")
     public PageInfo<JsonResult> getByPage(Integer pageNum, Integer pageSize) {
-        redisUtil.flushDB();
         PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(printBindMapper.list());
     }
 
     @Override
-    @Cacheable(value = "redisCache", keyGenerator = "keyGenerator",cacheManager = "cacheManager")
+    @Cacheable(value = "redisCache", keyGenerator = "keyGenerator", cacheManager = "cacheManager")
     public Map<String, JSONArray> dropdwon() {
         JSONArray var1 = new JSONArray();
         JSONArray var2 = new JSONArray();

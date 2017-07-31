@@ -5,7 +5,9 @@ import com.sellercube.common.utils.SplitUtil;
 import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.Config;
 import com.sellercube.usermanager.server.base.mapper.ConfigMapper;
+import com.sellercube.usermanager.server.base.mapper.UserMapper;
 import com.sellercube.usermanager.server.base.service.ConfigService;
+import com.sellercube.usermanager.server.base.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,9 @@ public class ConfigServiceImpl implements ConfigService {
 
     @Autowired
     private ConfigMapper configMapper;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public int deleteByPrimaryKeyALL(String ids) {
@@ -36,6 +41,8 @@ public class ConfigServiceImpl implements ConfigService {
     public int insert(Config record) {
         record.setCretaeTime(new Date());
         record.setUpdateTime(new Date());
+        record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
+        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
         return configMapper.insert(record);
     }
 
@@ -43,6 +50,8 @@ public class ConfigServiceImpl implements ConfigService {
     public int insertSelective(Config record) {
         record.setCretaeTime(new Date());
         record.setUpdateTime(new Date());
+        record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
+        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
         return configMapper.insertSelective(record);
     }
 
@@ -54,12 +63,14 @@ public class ConfigServiceImpl implements ConfigService {
     @Override
     public int updateByPrimaryKeySelective(Config record) {
         record.setUpdateTime(new Date());
+        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
         return configMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(Config record) {
         record.setUpdateTime(new Date());
+        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
         return configMapper.updateByPrimaryKey(record);
     }
 

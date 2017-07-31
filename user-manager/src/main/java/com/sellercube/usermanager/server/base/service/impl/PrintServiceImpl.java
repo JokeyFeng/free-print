@@ -6,6 +6,7 @@ import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.PrintType;
 import com.sellercube.usermanager.server.base.mapper.PrintTypeMapper;
 import com.sellercube.usermanager.server.base.service.PrintService;
+import com.sellercube.usermanager.server.base.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,9 @@ public class PrintServiceImpl implements PrintService {
 
     @Autowired
     private PrintTypeMapper printTypeMapper;
+
+    @Autowired
+    private UserService userService;
 
     @Override
     public int deleteByPrimaryKey(Integer id) {
@@ -36,6 +40,8 @@ public class PrintServiceImpl implements PrintService {
     public int insert(PrintType record) {
         record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
+        record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
+        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
         return printTypeMapper.insert(record);
     }
 
@@ -43,6 +49,8 @@ public class PrintServiceImpl implements PrintService {
     public int insertSelective(PrintType record) {
         record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
+        record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
+        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
         return printTypeMapper.insertSelective(record);
     }
 
@@ -54,12 +62,14 @@ public class PrintServiceImpl implements PrintService {
     @Override
     public int updateByPrimaryKeySelective(PrintType record) {
         record.setUpdateTime(new Date());
+        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
         return printTypeMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
     public int updateByPrimaryKey(PrintType record) {
         record.setUpdateTime(new Date());
+        record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
         return printTypeMapper.updateByPrimaryKey(record);
     }
 
