@@ -27,9 +27,9 @@
 		ON pb.config_id = con.id
 	LEFT JOIN print_type pt
 		ON pb.print_type_id = pt.id
-	LEFT JOIN user u
-		ON pb.user_id = u.id
+	LEFT JOIN users u
+		ON pb.user_id = u.userid
 		WHERE pb.is_enable=#{isEnable}
-		AND u.id=#{userId} AND pt.type_name=#{printType}
+		AND u.userid=#{userId} AND pt.type_name=#{printType}
 </select>
 </mapper>

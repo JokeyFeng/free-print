@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sellercube.printserver.server.base.mapper.ChannelConfigMapper">
-    <resultMap id="BaseResultMap" type="com.sellercube.printserver.server.base.entity.ChannelConfig">
+<mapper namespace="com.sellercube.printserver.server.mapper.ChannelConfigMapper">
+    <resultMap id="BaseResultMap" type="com.sellercube.printserver.server.entity.ChannelConfig">
         <id column="id" jdbcType="INTEGER" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="clazz" jdbcType="VARCHAR" property="clazz"/>
@@ -34,7 +34,7 @@
     delete from channel_config
     where id = #{id,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="com.sellercube.printserver.server.base.entity.ChannelConfig">
+    <insert id="insert" parameterType="com.sellercube.printserver.server.entity.ChannelConfig">
     insert into channel_config (id, name, clazz, 
       method, create_time, creator, 
       update_time, updator, del_time, 
@@ -44,7 +44,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{updator,jdbcType=VARCHAR}, #{delTime,jdbcType=TIMESTAMP}, 
       #{deletor,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT})
   </insert>
-    <insert id="insertSelective" parameterType="com.sellercube.printserver.server.base.entity.ChannelConfig">
+    <insert id="insertSelective" parameterType="com.sellercube.printserver.server.entity.ChannelConfig">
         insert into channel_config
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -118,7 +118,7 @@
         </trim>
     </insert>
     <update id="updateByPrimaryKeySelective"
-            parameterType="com.sellercube.printserver.server.base.entity.ChannelConfig">
+            parameterType="com.sellercube.printserver.server.entity.ChannelConfig">
         update channel_config
         <set>
             <if test="name != null">
@@ -154,7 +154,7 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.sellercube.printserver.server.base.entity.ChannelConfig">
+    <update id="updateByPrimaryKey" parameterType="com.sellercube.printserver.server.entity.ChannelConfig">
     update channel_config
     set name = #{name,jdbcType=VARCHAR},
       clazz = #{clazz,jdbcType=VARCHAR},
