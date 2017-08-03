@@ -3,9 +3,11 @@ package com.sellercube.printserver.server.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
+import com.sellercube.printserver.server.entity.ChannelConfig;
 import com.sellercube.printserver.server.entity.Monitor;
 import com.sellercube.printserver.server.mapper.MonitorMapper;
 import com.sellercube.printserver.server.service.BanggoodService;
+import com.sellercube.printserver.server.service.ChannelConfigService;
 import com.sellercube.printserver.utils.CoreUtil;
 import com.sellercube.printserver.utils.PrintUtil;
 import org.apache.commons.codec.binary.Base64;
@@ -15,6 +17,7 @@ import org.springframework.util.StringUtils;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
@@ -27,45 +30,29 @@ public class BanggoodServiceImpl implements BanggoodService {
     @Autowired
     private MonitorMapper monitorMapper;
 
+    @Autowired
+    private ChannelConfigService channelConfigService;
+
     @Override
     public Result process(JSONObject jsonObject) throws Exception {
         Integer monitorId = jsonObject.getInteger("monitorId");
         JSONObject data = jsonObject.getJSONObject("Data");
         String pdfUrl = data.getString("PDFUrl");
         String shipType = data.getString("ShipType");
-
         if (Objects.equals(null, pdfUrl) || Objects.equals("", pdfUrl)) {
             return ResultUtil.error("打印失败，PDFUrl内容为空");
         }
+
         //还原特殊字符串
         pdfUrl = convert(pdfUrl);
-        switch (shipType) {
-            case "Fedex"://Fedex
-                if (pdfUrl.startsWith("iVBORw0KGgo")) {
-                    //base64 的图片
-                    InputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(pdfUrl));
-                    PrintUtil.printImage(inputStream, "jpg");
-                    break;
-                }
-                //base64 打印机指令
-                PrintUtil.printByString(new String(Base64.decodeBase64(pdfUrl)));
-                break;
-            case "DHL":
-                //base64 pdf
-                PrintUtil.printPDF(CoreUtil.base64(pdfUrl, "pdf"));
-                break;
-            case "DPD":
-                //base64 的打印机指令
-                PrintUtil.printByString(new String(Base64.decodeBase64(pdfUrl)));
-                break;
-            default:
-                Monitor monitor = new Monitor();
-                monitor.setId(monitorId);
-                monitor.setStatus("打印失败");
-                monitor.setId(monitorId);
-                monitorMapper.updateByPrimaryKeySelective(monitor);
-                return ResultUtil.error("打印失败，不支持" + shipType + "渠道");
-        }
+        ChannelConfig channelConfig = channelConfigService.selectByChannelName(shipType);
+        Objects.requireNonNull(channelConfig, "不支持" + shipType + "渠道");
+
+        //反射执行方法
+        Class<?> clazz = Class.forName(channelConfig.getClazz());
+        Method method = clazz.getMethod(channelConfig.getMethod(), String.class);
+        Object object = clazz.newInstance();
+        method.invoke(object, pdfUrl);
         monitorMapper.deleteByPrimaryKey(monitorId);
         return ResultUtil.success("打印成功");
     }
