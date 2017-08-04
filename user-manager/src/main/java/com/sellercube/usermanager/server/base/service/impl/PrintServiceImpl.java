@@ -8,6 +8,7 @@ import com.sellercube.usermanager.server.base.mapper.PrintTypeMapper;
 import com.sellercube.usermanager.server.base.service.PrintService;
 import com.sellercube.usermanager.server.base.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -26,17 +27,20 @@ public class PrintServiceImpl implements PrintService {
     private UserService userService;
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int deleteByPrimaryKey(Integer id) {
         return printTypeMapper.deleteByPrimaryKey(id);
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int deleteByPrimaryKey(String ids) {
         SplitUtil.split(",", ids).forEach(x -> printTypeMapper.deleteByPrimaryKey(Integer.valueOf(x)));
         return 1;
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int insert(PrintType record) {
         record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
@@ -46,6 +50,7 @@ public class PrintServiceImpl implements PrintService {
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int insertSelective(PrintType record) {
         record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
@@ -55,11 +60,13 @@ public class PrintServiceImpl implements PrintService {
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public PrintType selectByPrimaryKey(Integer id) {
         return printTypeMapper.selectByPrimaryKey(id);
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int updateByPrimaryKeySelective(PrintType record) {
         record.setUpdateTime(new Date());
         record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
@@ -67,6 +74,7 @@ public class PrintServiceImpl implements PrintService {
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int updateByPrimaryKey(PrintType record) {
         record.setUpdateTime(new Date());
         record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());

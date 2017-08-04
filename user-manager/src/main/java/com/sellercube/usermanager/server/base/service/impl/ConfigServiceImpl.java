@@ -5,10 +5,10 @@ import com.sellercube.common.utils.SplitUtil;
 import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.Config;
 import com.sellercube.usermanager.server.base.mapper.ConfigMapper;
-import com.sellercube.usermanager.server.base.mapper.UserMapper;
 import com.sellercube.usermanager.server.base.service.ConfigService;
 import com.sellercube.usermanager.server.base.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -27,17 +27,20 @@ public class ConfigServiceImpl implements ConfigService {
     private UserService userService;
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int deleteByPrimaryKeyALL(String ids) {
         SplitUtil.split(",", ids).forEach(x -> configMapper.deleteByPrimaryKey(Integer.valueOf(x)));
         return 1;
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int deleteByPrimaryKey(Integer id) {
         return configMapper.deleteByPrimaryKey(id);
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int insert(Config record) {
         record.setCretaeTime(new Date());
         record.setUpdateTime(new Date());
@@ -47,6 +50,7 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int insertSelective(Config record) {
         record.setCretaeTime(new Date());
         record.setUpdateTime(new Date());
@@ -61,6 +65,7 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int updateByPrimaryKeySelective(Config record) {
         record.setUpdateTime(new Date());
         record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
@@ -68,6 +73,7 @@ public class ConfigServiceImpl implements ConfigService {
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int updateByPrimaryKey(Config record) {
         record.setUpdateTime(new Date());
         record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(record.getUpdator())).getUsername());
