@@ -68,12 +68,12 @@ public class Config implements Serializable {
         this.printName = printName == null ? null : printName.trim();
     }
 
-    public Date getCretaeTime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCretaeTime(Date cretaeTime) {
-        this.createTime = cretaeTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getCreator() {

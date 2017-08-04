@@ -42,7 +42,7 @@ public class ConfigServiceImpl implements ConfigService {
     @Override
     @CacheEvict(value = "redisCache", allEntries = true)
     public int insert(Config record) {
-        record.setCretaeTime(new Date());
+        record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
         record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
         record.setUpdator(record.getCreator());
@@ -52,7 +52,7 @@ public class ConfigServiceImpl implements ConfigService {
     @Override
     @CacheEvict(value = "redisCache", allEntries = true)
     public int insertSelective(Config record) {
-        record.setCretaeTime(new Date());
+        record.setCreateTime(new Date());
         record.setUpdateTime(new Date());
         record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(record.getCreator())).getUsername());
         record.setUpdator(record.getCreator());
