@@ -50,7 +50,7 @@ public class PrintBindServiceImpl implements PrintBindService {
     @Override
     @CacheEvict(value = "redisCache", allEntries = true)
     public int insert(Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String creator) throws Exception {
-        List<JsonResult> list = printBindMapper.searchByCondition(printNameId, printTypeId, isEnable, userId);
+        List<JsonResult> list = printBindMapper.searchByCondition(null, printNameId, printTypeId, isEnable, userId);
         if (null != list && !list.isEmpty()) {
             throw new Exception("保存失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
         }
@@ -67,7 +67,7 @@ public class PrintBindServiceImpl implements PrintBindService {
     @Override
     @CacheEvict(value = "redisCache", allEntries = true)
     public int insertSelective(Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String creator) throws Exception {
-        List<JsonResult> list = printBindMapper.searchByCondition(printNameId, printTypeId, isEnable, userId);
+        List<JsonResult> list = printBindMapper.searchByCondition(null, printNameId, printTypeId, isEnable, userId);
         if (null != list && !list.isEmpty()) {
             throw new Exception("保存失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
         }
@@ -102,7 +102,7 @@ public class PrintBindServiceImpl implements PrintBindService {
     @Override
     @CacheEvict(value = "redisCache", allEntries = true)
     public int updateByPrimaryKey(Integer id, Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String updator) throws Exception {
-        List<JsonResult> list = printBindMapper.searchByCondition(null, printNameId, printTypeId, isEnable, userId);
+        List<JsonResult> list = printBindMapper.searchByCondition(id, printNameId, printTypeId, isEnable, userId);
         if (null != list && !list.isEmpty()) {
             throw new Exception("保存失败！打印机名称、打印类型、操作员、是否可用四项在打印绑定表中必须唯一!");
         }
