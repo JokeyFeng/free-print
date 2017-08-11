@@ -22,10 +22,11 @@ public interface PrintBindMapper {
 
     int updateByPrimaryKey(PrintBind record);
 
-    List<JsonResult> searchByCondition(@Param("config_id") Integer configId
-                                    , @Param("type_id")Integer typeId
-                                    , @Param("is_enable")Boolean isEnable
-                                    , @Param("user_id")Integer userId);
+    List<JsonResult> searchByCondition(@Param("id") Integer id,
+                                       @Param("config_id") Integer configId
+            , @Param("type_id") Integer typeId
+            , @Param("is_enable") Boolean isEnable
+            , @Param("user_id") Integer userId);
 
     List<JsonResult> list();
 }

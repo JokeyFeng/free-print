@@ -61,6 +61,9 @@
         <if test="user_id != null">
             AND pb.user_id = #{user_id}
         </if>
+        <if test="user_id != null">
+            AND pb.id != #{id}
+        </if>
     </select>
 
     <select id="list" resultMap="JsonResult">
