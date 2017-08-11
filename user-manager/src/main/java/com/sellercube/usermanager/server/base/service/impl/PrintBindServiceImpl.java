@@ -155,7 +155,7 @@ public class PrintBindServiceImpl implements PrintBindService {
             , Integer userId
             , Integer pageNum, Integer PageSize) {
         PageHelper.startPage(pageNum, PageSize);
-        return new PageInfo<>(printBindMapper.searchByCondition(configId, typeId, isEnable, userId));
+        return new PageInfo<>(printBindMapper.searchByCondition(null, configId, typeId, isEnable, userId));
     }
 
 
