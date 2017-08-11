@@ -30,16 +30,16 @@ public class PrintBindController {
         return ResultUtil.success(printBindService.insertSelective(printNameId, printTypeId, isEnable, userId, file, creator));
     }
 
-    @PutMapping("/bindings/{id}")
+    @PostMapping("/bindings/{id}")
     @ApiOperation(value = "修改【打印绑定】的信息", notes = "传入json对象根据id更新【打印绑定】的信息")
     public Result update(@PathVariable("id") Integer id,
-                         @RequestParam("printNameId") Integer printNameId,
+                         @RequestParam("printNameId") String printNameId,
                          @RequestParam("printTypeId") Integer printTypeId,
                          @RequestParam("isEnable") boolean isEnable,
                          @RequestParam("userId") Integer userId,
                          @RequestParam(value = "file", required = false) MultipartFile file,
                          @RequestParam("updator") String updator) throws Exception {
-        return ResultUtil.success(printBindService.updateByPrimaryKeySelective(id, printNameId, printTypeId, isEnable, userId, file, updator));
+        return ResultUtil.success(printBindService.updateByPrimaryKeySelective(id, Integer.valueOf(printNameId), printTypeId, isEnable, userId, file, updator));
     }
 
     @DeleteMapping("/bindings/{id}")
