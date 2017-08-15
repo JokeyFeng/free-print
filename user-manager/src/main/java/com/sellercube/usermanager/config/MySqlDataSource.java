@@ -25,9 +25,9 @@ import java.sql.SQLException;
 @Configuration
 @MapperScan(basePackages = MySqlDataSource.PACKAGE, sqlSessionFactoryRef = "mysqlSqlSessionFactory")
 public class MySqlDataSource {
-    static final String PACKAGE = "com.sellercube.printserver.server.*.mapper";
+    static final String PACKAGE = "com.sellercube.usermanager.server.*.mapper";
     private final static String mapperLocations = "classpath*:com/sellercube/map/*/*Mapper.xml";
-    private final static String aliasesPackage = "com.sellercube.printserver.server.*..entity";
+    private final static String aliasesPackage = "com.sellercube.usermanager.server.*.entity";
 
     @Value("${mysql_url}")
     private String dbUrl;
