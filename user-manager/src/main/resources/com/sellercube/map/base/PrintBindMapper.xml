@@ -61,7 +61,7 @@
         <if test="user_id != null">
             AND pb.user_id = #{user_id}
         </if>
-        <if test="user_id != null">
+        <if test="id != null">
             AND pb.id != #{id}
         </if>
     </select>
