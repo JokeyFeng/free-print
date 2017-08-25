@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sellercube.usermanager.server.base.mapper.PrintConfigMapper">
+  <resultMap id="BaseResultMap" type="com.sellercube.usermanager.server.base.entity.PrintConfig">
+    <id column="print_config_id" jdbcType="INTEGER" property="printConfigId" />
+    <result column="machine_ip" jdbcType="VARCHAR" property="machineIp" />
+    <result column="storage_id" jdbcType="INTEGER" property="storageId" />
+    <result column="machine_port" jdbcType="INTEGER" property="machinePort" />
+    <result column="operate_user_id" jdbcType="INTEGER" property="operateUserId" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="create_user_id" jdbcType="INTEGER" property="createUserId" />
+    <result column="modify_date" jdbcType="TIMESTAMP" property="modifyDate" />
+    <result column="modify_user_id" jdbcType="INTEGER" property="modifyUserId" />
+    <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
+    <result column="delete_userId" jdbcType="INTEGER" property="deleteUserid" />
+    <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    print_config_id, machine_ip, storage_id, machine_port, operate_user_id, create_date, 
+    create_user_id, modify_date, modify_user_id, delete_date, delete_userId, is_deleted
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from print_config
+    where print_config_id = #{printConfigId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from print_config
+    where print_config_id = #{printConfigId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.sellercube.usermanager.server.base.entity.PrintConfig">
+    insert into print_config (print_config_id, machine_ip, storage_id, 
+      machine_port, operate_user_id, create_date, 
+      create_user_id, modify_date, modify_user_id, 
+      delete_date, delete_userId, is_deleted
+      )
+    values (#{printConfigId,jdbcType=INTEGER}, #{machineIp,jdbcType=VARCHAR}, #{storageId,jdbcType=INTEGER}, 
+      #{machinePort,jdbcType=INTEGER}, #{operateUserId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{createUserId,jdbcType=INTEGER}, #{modifyDate,jdbcType=TIMESTAMP}, #{modifyUserId,jdbcType=INTEGER}, 
+      #{deleteDate,jdbcType=TIMESTAMP}, #{deleteUserid,jdbcType=INTEGER}, #{isDeleted,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sellercube.usermanager.server.base.entity.PrintConfig">
+    insert into print_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="printConfigId != null">
+        print_config_id,
+      </if>
+      <if test="machineIp != null">
+        machine_ip,
+      </if>
+      <if test="storageId != null">
+        storage_id,
+      </if>
+      <if test="machinePort != null">
+        machine_port,
+      </if>
+      <if test="operateUserId != null">
+        operate_user_id,
+      </if>
+      <if test="createDate != null">
+        create_date,
+      </if>
+      <if test="createUserId != null">
+        create_user_id,
+      </if>
+      <if test="modifyDate != null">
+        modify_date,
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id,
+      </if>
+      <if test="deleteDate != null">
+        delete_date,
+      </if>
+      <if test="deleteUserid != null">
+        delete_userId,
+      </if>
+      <if test="isDeleted != null">
+        is_deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="printConfigId != null">
+        #{printConfigId,jdbcType=INTEGER},
+      </if>
+      <if test="machineIp != null">
+        #{machineIp,jdbcType=VARCHAR},
+      </if>
+      <if test="storageId != null">
+        #{storageId,jdbcType=INTEGER},
+      </if>
+      <if test="machinePort != null">
+        #{machinePort,jdbcType=INTEGER},
+      </if>
+      <if test="operateUserId != null">
+        #{operateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyDate != null">
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserId != null">
+        #{modifyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="deleteDate != null">
+        #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteUserid != null">
+        #{deleteUserid,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        #{isDeleted,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sellercube.usermanager.server.base.entity.PrintConfig">
+    update print_config
+    <set>
+      <if test="machineIp != null">
+        machine_ip = #{machineIp,jdbcType=VARCHAR},
+      </if>
+      <if test="storageId != null">
+        storage_id = #{storageId,jdbcType=INTEGER},
+      </if>
+      <if test="machinePort != null">
+        machine_port = #{machinePort,jdbcType=INTEGER},
+      </if>
+      <if test="operateUserId != null">
+        operate_user_id = #{operateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null">
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUserId != null">
+        create_user_id = #{createUserId,jdbcType=INTEGER},
+      </if>
+      <if test="modifyDate != null">
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyUserId != null">
+        modify_user_id = #{modifyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="deleteDate != null">
+        delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteUserid != null">
+        delete_userId = #{deleteUserid,jdbcType=INTEGER},
+      </if>
+      <if test="isDeleted != null">
+        is_deleted = #{isDeleted,jdbcType=BIT},
+      </if>
+    </set>
+    where print_config_id = #{printConfigId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sellercube.usermanager.server.base.entity.PrintConfig">
+    update print_config
+    set machine_ip = #{machineIp,jdbcType=VARCHAR},
+      storage_id = #{storageId,jdbcType=INTEGER},
+      machine_port = #{machinePort,jdbcType=INTEGER},
+      operate_user_id = #{operateUserId,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      create_user_id = #{createUserId,jdbcType=INTEGER},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      modify_user_id = #{modifyUserId,jdbcType=INTEGER},
+      delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      delete_userId = #{deleteUserid,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=BIT}
+    where print_config_id = #{printConfigId,jdbcType=INTEGER}
+  </update>
+</mapper>

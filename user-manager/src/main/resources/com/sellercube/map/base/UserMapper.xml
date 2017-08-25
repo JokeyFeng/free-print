@@ -14,13 +14,12 @@
     <result column="DeliverAddress" jdbcType="INTEGER" property="deliveraddress" />
     <result column="DefaultLanguageId" jdbcType="INTEGER" property="defaultlanguageid" />
     <result column="NewPassword" jdbcType="VARCHAR" property="newpassword" />
-    <result column="TestUserType" jdbcType="SMALLINT" property="testusertype" />
     <result column="Guid" jdbcType="CHAR" property="guid" />
     <result column="SyncKey" jdbcType="BIGINT" property="synckey" />
   </resultMap>
   <sql id="Base_Column_List">
     UserId, ProcessCenterId, DefaultStorageId, DepartmentId, UserName, Password, Email, 
-    Islocked, LastLoginTime, DeliverAddress, DefaultLanguageId, NewPassword, TestUserType, 
+    Islocked, LastLoginTime, DeliverAddress, DefaultLanguageId, NewPassword,
     Guid, SyncKey
   </sql>
 
@@ -44,14 +43,13 @@
     insert into users (UserId, ProcessCenterId, DefaultStorageId, 
       DepartmentId, UserName, Password, 
       Email, Islocked, LastLoginTime, 
-      DeliverAddress, DefaultLanguageId, NewPassword, 
-      TestUserType, Guid, SyncKey
+      DeliverAddress, DefaultLanguageId, NewPassword, Guid, SyncKey
       )
     values (#{userid,jdbcType=INTEGER}, #{processcenterid,jdbcType=INTEGER}, #{defaultstorageid,jdbcType=INTEGER}, 
       #{departmentid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{islocked,jdbcType=BIT}, #{lastlogintime,jdbcType=TIMESTAMP}, 
       #{deliveraddress,jdbcType=INTEGER}, #{defaultlanguageid,jdbcType=INTEGER}, #{newpassword,jdbcType=VARCHAR}, 
-      #{testusertype,jdbcType=SMALLINT}, #{guid,jdbcType=CHAR}, #{synckey,jdbcType=BIGINT}
+      #{guid,jdbcType=CHAR}, #{synckey,jdbcType=BIGINT}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.sellercube.usermanager.server.base.entity.User">
@@ -92,9 +90,6 @@
       </if>
       <if test="newpassword != null">
         NewPassword,
-      </if>
-      <if test="testusertype != null">
-        TestUserType,
       </if>
       <if test="guid != null">
         Guid,
@@ -140,9 +135,6 @@
       <if test="newpassword != null">
         #{newpassword,jdbcType=VARCHAR},
       </if>
-      <if test="testusertype != null">
-        #{testusertype,jdbcType=SMALLINT},
-      </if>
       <if test="guid != null">
         #{guid,jdbcType=CHAR},
       </if>
@@ -187,9 +179,6 @@
       <if test="newpassword != null">
         NewPassword = #{newpassword,jdbcType=VARCHAR},
       </if>
-      <if test="testusertype != null">
-        TestUserType = #{testusertype,jdbcType=SMALLINT},
-      </if>
       <if test="guid != null">
         Guid = #{guid,jdbcType=CHAR},
       </if>
@@ -212,7 +201,6 @@
       DeliverAddress = #{deliveraddress,jdbcType=INTEGER},
       DefaultLanguageId = #{defaultlanguageid,jdbcType=INTEGER},
       NewPassword = #{newpassword,jdbcType=VARCHAR},
-      TestUserType = #{testusertype,jdbcType=SMALLINT},
       Guid = #{guid,jdbcType=CHAR},
       SyncKey = #{synckey,jdbcType=BIGINT}
     where UserId = #{userid,jdbcType=INTEGER}
