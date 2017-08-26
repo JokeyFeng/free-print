@@ -1,7 +1,9 @@
 package com.sellercube.usermanager.server.base.service;
 
 
+import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.PrintConfig;
+import com.sellercube.usermanager.vo.PrintConfigVO;
 
 public interface PrintConfigService {
     int deleteByPrimaryKey(Integer printConfigId);
@@ -15,4 +17,10 @@ public interface PrintConfigService {
     int updateByPrimaryKeySelective(PrintConfig record);
 
     int updateByPrimaryKey(PrintConfig record);
+
+    int deleteByPrimaryKeyALL(String ids);
+
+    PageInfo<PrintConfigVO> list(String pageNum, String limit);
+
+    PageInfo<PrintConfigVO> search(String operateName, String ip, Integer warehouseId, Integer pageNum, Integer limit);
 }

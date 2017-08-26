@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sellercube.usermanager.server.base.mapper.StorageMapper">
+    <resultMap id="BaseResultMap" type="com.sellercube.usermanager.server.base.entity.Storage">
+        <id column="StorageId" jdbcType="INTEGER" property="storageid"/>
+        <result column="ProcessCenterId" jdbcType="INTEGER" property="processcenterid"/>
+        <result column="StorageName" jdbcType="VARCHAR" property="storagename"/>
+        <result column="IsDefault" jdbcType="BIT" property="isdefault"/>
+        <result column="CheckStorageIsGroup" jdbcType="BIT" property="checkstorageisgroup"/>
+        <result column="IsInterchangeCenter" jdbcType="BIT" property="isinterchangecenter"/>
+        <result column="CompanyId" jdbcType="INTEGER" property="companyid"/>
+        <result column="EnName" jdbcType="VARCHAR" property="enname"/>
+        <result column="IsChina" jdbcType="BIT" property="ischina"/>
+        <result column="IsSampleStorage" jdbcType="BIT" property="issamplestorage"/>
+        <result column="IsPurchase" jdbcType="BIT" property="ispurchase"/>
+        <result column="IsEnable" jdbcType="BIT" property="isenable"/>
+        <result column="Sort" jdbcType="INTEGER" property="sort"/>
+        <result column="Type" jdbcType="VARCHAR" property="type"/>
+        <result column="IsStockUp" jdbcType="BIT" property="isstockup"/>
+        <result column="IsFBA" jdbcType="BIT" property="isfba"/>
+        <result column="IsSeawayDelivery" jdbcType="BIT" property="isseawaydelivery"/>
+        <result column="SyncKey" jdbcType="BIGINT" property="synckey"/>
+        <result column="IsBatStorage" jdbcType="BIT" property="isbatstorage"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    StorageId, ProcessCenterId, StorageName, IsDefault, CheckStorageIsGroup, IsInterchangeCenter, 
+    CompanyId, EnName, IsChina, IsSampleStorage, IsPurchase, IsEnable, Sort, Type, IsStockUp, 
+    IsFBA, IsSeawayDelivery, SyncKey, IsBatStorage
+  </sql>
+    <select id="list" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from storage
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from storage
+        where StorageId = #{storageid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from storage
+    where StorageId = #{storageid,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.sellercube.usermanager.server.base.entity.Storage">
+    insert into storage (StorageId, ProcessCenterId, StorageName, 
+      IsDefault, CheckStorageIsGroup, IsInterchangeCenter, 
+      CompanyId, EnName, IsChina, 
+      IsSampleStorage, IsPurchase, IsEnable, 
+      Sort, Type, IsStockUp, 
+      IsFBA, IsSeawayDelivery, SyncKey, 
+      IsBatStorage)
+    values (#{storageid,jdbcType=INTEGER}, #{processcenterid,jdbcType=INTEGER}, #{storagename,jdbcType=VARCHAR}, 
+      #{isdefault,jdbcType=BIT}, #{checkstorageisgroup,jdbcType=BIT}, #{isinterchangecenter,jdbcType=BIT}, 
+      #{companyid,jdbcType=INTEGER}, #{enname,jdbcType=VARCHAR}, #{ischina,jdbcType=BIT}, 
+      #{issamplestorage,jdbcType=BIT}, #{ispurchase,jdbcType=BIT}, #{isenable,jdbcType=BIT}, 
+      #{sort,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{isstockup,jdbcType=BIT}, 
+      #{isfba,jdbcType=BIT}, #{isseawaydelivery,jdbcType=BIT}, #{synckey,jdbcType=BIGINT}, 
+      #{isbatstorage,jdbcType=BIT})
+  </insert>
+    <insert id="insertSelective" parameterType="com.sellercube.usermanager.server.base.entity.Storage">
+        insert into storage
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="storageid != null">
+                StorageId,
+            </if>
+            <if test="processcenterid != null">
+                ProcessCenterId,
+            </if>
+            <if test="storagename != null">
+                StorageName,
+            </if>
+            <if test="isdefault != null">
+                IsDefault,
+            </if>
+            <if test="checkstorageisgroup != null">
+                CheckStorageIsGroup,
+            </if>
+            <if test="isinterchangecenter != null">
+                IsInterchangeCenter,
+            </if>
+            <if test="companyid != null">
+                CompanyId,
+            </if>
+            <if test="enname != null">
+                EnName,
+            </if>
+            <if test="ischina != null">
+                IsChina,
+            </if>
+            <if test="issamplestorage != null">
+                IsSampleStorage,
+            </if>
+            <if test="ispurchase != null">
+                IsPurchase,
+            </if>
+            <if test="isenable != null">
+                IsEnable,
+            </if>
+            <if test="sort != null">
+                Sort,
+            </if>
+            <if test="type != null">
+                Type,
+            </if>
+            <if test="isstockup != null">
+                IsStockUp,
+            </if>
+            <if test="isfba != null">
+                IsFBA,
+            </if>
+            <if test="isseawaydelivery != null">
+                IsSeawayDelivery,
+            </if>
+            <if test="synckey != null">
+                SyncKey,
+            </if>
+            <if test="isbatstorage != null">
+                IsBatStorage,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="storageid != null">
+                #{storageid,jdbcType=INTEGER},
+            </if>
+            <if test="processcenterid != null">
+                #{processcenterid,jdbcType=INTEGER},
+            </if>
+            <if test="storagename != null">
+                #{storagename,jdbcType=VARCHAR},
+            </if>
+            <if test="isdefault != null">
+                #{isdefault,jdbcType=BIT},
+            </if>
+            <if test="checkstorageisgroup != null">
+                #{checkstorageisgroup,jdbcType=BIT},
+            </if>
+            <if test="isinterchangecenter != null">
+                #{isinterchangecenter,jdbcType=BIT},
+            </if>
+            <if test="companyid != null">
+                #{companyid,jdbcType=INTEGER},
+            </if>
+            <if test="enname != null">
+                #{enname,jdbcType=VARCHAR},
+            </if>
+            <if test="ischina != null">
+                #{ischina,jdbcType=BIT},
+            </if>
+            <if test="issamplestorage != null">
+                #{issamplestorage,jdbcType=BIT},
+            </if>
+            <if test="ispurchase != null">
+                #{ispurchase,jdbcType=BIT},
+            </if>
+            <if test="isenable != null">
+                #{isenable,jdbcType=BIT},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="isstockup != null">
+                #{isstockup,jdbcType=BIT},
+            </if>
+            <if test="isfba != null">
+                #{isfba,jdbcType=BIT},
+            </if>
+            <if test="isseawaydelivery != null">
+                #{isseawaydelivery,jdbcType=BIT},
+            </if>
+            <if test="synckey != null">
+                #{synckey,jdbcType=BIGINT},
+            </if>
+            <if test="isbatstorage != null">
+                #{isbatstorage,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.sellercube.usermanager.server.base.entity.Storage">
+        update storage
+        <set>
+            <if test="processcenterid != null">
+                ProcessCenterId = #{processcenterid,jdbcType=INTEGER},
+            </if>
+            <if test="storagename != null">
+                StorageName = #{storagename,jdbcType=VARCHAR},
+            </if>
+            <if test="isdefault != null">
+                IsDefault = #{isdefault,jdbcType=BIT},
+            </if>
+            <if test="checkstorageisgroup != null">
+                CheckStorageIsGroup = #{checkstorageisgroup,jdbcType=BIT},
+            </if>
+            <if test="isinterchangecenter != null">
+                IsInterchangeCenter = #{isinterchangecenter,jdbcType=BIT},
+            </if>
+            <if test="companyid != null">
+                CompanyId = #{companyid,jdbcType=INTEGER},
+            </if>
+            <if test="enname != null">
+                EnName = #{enname,jdbcType=VARCHAR},
+            </if>
+            <if test="ischina != null">
+                IsChina = #{ischina,jdbcType=BIT},
+            </if>
+            <if test="issamplestorage != null">
+                IsSampleStorage = #{issamplestorage,jdbcType=BIT},
+            </if>
+            <if test="ispurchase != null">
+                IsPurchase = #{ispurchase,jdbcType=BIT},
+            </if>
+            <if test="isenable != null">
+                IsEnable = #{isenable,jdbcType=BIT},
+            </if>
+            <if test="sort != null">
+                Sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                Type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="isstockup != null">
+                IsStockUp = #{isstockup,jdbcType=BIT},
+            </if>
+            <if test="isfba != null">
+                IsFBA = #{isfba,jdbcType=BIT},
+            </if>
+            <if test="isseawaydelivery != null">
+                IsSeawayDelivery = #{isseawaydelivery,jdbcType=BIT},
+            </if>
+            <if test="synckey != null">
+                SyncKey = #{synckey,jdbcType=BIGINT},
+            </if>
+            <if test="isbatstorage != null">
+                IsBatStorage = #{isbatstorage,jdbcType=BIT},
+            </if>
+        </set>
+        where StorageId = #{storageid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.sellercube.usermanager.server.base.entity.Storage">
+    update storage
+    set ProcessCenterId = #{processcenterid,jdbcType=INTEGER},
+      StorageName = #{storagename,jdbcType=VARCHAR},
+      IsDefault = #{isdefault,jdbcType=BIT},
+      CheckStorageIsGroup = #{checkstorageisgroup,jdbcType=BIT},
+      IsInterchangeCenter = #{isinterchangecenter,jdbcType=BIT},
+      CompanyId = #{companyid,jdbcType=INTEGER},
+      EnName = #{enname,jdbcType=VARCHAR},
+      IsChina = #{ischina,jdbcType=BIT},
+      IsSampleStorage = #{issamplestorage,jdbcType=BIT},
+      IsPurchase = #{ispurchase,jdbcType=BIT},
+      IsEnable = #{isenable,jdbcType=BIT},
+      Sort = #{sort,jdbcType=INTEGER},
+      Type = #{type,jdbcType=VARCHAR},
+      IsStockUp = #{isstockup,jdbcType=BIT},
+      IsFBA = #{isfba,jdbcType=BIT},
+      IsSeawayDelivery = #{isseawaydelivery,jdbcType=BIT},
+      SyncKey = #{synckey,jdbcType=BIGINT},
+      IsBatStorage = #{isbatstorage,jdbcType=BIT}
+    where StorageId = #{storageid,jdbcType=INTEGER}
+  </update>
+</mapper>
