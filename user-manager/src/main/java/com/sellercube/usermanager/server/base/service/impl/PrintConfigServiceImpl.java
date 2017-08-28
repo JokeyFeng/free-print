@@ -1,12 +1,16 @@
 package com.sellercube.usermanager.server.base.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Maps;
+import com.sellercube.common.function.Tuples;
 import com.sellercube.common.utils.SplitUtil;
 import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.PrintConfig;
 import com.sellercube.usermanager.server.base.mapper.PrintConfigMapper;
 import com.sellercube.usermanager.server.base.service.PrintConfigService;
+import com.sellercube.usermanager.server.base.service.StorageService;
 import com.sellercube.usermanager.server.base.service.UserService;
 import com.sellercube.usermanager.vo.PrintConfigVO;
 import org.springframework.beans.BeanUtils;
@@ -30,6 +34,9 @@ public class PrintConfigServiceImpl implements PrintConfigService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private StorageService storageService;
 
     @Override
     public int deleteByPrimaryKey(Integer printConfigId) {
@@ -85,6 +92,22 @@ public class PrintConfigServiceImpl implements PrintConfigService {
     public PageInfo<PrintConfigVO> search(String operateName, String ip, Integer warehouseId, Integer pageNum, Integer limit) {
         PageHelper.startPage(pageNum, limit);
         return new PageInfo<>(resultTrans(printConfigMapper.searchByCondition(operateName, ip, warehouseId)));
+    }
+
+    @Override
+    public Map<String, JSONArray> dropdown() {
+        JSONArray var1 = new JSONArray();
+        JSONArray var3 = new JSONArray();
+        Map<String, JSONArray> map = Maps.newHashMap();
+        userService.list().forEach(x -> var3.add(Tuples.of(x.getUserid().toString(), x.getUsername())));
+        storageService.list().forEach(x -> var1.add(Tuples.of(x.getStorageid().toString(), x.getStoragename())));
+        map.put("userName", var3);
+        List<String> ips = printConfigMapper.distinctByIP();
+        ips.remove(null);
+        ips.remove("");
+        map.put("ip", JSON.parseArray(ips.toString()));
+        map.put("warehouse", var1);
+        return map;
     }
 
     /**

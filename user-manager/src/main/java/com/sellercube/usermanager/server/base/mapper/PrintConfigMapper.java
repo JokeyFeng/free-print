@@ -26,4 +26,6 @@ public interface PrintConfigMapper {
     List<PrintConfig> list();
 
     List<PrintConfig> searchByCondition(@Param("username") String operateName, @Param("ip") String ip,@Param("warehouseId") Integer warehouseId);
+
+    List<String> distinctByIP();
 }

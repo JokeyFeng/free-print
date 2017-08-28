@@ -1,9 +1,12 @@
 package com.sellercube.usermanager.server.base.service;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.PrintConfig;
 import com.sellercube.usermanager.vo.PrintConfigVO;
+
+import java.util.Map;
 
 public interface PrintConfigService {
     int deleteByPrimaryKey(Integer printConfigId);
@@ -23,4 +26,6 @@ public interface PrintConfigService {
     PageInfo<PrintConfigVO> list(String pageNum, String limit);
 
     PageInfo<PrintConfigVO> search(String operateName, String ip, Integer warehouseId, Integer pageNum, Integer limit);
+
+    Map<String,JSONArray> dropdown();
 }

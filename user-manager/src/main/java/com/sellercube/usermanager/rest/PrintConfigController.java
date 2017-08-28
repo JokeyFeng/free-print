@@ -38,13 +38,13 @@ public class PrintConfigController {
     }
 
     @DeleteMapping("/config/{id}")
-    @ApiOperation(value = "删除手持IP配置的信息", notes = "根据id删除【打印绑定】的信息")
+    @ApiOperation(value = "删除手持IP配置的信息", notes = "根据id删除手持IP配置的信息")
     public Result deleteById(@PathVariable("id") Integer id) {
         return ResultUtil.success(printConfigService.deleteByPrimaryKey(id));
     }
 
     @DeleteMapping("/config")
-    @ApiOperation(value = "删除手持IP配置的信息", notes = "批量删除【打印绑定】的信息,多个id用英文逗号分隔")
+    @ApiOperation(value = "删除手持IP配置的信息", notes = "批量删除手持IP配置的信息,多个id用英文逗号分隔")
     public Result deleteByIds(@RequestBody String ids) {
         return ResultUtil.success(printConfigService.deleteByPrimaryKeyALL(ids));
     }
@@ -57,5 +57,11 @@ public class PrintConfigController {
                                     @RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                     @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit) throws Exception {
         return ResultUtil.success(printConfigService.search(operateName, ip, warehouseId, pageNum, limit));
+    }
+
+    @GetMapping("/config/dropdown")
+    @ApiOperation(value = "下拉列表菜单信息")
+    public Result dropdown() {
+        return ResultUtil.success(printConfigService.dropdown());
     }
 }

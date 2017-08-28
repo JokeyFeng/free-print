@@ -27,7 +27,7 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (request.getRequestURI().contains("swagger") || request.getRequestURI().contains("login")
-                || request.getRequestURI().contains("/v2/api-docs")) {
+                || request.getRequestURI().contains("/v2/api-docs") || request.getRequestURI().contains("swagger-resources")) {
             return true;
         }
 
