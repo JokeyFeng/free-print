@@ -3,6 +3,7 @@ package com.sellercube.usermanager.rest;
 import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
 import com.sellercube.usermanager.server.base.service.MonitorService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by Chenjing on 2017/7/18.
  */
 @RestController
+@Api(tags = "监控访问（过时）")
 public class MonitorController {
 
     @Autowired

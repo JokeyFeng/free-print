@@ -3,6 +3,7 @@ package com.sellercube.usermanager.rest;
 import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
 import com.sellercube.usermanager.server.base.service.PrintBindService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
  * Version:1.0.0
  */
 @RestController
+@Api(tags = "打印绑定")
 public class PrintBindController {
     @Autowired
     private PrintBindService printBindService;

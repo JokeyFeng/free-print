@@ -5,6 +5,7 @@ import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
 import com.sellercube.usermanager.server.base.entity.PrintType;
 import com.sellercube.usermanager.server.base.service.PrintService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
  * Created by Chenjing on 2017/7/8.
  */
 @RestController
+@Api(tags = "打印类型")
 public class PrintController {
 
     @Autowired

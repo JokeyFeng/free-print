@@ -4,6 +4,7 @@ import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
 import com.sellercube.usermanager.server.base.entity.PrintConfig;
 import com.sellercube.usermanager.server.base.service.PrintConfigService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/android/ip")
+@Api(tags = "手持IP配置")
 public class PrintConfigController {
 
     @Autowired
