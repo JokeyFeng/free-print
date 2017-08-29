@@ -115,13 +115,16 @@ public class PrintConfigServiceImpl implements PrintConfigService {
      */
     private List<PrintConfigVO> resultTrans(List<PrintConfig> printConfigs) {
         Map<Integer, String> userMap = Maps.newHashMap();
+        Map<Integer, String> storageMap = Maps.newHashMap();
         userService.list().forEach(x -> userMap.put(x.getUserid(), x.getUsername()));
+        storageService.list().forEach(x -> storageMap.put(x.getStorageid(), x.getStoragename()));
         return printConfigs.stream().map(x -> {
             PrintConfigVO printConfigVO = new PrintConfigVO();
             BeanUtils.copyProperties(x, printConfigVO);
             printConfigVO.setCreateUserName(userMap.get(x.getCreateUserId()));
             printConfigVO.setModifyUserName(userMap.get(x.getModifyUserId()));
             printConfigVO.setOperateUserName(userMap.get(x.getOperateUserId()));
+            printConfigVO.setStorageId(storageMap.get(x.getStorageId()));
             return printConfigVO;
         }).collect(Collectors.toList());
     }

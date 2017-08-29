@@ -8,7 +8,7 @@ public class PrintConfigVO implements Serializable {
 
     private String machineIp;
 
-    private Integer storageId;
+    private String storageId;
 
     private Integer machinePort;
 
@@ -44,11 +44,11 @@ public class PrintConfigVO implements Serializable {
         this.machineIp = machineIp;
     }
 
-    public Integer getStorageId() {
+    public String getStorageId() {
         return storageId;
     }
 
-    public void setStorageId(Integer storageId) {
+    public void setStorageId(String storageId) {
         this.storageId = storageId;
     }
 
