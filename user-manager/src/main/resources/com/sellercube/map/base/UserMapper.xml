@@ -24,9 +24,7 @@
   </sql>
 
     <select id="list" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from users
+        select UserId, UserName from users
     </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

@@ -15,6 +15,8 @@ import com.sellercube.usermanager.server.base.service.UserService;
 import com.sellercube.usermanager.vo.PrintConfigVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -39,11 +41,13 @@ public class PrintConfigServiceImpl implements PrintConfigService {
     private StorageService storageService;
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int deleteByPrimaryKey(Integer printConfigId) {
         return printConfigMapper.deleteByPrimaryKey(printConfigId);
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int insert(PrintConfig record) {
         record.setCreateDate(new Date());
         record.setModifyDate(new Date());
@@ -51,6 +55,7 @@ public class PrintConfigServiceImpl implements PrintConfigService {
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int insertSelective(PrintConfig record) {
         record.setCreateDate(new Date());
         record.setModifyDate(new Date());
@@ -63,38 +68,53 @@ public class PrintConfigServiceImpl implements PrintConfigService {
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int updateByPrimaryKeySelective(PrintConfig record) {
         record.setModifyDate(new Date());
         return printConfigMapper.updateByPrimaryKeySelective(record);
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int updateByPrimaryKey(PrintConfig record) {
         record.setModifyDate(new Date());
         return printConfigMapper.updateByPrimaryKey(record);
     }
 
     @Override
+    @CacheEvict(value = "redisCache", allEntries = true)
     public int deleteByPrimaryKeyALL(String ids) {
         SplitUtil.split(",", ids).forEach(x -> printConfigMapper.deleteByPrimaryKey(Integer.valueOf(x)));
         return 1;
     }
 
     @Override
+    @Cacheable(value = "redisCache", keyGenerator = "keyGenerator", cacheManager = "cacheManager")
     public PageInfo<PrintConfigVO> list(String pageNum, String limit) {
         Optional<String> pageNum1 = Optional.ofNullable(pageNum);
         Optional<String> limit1 = Optional.ofNullable(limit);
         PageHelper.startPage(Integer.valueOf(pageNum1.orElse("1")), Integer.valueOf(limit1.orElse("10")));
-        return new PageInfo<>(resultTrans(printConfigMapper.list()));
+        List<PrintConfig> printConfigList = printConfigMapper.list();
+        PageInfo<PrintConfig> pageInfo = new PageInfo<>(printConfigList);
+        PageInfo<PrintConfigVO> pageInfoVO = new PageInfo<>();
+        BeanUtils.copyProperties(pageInfo, pageInfoVO);
+        pageInfoVO.setList(resultTrans(printConfigList));
+        return pageInfoVO;
     }
 
     @Override
     public PageInfo<PrintConfigVO> search(String operateName, String ip, Integer warehouseId, Integer pageNum, Integer limit) {
         PageHelper.startPage(pageNum, limit);
-        return new PageInfo<>(resultTrans(printConfigMapper.searchByCondition(operateName, ip, warehouseId)));
+        List<PrintConfig> printConfigList = printConfigMapper.searchByCondition(operateName, ip, warehouseId);
+        PageInfo<PrintConfig> pageInfo = new PageInfo<>(printConfigList);
+        PageInfo<PrintConfigVO> pageInfoVO = new PageInfo<>();
+        BeanUtils.copyProperties(pageInfo, pageInfoVO);
+        pageInfoVO.setList(resultTrans(printConfigList));
+        return pageInfoVO;
     }
 
     @Override
+    @Cacheable(value = "redisCache", keyGenerator = "keyGenerator", cacheManager = "cacheManager")
     public Map<String, JSONArray> dropdown() {
         JSONArray var1 = new JSONArray();
         JSONArray var3 = new JSONArray();
