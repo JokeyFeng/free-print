@@ -2,6 +2,7 @@ package com.sellercube.usermanager.server.base.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.sellercube.common.function.Tuples;
 import com.sellercube.common.utils.SplitUtil;

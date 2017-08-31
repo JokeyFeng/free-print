@@ -1,6 +1,5 @@
 package com.sellercube.usermanager.server.base.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Maps;
@@ -117,6 +116,7 @@ public class PrintConfigServiceImpl implements PrintConfigService {
     @Cacheable(value = "redisCache", keyGenerator = "keyGenerator", cacheManager = "cacheManager")
     public Map<String, JSONArray> dropdown() {
         JSONArray var1 = new JSONArray();
+        JSONArray var2 = new JSONArray();
         JSONArray var3 = new JSONArray();
         Map<String, JSONArray> map = Maps.newHashMap();
         userService.list().forEach(x -> var3.add(Tuples.of(x.getUserid().toString(), x.getUsername())));
@@ -125,7 +125,8 @@ public class PrintConfigServiceImpl implements PrintConfigService {
         List<String> ips = printConfigMapper.distinctByIP();
         ips.remove(null);
         ips.remove("");
-        map.put("ip", JSON.parseArray(ips.toString()));
+        ips.forEach(x->var2.add(x));
+        map.put("ip", var2);
         map.put("warehouse", var1);
         return map;
     }
