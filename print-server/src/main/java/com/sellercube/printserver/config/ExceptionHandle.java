@@ -18,6 +18,6 @@ public class ExceptionHandle {
     @ResponseBody
     public Result handle(Exception e){
         log.error("【系统异常】：{}",e);
-        return ResultUtil.error(e.toString());
+        return ResultUtil.error(e.getMessage());
     }
 }

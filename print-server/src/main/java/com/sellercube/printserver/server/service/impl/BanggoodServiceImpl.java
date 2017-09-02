@@ -4,19 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
 import com.sellercube.printserver.server.entity.ChannelConfig;
-import com.sellercube.printserver.server.entity.Monitor;
-import com.sellercube.printserver.server.mapper.MonitorMapper;
 import com.sellercube.printserver.server.service.BanggoodService;
 import com.sellercube.printserver.server.service.ChannelConfigService;
-import com.sellercube.printserver.utils.CoreUtil;
-import com.sellercube.printserver.utils.PrintUtil;
-import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
@@ -28,14 +21,10 @@ import java.util.Objects;
 public class BanggoodServiceImpl implements BanggoodService {
 
     @Autowired
-    private MonitorMapper monitorMapper;
-
-    @Autowired
     private ChannelConfigService channelConfigService;
 
     @Override
     public Result process(JSONObject jsonObject) throws Exception {
-        Integer monitorId = jsonObject.getInteger("monitorId");
         JSONObject data = jsonObject.getJSONObject("Data");
         String pdfUrl = data.getString("PDFUrl");
         String shipType = data.getString("ShipType");
@@ -53,7 +42,6 @@ public class BanggoodServiceImpl implements BanggoodService {
         Method method = clazz.getMethod(channelConfig.getMethod(), String.class);
         Object object = clazz.newInstance();
         method.invoke(object, pdfUrl);
-        monitorMapper.deleteByPrimaryKey(monitorId);
         return ResultUtil.success("打印成功");
     }
 
