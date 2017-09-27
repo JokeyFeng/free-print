@@ -3,10 +3,12 @@ package com.sellercube.usermanager.server.base.mapper;
 
 import com.sellercube.usermanager.server.base.entity.Monitor;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Mapper
+@Component
 public interface MonitorMapper {
     int deleteByPrimaryKey(Integer id);
 

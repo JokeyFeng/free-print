@@ -3,10 +3,12 @@ package com.sellercube.usermanager.server.base.mapper;
 
 import com.sellercube.usermanager.server.base.entity.PrintType;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Mapper
+@Component
 public interface PrintTypeMapper {
     int deleteByPrimaryKey(Integer id);
 
