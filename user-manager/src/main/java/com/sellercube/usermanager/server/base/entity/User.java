@@ -28,11 +28,9 @@ public class User implements Serializable {
 
     private String newpassword;
 
-    private Short testusertype;
-
-    private String guid;
-
     private Long synckey;
+
+    private Short testusertype;
 
     public Integer getUserid() {
         return userid;
@@ -130,28 +128,20 @@ public class User implements Serializable {
         this.newpassword = newpassword == null ? null : newpassword.trim();
     }
 
-    public Short getTestusertype() {
-        return testusertype;
-    }
-
-    public void setTestusertype(Short testusertype) {
-        this.testusertype = testusertype;
-    }
-
-    public String getGuid() {
-        return guid;
-    }
-
-    public void setGuid(String guid) {
-        this.guid = guid == null ? null : guid.trim();
-    }
-
     public Long getSynckey() {
         return synckey;
     }
 
     public void setSynckey(Long synckey) {
         this.synckey = synckey;
+    }
+
+    public Short getTestusertype() {
+        return testusertype;
+    }
+
+    public void setTestusertype(Short testusertype) {
+        this.testusertype = testusertype;
     }
 
     @Override
@@ -169,9 +159,8 @@ public class User implements Serializable {
                 ", deliveraddress=" + deliveraddress +
                 ", defaultlanguageid=" + defaultlanguageid +
                 ", newpassword='" + newpassword + '\'' +
-                ", testusertype=" + testusertype +
-                ", guid='" + guid + '\'' +
                 ", synckey=" + synckey +
+                ", testusertype=" + testusertype +
                 '}';
     }
 }

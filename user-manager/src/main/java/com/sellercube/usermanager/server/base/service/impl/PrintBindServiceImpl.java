@@ -2,7 +2,6 @@ package com.sellercube.usermanager.server.base.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.sellercube.common.function.Tuples;
 import com.sellercube.common.utils.SplitUtil;
@@ -13,7 +12,6 @@ import com.sellercube.usermanager.server.base.mapper.PrintBindMapper;
 import com.sellercube.usermanager.server.base.mapper.PrintTypeMapper;
 import com.sellercube.usermanager.server.base.service.PrintBindService;
 import com.sellercube.usermanager.server.base.service.UserService;
-import com.sellercube.usermanager.util.RedisUtil;
 import com.sellercube.usermanager.vo.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
@@ -57,6 +55,10 @@ public class PrintBindServiceImpl implements PrintBindService {
         }
         String uuid = UUID.randomUUID().toString();
         String suffix = SplitUtil.split(".", file.getOriginalFilename()).get(1);
+        File dir = new File("/uploadFile");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
         File dest = new File("/uploadFile/" + uuid + "." + suffix);
         file.transferTo(dest);
         PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), new Date(), creator, new Date(), null);
@@ -74,6 +76,10 @@ public class PrintBindServiceImpl implements PrintBindService {
         }
         String uuid = UUID.randomUUID().toString();
         String suffix = SplitUtil.split(".", file.getOriginalFilename()).get(1);
+        File dir = new File("/uploadFile");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
         File dest = new File("/uploadFile/" + uuid + "." + suffix);
         file.transferTo(dest);
         PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), new Date(), creator, new Date(), null);
@@ -115,6 +121,10 @@ public class PrintBindServiceImpl implements PrintBindService {
         } else {
             String uuid = UUID.randomUUID().toString();
             String suffix = SplitUtil.split(".", file.getOriginalFilename()).get(1);
+            File dir = new File("/uploadFile");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
             File dest = new File("/uploadFile/" + uuid + "." + suffix);
             file.transferTo(dest);
             PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), null, null, new Date(), updator);
@@ -139,6 +149,10 @@ public class PrintBindServiceImpl implements PrintBindService {
         } else {
             String uuid = UUID.randomUUID().toString();
             String suffix = SplitUtil.split(".", file.getOriginalFilename()).get(1);
+            File dir = new File("/uploadFile");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
             File dest = new File("/uploadFile/" + uuid + "." + suffix);
             file.transferTo(dest);
             PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), null, null, new Date(), updator);
