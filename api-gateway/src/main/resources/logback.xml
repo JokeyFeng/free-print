@@ -15,6 +15,7 @@
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${logback_path}/api-gateway.log.%d{yyyy-MM-dd}.log
             </fileNamePattern>
+            <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%t]-[%C{1}]-[%p] %logger{36} - %msg%n
