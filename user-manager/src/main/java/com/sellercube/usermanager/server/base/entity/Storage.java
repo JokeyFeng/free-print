@@ -39,8 +39,6 @@ public class Storage implements Serializable {
 
     private Long synckey;
 
-    private Boolean isbatstorage;
-
     public Integer getStorageid() {
         return storageid;
     }
@@ -185,14 +183,6 @@ public class Storage implements Serializable {
         this.synckey = synckey;
     }
 
-    public Boolean getIsbatstorage() {
-        return isbatstorage;
-    }
-
-    public void setIsbatstorage(Boolean isbatstorage) {
-        this.isbatstorage = isbatstorage;
-    }
-
     @Override
     public String toString() {
         return "Storage{" +
@@ -214,7 +204,6 @@ public class Storage implements Serializable {
                 ", isfba=" + isfba +
                 ", isseawaydelivery=" + isseawaydelivery +
                 ", synckey=" + synckey +
-                ", isbatstorage=" + isbatstorage +
                 '}';
     }
 }

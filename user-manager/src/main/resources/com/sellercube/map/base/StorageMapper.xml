@@ -20,12 +20,11 @@
         <result column="IsFBA" jdbcType="BIT" property="isfba"/>
         <result column="IsSeawayDelivery" jdbcType="BIT" property="isseawaydelivery"/>
         <result column="SyncKey" jdbcType="BIGINT" property="synckey"/>
-        <result column="IsBatStorage" jdbcType="BIT" property="isbatstorage"/>
     </resultMap>
     <sql id="Base_Column_List">
     StorageId, ProcessCenterId, StorageName, IsDefault, CheckStorageIsGroup, IsInterchangeCenter, 
     CompanyId, EnName, IsChina, IsSampleStorage, IsPurchase, IsEnable, Sort, Type, IsStockUp, 
-    IsFBA, IsSeawayDelivery, SyncKey, IsBatStorage
+    IsFBA, IsSeawayDelivery, SyncKey
   </sql>
     <select id="list" resultMap="BaseResultMap">
         select
@@ -48,15 +47,13 @@
       CompanyId, EnName, IsChina, 
       IsSampleStorage, IsPurchase, IsEnable, 
       Sort, Type, IsStockUp, 
-      IsFBA, IsSeawayDelivery, SyncKey, 
-      IsBatStorage)
+      IsFBA, IsSeawayDelivery, SyncKey)
     values (#{storageid,jdbcType=INTEGER}, #{processcenterid,jdbcType=INTEGER}, #{storagename,jdbcType=VARCHAR}, 
       #{isdefault,jdbcType=BIT}, #{checkstorageisgroup,jdbcType=BIT}, #{isinterchangecenter,jdbcType=BIT}, 
       #{companyid,jdbcType=INTEGER}, #{enname,jdbcType=VARCHAR}, #{ischina,jdbcType=BIT}, 
       #{issamplestorage,jdbcType=BIT}, #{ispurchase,jdbcType=BIT}, #{isenable,jdbcType=BIT}, 
       #{sort,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{isstockup,jdbcType=BIT}, 
-      #{isfba,jdbcType=BIT}, #{isseawaydelivery,jdbcType=BIT}, #{synckey,jdbcType=BIGINT}, 
-      #{isbatstorage,jdbcType=BIT})
+      #{isfba,jdbcType=BIT}, #{isseawaydelivery,jdbcType=BIT}, #{synckey,jdbcType=BIGINT})
   </insert>
     <insert id="insertSelective" parameterType="com.sellercube.usermanager.server.base.entity.Storage">
         insert into storage
@@ -115,9 +112,6 @@
             <if test="synckey != null">
                 SyncKey,
             </if>
-            <if test="isbatstorage != null">
-                IsBatStorage,
-            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="storageid != null">
@@ -173,9 +167,6 @@
             </if>
             <if test="synckey != null">
                 #{synckey,jdbcType=BIGINT},
-            </if>
-            <if test="isbatstorage != null">
-                #{isbatstorage,jdbcType=BIT},
             </if>
         </trim>
     </insert>
@@ -233,9 +224,6 @@
             <if test="synckey != null">
                 SyncKey = #{synckey,jdbcType=BIGINT},
             </if>
-            <if test="isbatstorage != null">
-                IsBatStorage = #{isbatstorage,jdbcType=BIT},
-            </if>
         </set>
         where StorageId = #{storageid,jdbcType=INTEGER}
     </update>
@@ -257,8 +245,7 @@
       IsStockUp = #{isstockup,jdbcType=BIT},
       IsFBA = #{isfba,jdbcType=BIT},
       IsSeawayDelivery = #{isseawaydelivery,jdbcType=BIT},
-      SyncKey = #{synckey,jdbcType=BIGINT},
-      IsBatStorage = #{isbatstorage,jdbcType=BIT}
+      SyncKey = #{synckey,jdbcType=BIGINT}
     where StorageId = #{storageid,jdbcType=INTEGER}
   </update>
 </mapper>
