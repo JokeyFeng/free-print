@@ -34,13 +34,13 @@ public class ConfigController {
 
     @DeleteMapping("/configs")
     @ApiOperation(value = "批量删除配置", notes = "根据id批量删除 格式：1,2,3,4")
-    public Result delteAll(@RequestBody String ids) {
+    public Result deleteAll(@RequestBody String ids) {
         return ResultUtil.success(configService.deleteByPrimaryKeyALL(ids));
     }
 
     @DeleteMapping("/configs/{id}")
     @ApiOperation(value = "删除配置", notes = "根据id删除配置")
-    public Result delte(@PathVariable Integer id) {
+    public Result delete(@PathVariable Integer id) {
         return ResultUtil.success(configService.deleteByPrimaryKey(id));
     }
 

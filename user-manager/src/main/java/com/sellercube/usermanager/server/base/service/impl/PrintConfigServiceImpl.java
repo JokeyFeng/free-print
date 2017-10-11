@@ -112,6 +112,9 @@ public class PrintConfigServiceImpl implements PrintConfigService {
         return pageInfoVO;
     }
 
+    /**
+     * TODO 需要解决速度慢的问题
+     */
     @Override
     @Cacheable(value = "redisCache", keyGenerator = "keyGenerator", cacheManager = "cacheManager")
     public Map<String, JSONArray> dropdown() {
