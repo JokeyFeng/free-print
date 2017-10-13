@@ -199,4 +199,9 @@ public class PrintBindServiceImpl implements PrintBindService {
         map.put("userName", var3);
         return map;
     }
+
+    @Override
+    public List<String> listByCondition(String userId, String printType, Boolean isEnable) {
+        return printBindMapper.listByCondition(userId, isEnable, printType);
+    }
 }

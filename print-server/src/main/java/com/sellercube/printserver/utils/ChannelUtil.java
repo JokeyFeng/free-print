@@ -22,7 +22,7 @@ public class ChannelUtil {
      * 打印base64 pdf
      */
     public void base64Pdf(String var) throws Exception {
-        PrintUtil.printPDF(CoreUtil.base64(var, "pdf"));
+        PrintUtil.printPDF(FileUtil.base64ToFile(var, "pdf"));
     }
 
     /**
@@ -50,6 +50,6 @@ public class ChannelUtil {
      * 打印下载的pdf文件
      */
     public void downloadPdf(String var) throws Exception {
-        PrintUtil.printPDF(CoreUtil.download(var, "pdf"));
+        PrintUtil.printPDF(FileUtil.downloadFile(var, "pdf"));
     }
 }

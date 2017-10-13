@@ -32,6 +32,18 @@
         <result column="updator" property="editor" jdbcType="VARCHAR"/>
         <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
     </resultMap>
+    <select id="listByCondition" resultType="java.lang.String">
+        SELECT con.ip
+        FROM print_bind pb
+        LEFT JOIN config con
+        ON pb.config_id = con.id
+        LEFT JOIN print_type pt
+        ON pb.print_type_id = pt.id
+        LEFT JOIN users u
+        ON pb.user_id = u.userid
+        WHERE pb.is_enable=#{isEnable}
+        AND u.userid=#{userId} AND pt.type_name=#{printType}
+    </select>
     <select id="searchByCondition" resultMap="JsonResult">
         SELECT pb.id,con.print_name
         ,pt.type_name

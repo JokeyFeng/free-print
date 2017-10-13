@@ -6,6 +6,7 @@ import com.sellercube.usermanager.server.base.entity.PrintBind;
 import com.sellercube.usermanager.vo.JsonResult;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -23,9 +24,9 @@ public interface PrintBindService {
      * @return
      * @throws Exception
      */
-    int insert(Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file,String creator) throws Exception;
+    int insert(Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String creator) throws Exception;
 
-    int insertSelective(Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file,String creator) throws Exception;
+    int insertSelective(Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String creator) throws Exception;
 
     /**
      * 根据主键删除打印绑定信息
@@ -58,9 +59,9 @@ public interface PrintBindService {
      * @return
      * @throws Exception
      */
-    int updateByPrimaryKey(Integer id,Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file,String updator) throws Exception;
+    int updateByPrimaryKey(Integer id, Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String updator) throws Exception;
 
-    int updateByPrimaryKeySelective(Integer id,Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file,String updator) throws Exception;
+    int updateByPrimaryKeySelective(Integer id, Integer printNameId, Integer printTypeId, boolean isEnable, Integer userId, MultipartFile file, String updator) throws Exception;
 
     /**
      * 根据多重条件进行查询
@@ -88,5 +89,10 @@ public interface PrintBindService {
      */
     PageInfo<JsonResult> getByPage(Integer pageNum, Integer pageSize);
 
-    Map<String,JSONArray> dropdwon();
+    Map<String, JSONArray> dropdwon();
+
+    /**
+     * 根据条件查询用户所绑定的打印机
+     */
+    List<String> listByCondition(String userId, String printType, Boolean isEnable);
 }

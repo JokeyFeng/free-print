@@ -31,4 +31,16 @@ public interface PrintBindMapper {
             , @Param("user_id") Integer userId);
 
     List<JsonResult> list();
+
+    /**
+     * 根据条件查询ip
+     *
+     * @param userId  用户id
+     * @param isEnable  是否启用
+     * @param printType 打印类型
+     * @return ip list
+     */
+    List<String> listByCondition(@Param("userId") String userId,
+                                 @Param("isEnable") Boolean isEnable,
+                                 @Param("printType") String printType);
 }

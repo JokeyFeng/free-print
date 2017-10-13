@@ -1,8 +1,8 @@
 package com.sellercube.printserver.rest;
 
-import com.alibaba.fastjson.JSONObject;
+import com.sellercube.common.entity.PrintParam;
 import com.sellercube.common.entity.Result;
-import com.sellercube.printserver.server.service.CoreService;
+import com.sellercube.printserver.service.CoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +18,7 @@ public class BaseController {
     private CoreService coreService;
 
     @PostMapping("/print")
-    public Result handle(@RequestBody JSONObject jsonObject) throws Exception {
-        return coreService.print(jsonObject);
+    public Result handle(@RequestBody PrintParam printParam) throws Exception {
+        return coreService.print(printParam);
     }
 }

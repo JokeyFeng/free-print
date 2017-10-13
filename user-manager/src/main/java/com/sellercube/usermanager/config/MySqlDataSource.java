@@ -25,9 +25,9 @@ import java.sql.SQLException;
 @Configuration
 @MapperScan(basePackages = MySqlDataSource.PACKAGE, sqlSessionFactoryRef = "mysqlSqlSessionFactory")
 public class MySqlDataSource {
-    static final String PACKAGE = "com.sellercube.usermanager.server.*.mapper";
+    static final String PACKAGE = "com.sellercube.usermanager.service.*.mapper";
     private final static String mapperLocations = "classpath*:com/sellercube/map/*/*Mapper.xml";
-    private final static String aliasesPackage = "com.sellercube.usermanager.server.*.entity";
+    private final static String aliasesPackage = "com.sellercube.usermanager.service.*.entity";
 
     @Value("${mysql_url}")
     private String dbUrl;
@@ -50,7 +50,7 @@ public class MySqlDataSource {
     @Bean(name = "mysqlDataSource")
     public DataSource rdsDataSource() {
         DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl(dbUrl);
         dataSource.setUsername(dbUser);
         dataSource.setPassword(dbPassword);

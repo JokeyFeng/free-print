@@ -14,7 +14,7 @@ import java.util.List;
  * Created by Chenjing on 2017/7/15.
  */
 @Component
-public class CoreUtil {
+public class FileUtil {
 
 
     private static final String APPLICATION_PDF = "application/pdf";
@@ -24,22 +24,27 @@ public class CoreUtil {
      * @param suffix 后缀名=文件类型
      * @return 文件路径
      */
-    public static String base64(String str, String suffix) throws Exception {
+    public synchronized static String base64ToFile(String str, String suffix) throws Exception {
         byte[] bytes = Base64Util.decodeData(str);
         String path = "D:/document." + suffix;
         FileOutputStream fileOutputStream = new FileOutputStream(path);
-        fileOutputStream.write(bytes);
-        fileOutputStream.flush();
-        fileOutputStream.close();
+        try {
+            fileOutputStream.write(bytes);
+            fileOutputStream.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            fileOutputStream.close();
+        }
         return path;
     }
 
     /**
-     * @param url url路径
+     * @param url    url路径
      * @param suffix 文件后缀名
      * @return 文件路径
      */
-    public static String download(String url, String suffix) throws Exception {
+    public synchronized static String downloadFile(String url, String suffix) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         List<MediaType> list = Lists.newArrayList(MediaType.valueOf(APPLICATION_PDF));
@@ -48,9 +53,14 @@ public class CoreUtil {
         byte[] result = response.getBody();
         String path = "D:/document." + suffix;
         FileOutputStream fileOutputStream = new FileOutputStream(path);
-        fileOutputStream.write(result);
-        fileOutputStream.flush();
-        fileOutputStream.close();
+        try {
+            fileOutputStream.write(result);
+            fileOutputStream.flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            fileOutputStream.close();
+        }
         return path;
     }
 }

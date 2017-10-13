@@ -1,7 +1,8 @@
 package com.sellercube.apigateway.rest;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sellercube.apigateway.server.service.MainService;
+import com.sellercube.apigateway.service.MainService;
+import com.sellercube.common.entity.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ public class MainController {
     private MainService mainService;
 
     @PostMapping(value = "/print")
-    public JSONObject a(@RequestBody JSONObject jsonObject) throws Exception {
+    public Result a(@RequestBody JSONObject jsonObject) throws Exception {
         return mainService.process(jsonObject);
     }
 }

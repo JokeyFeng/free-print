@@ -20,7 +20,7 @@ public class RestTemplateConfig {
     private Integer readTimeout;
 
     @Bean
-    public RestTemplate apiTemplate(){
+    public RestTemplate restTemplate(){
         StringHttpMessageConverter m = new StringHttpMessageConverter(Charset.forName("UTF-8"));
         return new RestTemplateBuilder()
                 .setConnectTimeout(connTimeout)

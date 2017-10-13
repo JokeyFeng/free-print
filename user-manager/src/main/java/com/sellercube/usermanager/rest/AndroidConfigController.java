@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/android/ip")
 @Api(tags = "手持IP配置")
-public class PrintConfigController {
+public class AndroidConfigController {
 
     @Autowired
     private PrintConfigService printConfigService;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @Api(tags = "打印机的配置")
-public class ConfigController {
+public class PrinterConfigController {
 
     @Autowired
     private ConfigService configService;

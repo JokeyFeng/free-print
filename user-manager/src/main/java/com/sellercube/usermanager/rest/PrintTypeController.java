@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @Api(tags = "打印类型")
-public class PrintController {
+public class PrintTypeController {
 
     @Autowired
     private PrintService printService;
