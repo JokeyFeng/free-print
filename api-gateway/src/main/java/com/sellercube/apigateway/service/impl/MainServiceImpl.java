@@ -2,6 +2,8 @@ package com.sellercube.apigateway.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.ImmutableMap;
 import com.sellercube.apigateway.entity.PrintTypeEnum;
 import com.sellercube.apigateway.service.MainService;
@@ -22,6 +24,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 跳转到某个服务进行打印
@@ -31,6 +34,11 @@ import java.util.Objects;
 public class MainServiceImpl implements MainService {
 
     private static final Logger log = LoggerFactory.getLogger(MainServiceImpl.class);
+
+    private static Cache<String, List<String>> cache = CacheBuilder.newBuilder()
+            .maximumSize(100)
+            .expireAfterAccess(1, TimeUnit.HOURS)
+            .build();
 
     @Autowired
     private RestTemplate restTemplate;
@@ -51,42 +59,44 @@ public class MainServiceImpl implements MainService {
         //转换参数
         PrintParam printParam = this.setParam(jsonObject);
         String printType = printParam.getPrintType();
-        //请求数据库接口查询可用的IP
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("Authorization", token);
-        HttpEntity<String> requestEntity = new HttpEntity<>(null, headers);
-        String result = restTemplate.exchange(url + "/db/users/ip?isEnable=1&printType=" + printType + "&userId=" + printParam.getUserId(),
-                HttpMethod.GET, requestEntity, String.class).getBody();
-        Result jsonResult = JSON.parseObject(result, Result.class);
+        String userId = printParam.getUserId();
+        //在缓存查看用户绑定的IP
+        List<String> ipList = cache.get(userId + printType + "1", () -> {
+            //请求数据库接口查询可用的IP
+            HttpHeaders headers = new HttpHeaders();
+            headers.add("Authorization", token);
+            HttpEntity<String> requestEntity = new HttpEntity<>(null, headers);
+            String result = restTemplate.exchange(url + "/db/users/ip?isEnable=1&printType=" + printType + "&userId=" + userId,
+                    HttpMethod.GET, requestEntity, String.class).getBody();
+            Result jsonResult = JSON.parseObject(result, Result.class);
+            if (Objects.equals(200, jsonResult.getCode())) {
+                log.info("user bind ips=>{}", jsonResult.getData());
+                return (List<String>) jsonResult.getData();
+            } else {
+                throw new Exception(jsonResult.getData().toString());
+            }
+        });
 
-        List<String> ips;
-        if (Objects.equals(200, jsonResult.getCode())) {
-            ips = (List<String>) jsonResult.getData();
-            log.info("user bind ips=>{}", ips.toString());
-        } else {
-            throw new Exception(jsonResult.getData().toString());
-        }
-
-        if (!ips.isEmpty()) {
+        if (!ipList.isEmpty()) {
             //设置请求头参数
-            headers = new HttpHeaders();
+            HttpHeaders headers = new HttpHeaders();
             MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
             headers.setContentType(type);
             headers.add("Accept", "application/json; charset=UTF-8");
             HttpEntity<String> httpEntity = new HttpEntity<>(JSON.toJSONString(printParam), headers);
 
-            if (ips.size() == 1) {
+            if (ipList.size() == 1) {
                 //单个ip
-                String url = "http://" + ips.get(0) + ":8001/print";
+                String url = "http://" + ipList.get(0) + ":8001/print";
                 String response = restTemplate.exchange(url, HttpMethod.POST, httpEntity, String.class).getBody();
                 return JSON.parseObject(response, Result.class);
             } else {
                 //多个ip
-                ips.forEach(x -> {
+                ipList.forEach(x -> {
                     String url = "http://" + x + ":8001/print";
                     restTemplate.exchange(url, HttpMethod.POST, httpEntity, String.class);
                 });
-                return ResultUtil.success(ips.size() + "台打印机全部打印成功");
+                return ResultUtil.success(ipList.size() + "台打印机全部打印成功");
             }
         } else {
             //没有找到ip地址
