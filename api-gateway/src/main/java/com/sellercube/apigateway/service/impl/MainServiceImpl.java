@@ -62,7 +62,7 @@ public class MainServiceImpl implements MainService {
         String printType = printParam.getPrintType();
         String userId = printParam.getUserId();
         //在缓存查看用户绑定的IP
-        List<String> ipList = cache.get(userId + printType + "1", () -> {
+        List<String> ipList = cache.get(userId + printType, () -> {
             //请求数据库接口查询可用的IP
             HttpHeaders headers = new HttpHeaders();
             headers.add("Authorization", token);
