@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
+ * 唯一开放的控制层
  * Created by Chenjing on 2017/6/20.
+ *
+ * @author Chenjing
  */
 @RestController
 public class BaseController {

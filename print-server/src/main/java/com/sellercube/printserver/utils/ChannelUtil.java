@@ -8,8 +8,10 @@ import java.io.InputStream;
 /**
  * 反射到这个类  进行打印
  * Created by Chenjing on 2017/8/3.
+ * @author Chenjing
  */
 public class ChannelUtil {
+    private final String imgBase64Start="iVBORw0KGgo";
     /**
      * 打印base64图片
      */
@@ -36,7 +38,7 @@ public class ChannelUtil {
      * 打印base64的 图片和打印机指令
      */
     public void base64ImgCmd(String var) throws Exception {
-        if (var.startsWith("iVBORw0KGgo")) {
+        if (var.startsWith(imgBase64Start)) {
             //base64 的图片
             InputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(var));
             PrintUtil.printImage(inputStream, "jpg");

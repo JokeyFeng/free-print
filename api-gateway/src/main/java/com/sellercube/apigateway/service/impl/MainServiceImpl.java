@@ -7,6 +7,7 @@ import com.google.common.cache.CacheBuilder;
 import com.google.common.collect.ImmutableMap;
 import com.sellercube.apigateway.entity.PrintTypeEnum;
 import com.sellercube.apigateway.service.MainService;
+import com.sellercube.common.entity.HttpStatus;
 import com.sellercube.common.entity.PrintParam;
 import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
@@ -49,7 +50,7 @@ public class MainServiceImpl implements MainService {
     @Value("${db.url.token}")
     private String token;
 
-    private static final Map<String, PrintTypeEnum> printTypeMap =
+    private static final Map<String, PrintTypeEnum> PRINT_TYPE_ENUM_MAP =
             ImmutableMap.of("facelist", PrintTypeEnum.FACELIST, "label", PrintTypeEnum.LABEL);
 
 
@@ -69,7 +70,7 @@ public class MainServiceImpl implements MainService {
             String result = restTemplate.exchange(url + "/db/users/ip?isEnable=1&printType=" + printType + "&userId=" + userId,
                     HttpMethod.GET, requestEntity, String.class).getBody();
             Result jsonResult = JSON.parseObject(result, Result.class);
-            if (Objects.equals(200, jsonResult.getCode())) {
+            if (Objects.equals(HttpStatus.SUCCESS.getCode(), jsonResult.getCode())) {
                 log.info("user bind ips=>{}", jsonResult.getData());
                 return (List<String>) jsonResult.getData();
             } else {
@@ -100,6 +101,7 @@ public class MainServiceImpl implements MainService {
             }
         } else {
             //没有找到ip地址
+            cache.invalidate(userId + printType + "1");
             return ResultUtil.error("当前用户没有绑定打印机");
         }
     }
@@ -111,7 +113,7 @@ public class MainServiceImpl implements MainService {
         PrintParam param = new PrintParam();
         param.setFrom(jsonObject.getString("from"));
         param.setUserId(jsonObject.getString("userid"));
-        param.setPrintType(printTypeMap.get(jsonObject.getString("type")).getChinesName());
+        param.setPrintType(PRINT_TYPE_ENUM_MAP.get(jsonObject.getString("type")).getChinesName());
         JSONObject data = jsonObject.getJSONObject("Data");
         //重要：设置打印的内容
         switch (param.getFrom()) {
@@ -126,6 +128,7 @@ public class MainServiceImpl implements MainService {
         }
         param.setFormat(data.getString("Format"));
         param.setShipType(data.getString("ShipType"));
+        param.setFbaCode(data.getString("FBACode"));
         return param;
     }
 }

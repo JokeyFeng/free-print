@@ -45,6 +45,7 @@ public class LogRecord {
     @AfterReturning(returning = "ret", pointcut = "log()")
     public void doAfterReturning(Object ret) throws Throwable {
         logger.info("{result : " + ret + "\nspend time : " + (System.currentTimeMillis() - startTime.get()) + " milliseconds}");
+        startTime.remove();
     }
 }
 

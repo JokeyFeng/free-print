@@ -34,84 +34,90 @@ import java.util.Iterator;
  */
 public class Tuple7<T1, T2, T3, T4, T5, T6, T7> extends Tuple6<T1, T2, T3, T4, T5, T6> {
 
-	private static final long serialVersionUID = 8273600047065201704L;
+    private static final long serialVersionUID = 8273600047065201704L;
 
-	final T7 t7;
+    final T7 t7;
 
-	Tuple7(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7) {
-		super( t1, t2, t3, t4, t5, t6);
-		this.t7 = t7;
-	}
+    Tuple7(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6, T7 t7) {
+        super(t1, t2, t3, t4, t5, t6);
+        this.t7 = t7;
+    }
 
-	/**
-	 * Type-safe way to get the seventh object of this {@link Tuples}.
-	 *
-	 * @return The seventh object
-	 */
-	public T7 getT7() {
-		return t7;
-	}
+    /**
+     * Type-safe way to get the seventh object of this {@link Tuples}.
+     *
+     * @return The seventh object
+     */
+    public T7 getT7() {
+        return t7;
+    }
 
-	@Override
-	public Object get(int index) {
-		switch (index) {
-			case 0:
-				return t1;
-			case 1:
-				return t2;
-			case 2:
-				return t3;
-			case 3:
-				return t4;
-			case 4:
-				return t5;
-			case 5:
-				return t6;
-			case 6:
-				return t7;
-			default:
-				return null;
-		}
-	}
+    @Override
+    public Object get(int index) {
+        switch (index) {
+            case 0:
+                return t1;
+            case 1:
+                return t2;
+            case 2:
+                return t3;
+            case 3:
+                return t4;
+            case 4:
+                return t5;
+            case 5:
+                return t6;
+            case 6:
+                return t7;
+            default:
+                return null;
+        }
+    }
 
-	@Override
-	public Object[] toArray() {
-		return new Object[]{t1, t2, t3, t4, t5, t6, t7};
-	}
+    @Override
+    public Object[] toArray() {
+        return new Object[]{t1, t2, t3, t4, t5, t6, t7};
+    }
 
-	@Override
-	public Iterator<?> iterator() {
-		return Arrays.asList(t1, t2, t3, t4, t5, t6, t7).iterator();
-	}
+    @Override
+    public Iterator<?> iterator() {
+        return Arrays.asList(t1, t2, t3, t4, t5, t6, t7).iterator();
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof Tuple7)) return false;
-		if (!super.equals(o)) return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Tuple7)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
 
-		@SuppressWarnings("rawtypes")
+        @SuppressWarnings("rawtypes")
         Tuple7 tuple7 = (Tuple7) o;
 
-		return t7 != null ? t7.equals(tuple7.t7) : tuple7.t7 == null;
+        return t7 != null ? t7.equals(tuple7.t7) : tuple7.t7 == null;
 
-	}
+    }
 
-	@Override
-	public int hashCode() {
-		int result = super.hashCode();
-		result = 31 * result + (t7 != null ? t7.hashCode() : 0);
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (t7 != null ? t7.hashCode() : 0);
+        return result;
+    }
 
-	@Override
-	public int size() {
-		return 7;
-	}
+    @Override
+    public int size() {
+        return 7;
+    }
 
-	@Override
-	public String toString() {
-		return super.toString() +
-		  (t7 != null ? "," + t7.toString() : "");
-	}
+    @Override
+    public String toString() {
+        return super.toString() +
+                (t7 != null ? "," + t7.toString() : "");
+    }
 }

@@ -12,8 +12,8 @@ import java.util.List;
  * Created by Chenjing on 2017/7/8
  * 覆盖pageHelper的pageInfo
  * 以便支持@jsonView
- * @param <T>
- */
+ * @author Chenjing
+ * */
 public class PageInfo<T> implements Serializable {
     private static final long serialVersionUID = 1L;
     @JsonView(View.BaseView.class)
@@ -327,6 +327,7 @@ public class PageInfo<T> implements Serializable {
         this.navigateLastPage = navigateLastPage;
     }
 
+    @Override
     public String toString() {
         StringBuffer sb = new StringBuffer("PageInfo{");
         sb.append("pageNum=").append(this.pageNum);

@@ -32,80 +32,86 @@ import java.util.Iterator;
  */
 public class Tuple5<T1, T2, T3, T4, T5> extends Tuple4<T1, T2, T3, T4> {
 
-	private static final long serialVersionUID = -5866370282498275773L;
+    private static final long serialVersionUID = -5866370282498275773L;
 
-	final T5 t5;
+    final T5 t5;
 
-	Tuple5(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5) {
-		super(t1, t2, t3, t4);
-		this.t5 = t5;
-	}
+    Tuple5(T1 t1, T2 t2, T3 t3, T4 t4, T5 t5) {
+        super(t1, t2, t3, t4);
+        this.t5 = t5;
+    }
 
-	/**
-	 * Type-safe way to get the fifth object of this {@link Tuples}.
-	 *
-	 * @return The fifth object
-	 */
-	public T5 getT5() {
-		return t5;
-	}
+    /**
+     * Type-safe way to get the fifth object of this {@link Tuples}.
+     *
+     * @return The fifth object
+     */
+    public T5 getT5() {
+        return t5;
+    }
 
-	@Override
-	public Object get(int index) {
-		switch (index) {
-			case 0:
-				return t1;
-			case 1:
-				return t2;
-			case 2:
-				return t3;
-			case 3:
-				return t4;
-			case 4:
-				return t5;
-			default:
-				return null;
-		}
-	}
+    @Override
+    public Object get(int index) {
+        switch (index) {
+            case 0:
+                return t1;
+            case 1:
+                return t2;
+            case 2:
+                return t3;
+            case 3:
+                return t4;
+            case 4:
+                return t5;
+            default:
+                return null;
+        }
+    }
 
-	@Override
-	public Object[] toArray() {
-		return new Object[]{t1, t2, t3, t4, t5};
-	}
+    @Override
+    public Object[] toArray() {
+        return new Object[]{t1, t2, t3, t4, t5};
+    }
 
-	@Override
-	public Iterator<?> iterator() {
-		return Arrays.asList(t1, t2, t3, t4, t5).iterator();
-	}
+    @Override
+    public Iterator<?> iterator() {
+        return Arrays.asList(t1, t2, t3, t4, t5).iterator();
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof Tuple5)) return false;
-		if (!super.equals(o)) return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Tuple5)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
 
-		@SuppressWarnings("rawtypes")
+        @SuppressWarnings("rawtypes")
         Tuple5 tuple5 = (Tuple5) o;
 
-		return t5 != null ? t5.equals(tuple5.t5) : tuple5.t5 == null;
+        return t5 != null ? t5.equals(tuple5.t5) : tuple5.t5 == null;
 
-	}
+    }
 
-	@Override
-	public int hashCode() {
-		int result = super.hashCode();
-		result = 31 * result + (t5 != null ? t5.hashCode() : 0);
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (t5 != null ? t5.hashCode() : 0);
+        return result;
+    }
 
-	@Override
-	public int size() {
-		return 5;
-	}
+    @Override
+    public int size() {
+        return 5;
+    }
 
-	@Override
-	public String toString() {
-		return super.toString() +
-		  (t5 != null ? "," + t5.toString() : "");
-	}
+    @Override
+    public String toString() {
+        return super.toString() +
+                (t5 != null ? "," + t5.toString() : "");
+    }
 }

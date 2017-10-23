@@ -124,4 +124,21 @@ public class PrintConfigVO implements Serializable {
         isDeleted = deleted;
     }
 
+    @Override
+    public String toString() {
+        return "PrintConfigVO{" +
+                "printConfigId=" + printConfigId +
+                ", machineIp='" + machineIp + '\'' +
+                ", storageId='" + storageId + '\'' +
+                ", machinePort=" + machinePort +
+                ", operateUserName='" + operateUserName + '\'' +
+                ", createDate=" + createDate +
+                ", createUserName='" + createUserName + '\'' +
+                ", modifyDate=" + modifyDate +
+                ", modifyUserName='" + modifyUserName + '\'' +
+                ", deleteDate=" + deleteDate +
+                ", deleteUserName='" + deleteUserName + '\'' +
+                ", isDeleted=" + isDeleted +
+                '}';
+    }
 }

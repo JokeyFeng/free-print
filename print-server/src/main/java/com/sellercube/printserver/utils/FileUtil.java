@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * 生成文件工具类
  * Created by Chenjing on 2017/7/15.
+ * @author Chenjing
  */
 @Component
 public class FileUtil {

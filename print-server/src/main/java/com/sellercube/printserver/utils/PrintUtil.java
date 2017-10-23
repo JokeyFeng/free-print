@@ -17,9 +17,17 @@ import java.io.InputStream;
 /**
  * 打印工具类
  * Created by Chenjing on 2017/6/22.
+ *
+ * @author Chenjing
  */
 @Component
 public class PrintUtil {
+
+    private static final String GIF = "gif";
+
+    private static final String JPG = "jpg";
+
+    private static final String PNG = "png";
 
     /**
      * 把渠道商返回的字符串进行打印
@@ -33,7 +41,8 @@ public class PrintUtil {
         DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
         // 定位默认的打印服务
         PrintService defaultService = PrintServiceLookup.lookupDefaultPrintService();
-        DocPrintJob job = defaultService.createPrintJob(); // 创建打印作业
+        // 创建打印作业
+        DocPrintJob job = defaultService.createPrintJob();
         DocAttributeSet das = new HashDocAttributeSet();
         Doc doc = new SimpleDoc(str.getBytes(), flavor, das);
         job.print(doc, pras);
@@ -48,11 +57,11 @@ public class PrintUtil {
      */
     public static void printImage(String fileName, Integer width, Integer height) throws Exception {
         DocFlavor dof = null;
-        if (fileName.toLowerCase().endsWith("gif")) {
+        if (fileName.toLowerCase().endsWith(GIF)) {
             dof = DocFlavor.INPUT_STREAM.GIF;
-        } else if (fileName.toLowerCase().endsWith("jpg")) {
+        } else if (fileName.toLowerCase().endsWith(JPG)) {
             dof = DocFlavor.INPUT_STREAM.JPEG;
-        } else if (fileName.toLowerCase().endsWith("png")) {
+        } else if (fileName.toLowerCase().endsWith(PNG)) {
             dof = DocFlavor.INPUT_STREAM.PNG;
         }
         PrintService ps = PrintServiceLookup.lookupDefaultPrintService();
@@ -83,17 +92,17 @@ public class PrintUtil {
      * 打印图片
      *
      * @param inputStream 图片的输入流
-     * @param width           宽度 mm
-     * @param height          高度 mm
-     * @param type            图片的格式
+     * @param width       宽度 mm
+     * @param height      高度 mm
+     * @param type        图片的格式
      */
     public static void printImage(InputStream inputStream, Integer width, Integer height, String type) throws Exception {
         DocFlavor dof = null;
-        if (type.toLowerCase().equals("gif")) {
+        if (type.toLowerCase().endsWith(GIF)) {
             dof = DocFlavor.INPUT_STREAM.GIF;
-        } else if (type.toLowerCase().endsWith("jpg")) {
+        } else if (type.toLowerCase().endsWith(JPG)) {
             dof = DocFlavor.INPUT_STREAM.JPEG;
-        } else if (type.toLowerCase().endsWith("png")) {
+        } else if (type.toLowerCase().endsWith(PNG)) {
             dof = DocFlavor.INPUT_STREAM.PNG;
         }
         PrintService ps = PrintServiceLookup.lookupDefaultPrintService();
@@ -114,7 +123,7 @@ public class PrintUtil {
      * 打印图片 默认100X150
      *
      * @param inputStream 输入流
-     * @param type            图片的格式
+     * @param type        图片的格式
      */
     public static void printImage(InputStream inputStream, String type) throws Exception {
         printImage(inputStream, 100, 150, type);

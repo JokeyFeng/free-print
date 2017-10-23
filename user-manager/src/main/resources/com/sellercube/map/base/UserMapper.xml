@@ -30,7 +30,7 @@
 
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List" />
+        UserId, UserName
         from users
         where UserId = #{userid,jdbcType=INTEGER}
     </select>

@@ -17,6 +17,7 @@ public class UserManagerApplication extends WebMvcConfigurerAdapter {
     @Autowired
     AuthHandlerInterceptor authHandlerInterceptor;
 
+	@Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authHandlerInterceptor)
                 .addPathPatterns("/**");

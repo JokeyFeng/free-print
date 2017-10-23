@@ -24,9 +24,13 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
     @Value("${auth.secret}")
     private String secret;
 
+    private static final String SWAGGER = "swagger";
+
+    private static final String SWAGGER_URI = "/v2/api-docs";
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getRequestURI().contains("swagger") || request.getRequestURI().contains("/v2/api-docs")) {
+        if (request.getRequestURI().contains(SWAGGER) || request.getRequestURI().contains(SWAGGER_URI)) {
             return true;
         }
 

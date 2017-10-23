@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -59,9 +60,12 @@ public class PrintBindServiceImpl implements PrintBindService {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        File dest = new File("/uploadFile/" + uuid + "." + suffix);
-        file.transferTo(dest);
-        PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), new Date(), creator, new Date(), null);
+        String destFilePath = "/uploadFile/" + uuid + "." + suffix;
+        FileOutputStream out = new FileOutputStream(destFilePath);
+        out.write(file.getBytes());
+        out.flush();
+        out.close();
+        PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, destFilePath, new Date(), creator, new Date(), null);
         record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(creator)).getUsername());
         record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(creator)).getUsername());
         return printBindMapper.insert(record);
@@ -80,9 +84,12 @@ public class PrintBindServiceImpl implements PrintBindService {
         if (!dir.exists()) {
             dir.mkdirs();
         }
-        File dest = new File("/uploadFile/" + uuid + "." + suffix);
-        file.transferTo(dest);
-        PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), new Date(), creator, new Date(), null);
+        String destFilePath = "/uploadFile/" + uuid + "." + suffix;
+        FileOutputStream out = new FileOutputStream(destFilePath);
+        out.write(file.getBytes());
+        out.flush();
+        out.close();
+        PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, destFilePath, new Date(), creator, new Date(), null);
         record.setCreator(userService.selectByPrimaryKey(Integer.valueOf(creator)).getUsername());
         record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(creator)).getUsername());
         return printBindMapper.insertSelective(record);
@@ -125,9 +132,12 @@ public class PrintBindServiceImpl implements PrintBindService {
             if (!dir.exists()) {
                 dir.mkdirs();
             }
-            File dest = new File("/uploadFile/" + uuid + "." + suffix);
-            file.transferTo(dest);
-            PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), null, null, new Date(), updator);
+            String destFilePath = "/uploadFile/" + uuid + "." + suffix;
+            FileOutputStream out = new FileOutputStream(destFilePath);
+            out.write(file.getBytes());
+            out.flush();
+            out.close();
+            PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, destFilePath, null, null, new Date(), updator);
             record.setId(id);
             record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(updator)).getUsername());
             return printBindMapper.updateByPrimaryKey(record);
@@ -153,9 +163,12 @@ public class PrintBindServiceImpl implements PrintBindService {
             if (!dir.exists()) {
                 dir.mkdirs();
             }
-            File dest = new File("/uploadFile/" + uuid + "." + suffix);
-            file.transferTo(dest);
-            PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, dest.getPath(), null, null, new Date(), updator);
+            String destFilePath = "/uploadFile/" + uuid + "." + suffix;
+            FileOutputStream out = new FileOutputStream(destFilePath);
+            out.write(file.getBytes());
+            out.flush();
+            out.close();
+            PrintBind record = new PrintBind(printNameId, printTypeId, isEnable, userId, destFilePath, null, null, new Date(), updator);
             record.setId(id);
             record.setUpdator(userService.selectByPrimaryKey(Integer.valueOf(updator)).getUsername());
             return printBindMapper.updateByPrimaryKeySelective(record);
@@ -168,8 +181,8 @@ public class PrintBindServiceImpl implements PrintBindService {
             , Integer typeId
             , Boolean isEnable
             , Integer userId
-            , Integer pageNum, Integer PageSize) {
-        PageHelper.startPage(pageNum, PageSize);
+            , Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
         return new PageInfo<>(printBindMapper.searchByCondition(null, configId, typeId, isEnable, userId));
     }
 

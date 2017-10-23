@@ -28,7 +28,7 @@
   </sql>
     <select id="list" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List"/>
+        StorageId,StorageName
         from storage
     </select>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">

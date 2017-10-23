@@ -71,14 +71,14 @@ public interface PrintBindService {
      * @param isEnable
      * @param userId
      * @param pageNum
-     * @param PageSize
+     * @param pageSize
      * @return
      */
     PageInfo<JsonResult> searchByCondition(Integer configId
             , Integer typeId
             , Boolean isEnable
             , Integer userId
-            , Integer pageNum, Integer PageSize);
+            , Integer pageNum, Integer pageSize);
 
     /**
      * 分页查询

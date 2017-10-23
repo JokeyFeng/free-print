@@ -26,8 +26,8 @@ import java.sql.SQLException;
 @MapperScan(basePackages = MySqlDataSource.PACKAGE, sqlSessionFactoryRef = "mysqlSqlSessionFactory")
 public class MySqlDataSource {
     static final String PACKAGE = "com.sellercube.usermanager.service.*.mapper";
-    private final static String mapperLocations = "classpath*:com/sellercube/map/*/*Mapper.xml";
-    private final static String aliasesPackage = "com.sellercube.usermanager.service.*.entity";
+    private final static String MAPPER_LOCATION = "classpath*:com/sellercube/map/*/*Mapper.xml";
+    private final static String ALIASES_PACKAGE = "com.sellercube.usermanager.service.*.entity";
 
     @Value("${mysql_url}")
     private String dbUrl;
@@ -74,9 +74,9 @@ public class MySqlDataSource {
     public SqlSessionFactory rdsSqlSessionFactory(@Qualifier("mysqlDataSource") DataSource rdsDataSource) throws Exception {
         final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
         sessionFactory.setDataSource(rdsDataSource);
-        sessionFactory.setTypeAliasesPackage(aliasesPackage);
+        sessionFactory.setTypeAliasesPackage(ALIASES_PACKAGE);
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sessionFactory.setMapperLocations(resolver.getResources(mapperLocations));
+        sessionFactory.setMapperLocations(resolver.getResources(MAPPER_LOCATION));
         return sessionFactory.getObject();
     }
 

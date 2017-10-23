@@ -1,74 +1,34 @@
 package com.sellercube.common.entity;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
 /**
  * 打印参数
  * Created by Chenjing on 2017/10/13.
+ *
+ * @author Chenjing
  */
+@Data
+@Accessors(chain = true)
 public class PrintParam {
     private String userId;
     private String printType;
+    /**
+     * 来自于棒谷接口还是飞特接口
+     */
     private String from;
+    /**
+     * 渠道类型
+     */
     private String shipType;
+    /**
+     * 内容
+     */
     private String content;
+    /**
+     * 格式
+     */
     private String format;
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getPrintType() {
-        return printType;
-    }
-
-    public void setPrintType(String printType) {
-        this.printType = printType;
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    public String getShipType() {
-        return shipType;
-    }
-
-    public void setShipType(String shipType) {
-        this.shipType = shipType;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getFormat() {
-        return format;
-    }
-
-    public void setFormat(String format) {
-        this.format = format;
-    }
-
-    @Override
-    public String toString() {
-        return "PrintParam{" +
-                "userId='" + userId + '\'' +
-                ", printType='" + printType + '\'' +
-                ", from='" + from + '\'' +
-                ", shipType='" + shipType + '\'' +
-                ", content='" + content + '\'' +
-                ", format='" + format + '\'' +
-                '}';
-    }
+    private String fbaCode;
 }

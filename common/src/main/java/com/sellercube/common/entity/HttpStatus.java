@@ -5,21 +5,25 @@ package com.sellercube.common.entity;
  */
 public enum HttpStatus {
 
-    SUCCESS(200,"成功"),
-    FAIL(400,"失败"),
+    //项目返回成功
+    SUCCESS(200, "成功"),
+    //项目返回失败
+    FAIL(400, "失败"),
+    //项目返回没有权限
     AUTH_FAIL(403, "抱歉，没有权限"),
+    //项目返回404 不存在
     NOT_EXIST(404, "不存在");
 
 
     private int code;
     private String msg;
 
-    HttpStatus(int code,String msg){
+    HttpStatus(int code, String msg) {
         this.setCode(code);
         this.msg = msg;
     }
 
-    public String getMsg(){
+    public String getMsg() {
         return this.msg;
     }
 

@@ -31,6 +31,7 @@ public class RedisConfig extends CachingConfigurerSupport {
      * @return
      */
     @Bean
+    @Override
     public KeyGenerator keyGenerator() {
         return new KeyGenerator() {
             @Override
@@ -60,7 +61,8 @@ public class RedisConfig extends CachingConfigurerSupport {
     @Bean
     public CacheManager cacheManager(RedisTemplate redisTemplate) {
         RedisCacheManager rcm = new RedisCacheManager(redisTemplate);
-        rcm.setDefaultExpiration(86400);//秒
+        //秒
+        rcm.setDefaultExpiration(86400);
         Map<String, Long> map = Maps.newHashMap();
         map.put("redisCache", 86400L);
         rcm.setExpires(map);

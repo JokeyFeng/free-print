@@ -31,78 +31,84 @@ import java.util.Iterator;
  */
 public class Tuple4<T1, T2, T3, T4> extends Tuple3<T1, T2, T3> {
 
-	private static final long serialVersionUID = 8075447176142642390L;
+    private static final long serialVersionUID = 8075447176142642390L;
 
-	final T4 t4;
+    final T4 t4;
 
-	Tuple4(T1 t1, T2 t2, T3 t3, T4 t4) {
-		super( t1, t2, t3);
-		this.t4 = t4;
-	}
+    Tuple4(T1 t1, T2 t2, T3 t3, T4 t4) {
+        super(t1, t2, t3);
+        this.t4 = t4;
+    }
 
-	/**
-	 * Type-safe way to get the fourth object of this {@link Tuples}.
-	 *
-	 * @return The fourth object
-	 */
-	public T4 getT4() {
-		return t4;
-	}
+    /**
+     * Type-safe way to get the fourth object of this {@link Tuples}.
+     *
+     * @return The fourth object
+     */
+    public T4 getT4() {
+        return t4;
+    }
 
-	@Override
-	public Object get(int index) {
-		switch (index) {
-			case 0:
-				return t1;
-			case 1:
-				return t2;
-			case 2:
-				return t3;
-			case 3:
-				return t4;
-			default:
-				return null;
-		}
-	}
+    @Override
+    public Object get(int index) {
+        switch (index) {
+            case 0:
+                return t1;
+            case 1:
+                return t2;
+            case 2:
+                return t3;
+            case 3:
+                return t4;
+            default:
+                return null;
+        }
+    }
 
-	@Override
-	public Object[] toArray() {
-		return new Object[]{t1, t2, t3, t4};
-	}
+    @Override
+    public Object[] toArray() {
+        return new Object[]{t1, t2, t3, t4};
+    }
 
-	@Override
-	public Iterator<?> iterator() {
-		return Arrays.asList(t1, t2, t3, t4).iterator();
-	}
+    @Override
+    public Iterator<?> iterator() {
+        return Arrays.asList(t1, t2, t3, t4).iterator();
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (!(o instanceof Tuple4)) return false;
-		if (!super.equals(o)) return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Tuple4)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
 
-		@SuppressWarnings("rawtypes")
+        @SuppressWarnings("rawtypes")
         Tuple4 tuple4 = (Tuple4) o;
 
-		return t4 != null ? t4.equals(tuple4.t4) : tuple4.t4 == null;
+        return t4 != null ? t4.equals(tuple4.t4) : tuple4.t4 == null;
 
-	}
+    }
 
-	@Override
-	public int hashCode() {
-		int result = super.hashCode();
-		result = 31 * result + (t4 != null ? t4.hashCode() : 0);
-		return result;
-	}
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (t4 != null ? t4.hashCode() : 0);
+        return result;
+    }
 
-	@Override
-	public int size() {
-		return 4;
-	}
+    @Override
+    public int size() {
+        return 4;
+    }
 
-	@Override
-	public String toString() {
-		return super.toString() +
-		  (t4 != null ? "," + t4.toString() : "");
-	}
+    @Override
+    public String toString() {
+        return super.toString() +
+                (t4 != null ? "," + t4.toString() : "");
+    }
 }

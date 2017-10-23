@@ -15,6 +15,8 @@ import java.util.Objects;
 
 /**
  * Created by chenjing on 2017/7/7.
+ *
+ * @author Chenjing
  */
 @Component
 public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
@@ -24,10 +26,13 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
     @Value("${access.token}")
     private String secret;
 
+    private static final String SWAGGER = "swagger";
+
+    private static final String SWAGGER_URI = "/v2/api-docs";
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        if (request.getRequestURI().contains("swagger") || request.getRequestURI().contains("login")
-                || request.getRequestURI().contains("/v2/api-docs") || request.getRequestURI().contains("swagger-resources")) {
+        if (request.getRequestURI().contains(SWAGGER) || request.getRequestURI().contains(SWAGGER_URI)) {
             return true;
         }
 

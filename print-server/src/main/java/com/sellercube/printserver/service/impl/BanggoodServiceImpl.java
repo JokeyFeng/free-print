@@ -4,9 +4,11 @@ import com.alibaba.fastjson.JSON;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import com.sellercube.common.entity.ChannelConfig;
+import com.sellercube.common.entity.HttpStatus;
 import com.sellercube.common.entity.PrintParam;
 import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
+import com.sellercube.printserver.executors.BackToEds;
 import com.sellercube.printserver.service.BanggoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +26,8 @@ import java.util.concurrent.TimeUnit;
 /**
  * 棒谷接口
  * Created by Chenjing on 2017/7/15.
+ *
+ * @author Chenjing
  */
 @Service
 public class BanggoodServiceImpl implements BanggoodService {
@@ -35,6 +39,9 @@ public class BanggoodServiceImpl implements BanggoodService {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private BackToEds backToEds;
 
     @Value("${db.url}")
     private String url;
@@ -63,7 +70,7 @@ public class BanggoodServiceImpl implements BanggoodService {
             String result = restTemplate.exchange(url + "/db/channel?channelName=" + shipType,
                     HttpMethod.GET, requestEntity, String.class).getBody();
             Result jsonResult = JSON.parseObject(result, Result.class);
-            if (Objects.equals(200, jsonResult.getCode())) {
+            if (Objects.equals(HttpStatus.SUCCESS.getCode(), jsonResult.getCode())) {
                 ChannelConfig channelConfig1 = JSON.parseObject(JSON.toJSONString(jsonResult.getData()), ChannelConfig.class);
                 if (channelConfig1 == null) {
                     throw new Exception("不支持" + shipType + "渠道");
@@ -79,6 +86,7 @@ public class BanggoodServiceImpl implements BanggoodService {
         Method method = clazz.getMethod(channelConfig.getMethod(), String.class);
         Object object = clazz.newInstance();
         method.invoke(object, pdfUrl);
+        backToEds.backFbaCode(printParam.getFbaCode(), printParam.getUserId());
         return ResultUtil.success("打印成功");
     }
 

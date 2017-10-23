@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 /**
  * Created by Chenjing on 2017/7/13.
+ *
+ * @author Chenjing
  */
 @Service
 public class CoreServiceImpl implements CoreService {

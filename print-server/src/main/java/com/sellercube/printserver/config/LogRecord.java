@@ -17,6 +17,7 @@ import java.util.Arrays;
 
 /**
  * Created by chenjing on 2017/7/7.
+ * @author Chenjing
  */
 @Component
 @Aspect
@@ -45,6 +46,7 @@ public class LogRecord {
     @AfterReturning(returning = "ret", pointcut = "log()")
     public void doAfterReturning(Object ret) throws Throwable {
         logger.info("{result : " + ret + "\nspend time : " + (System.currentTimeMillis() - startTime.get()) + " milliseconds}");
+        startTime.remove();
     }
 }
 

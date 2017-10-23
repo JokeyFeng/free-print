@@ -5,7 +5,9 @@ package com.sellercube.apigateway.entity;
  * Created by Chenjing on 2017/10/13.
  */
 public enum PrintTypeEnum {
+    //存取面单的中英文
     FACELIST("facelist", "面单"),
+    //存取标签的中英文
     LABEL("label", "标签");
 
     private String englishName;
