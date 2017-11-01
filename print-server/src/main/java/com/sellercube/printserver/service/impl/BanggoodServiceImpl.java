@@ -89,7 +89,7 @@ public class BanggoodServiceImpl implements BanggoodService {
         Method method = clazz.getMethod(channelConfig.getMethod(), String.class);
         Object object = clazz.newInstance();
         method.invoke(object, pdfUrl);
-        backToEds.backFbaCode(dotnetFba.getFbaCode(), printParam.getUserid());
+        backToEds.backFbaCode(dotnetFba.getFbaCode(), printParam.getUserId());
         return ResultUtil.success("打印成功");
     }
 
