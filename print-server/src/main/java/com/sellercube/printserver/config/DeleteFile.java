@@ -25,7 +25,7 @@ public class DeleteFile implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         log.info("开始检查过期的文件");
         File file = new File(pdfDir);
-        if (file.exists()) {
+        if (!file.exists()) {
             file.mkdirs();
         }
         String[] fileList = file.list();

@@ -101,7 +101,7 @@ public class MainServiceImpl implements MainService {
             }
         } else {
             //没有找到ip地址
-            cache.invalidate(userId + printType + "1");
+            cache.invalidate(userId + printType);
             return ResultUtil.error("当前用户没有绑定打印机");
         }
     }
