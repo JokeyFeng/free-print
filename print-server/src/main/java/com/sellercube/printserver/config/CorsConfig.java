@@ -1,4 +1,4 @@
-package com.sellercube.apigateway.config;
+package com.sellercube.printserver.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -7,6 +7,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 /**
  * 跨域
  * Created by Chenjing on 2017/6/20.
+ * @author Chenjing
  */
 @Configuration
 public class CorsConfig extends WebMvcConfigurerAdapter {

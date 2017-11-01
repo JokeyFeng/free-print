@@ -1,6 +1,7 @@
-package com.sellercube.apigateway.interceptor;
+package com.sellercube.printserver.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sellercube.common.entity.HttpStatus;
 import com.sellercube.common.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import java.util.Objects;
 
 /**
  * Created by chenjing on 2017/7/7.
+ * @author Chenjing
  */
 @Component
 public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
@@ -39,7 +41,7 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
             log.error("auth fail");
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(JSONObject.toJSONString(ResultUtil.authFail(null)));
+            response.getWriter().write(JSONObject.toJSONString(ResultUtil.create(HttpStatus.AUTH_FAIL, null)));
             return false;
         }
         return true;

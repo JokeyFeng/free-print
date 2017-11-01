@@ -2,6 +2,7 @@ package com.sellercube.common.entity;
 
 /**
  * Created by Chenjing on 2017/5/3.
+ * @author Chenjing
  */
 public enum HttpStatus {
 

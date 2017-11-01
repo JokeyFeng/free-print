@@ -1,8 +1,8 @@
 package com.sellercube.printserver.rest;
 
-import com.sellercube.common.entity.PrintParam;
 import com.sellercube.common.entity.Result;
-import com.sellercube.printserver.service.CoreService;
+import com.sellercube.printserver.entity.PrintParam;
+import com.sellercube.printserver.service.BanggoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,13 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Chenjing
  */
 @RestController
-public class BaseController {
+public class RestfulController {
 
     @Autowired
-    private CoreService coreService;
+    private BanggoodService banggoodService;
 
-    @PostMapping("/print")
-    public Result handle(@RequestBody PrintParam printParam) throws Exception {
-        return coreService.print(printParam);
+    /**
+     * 针对棒谷FBA渠道调拨进行打印
+     *
+     * @param var
+     * @return
+     * @throws Exception
+     */
+    @PostMapping("/bg/fba/print")
+    public Result handle(@RequestBody PrintParam var) throws Exception {
+        return banggoodService.process(var);
     }
 }

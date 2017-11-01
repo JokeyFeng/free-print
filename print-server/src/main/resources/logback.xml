@@ -24,7 +24,7 @@
     </appender>
 
     <!-- project default level -->
-    <logger name="com.sellercube.printserver" level="debug" />
+    <logger name="com.sellercube.printserver" level="info" />
 
     <!--log4jdbc -->
     <logger name="jdbc.sqltiming" level="debug" />
