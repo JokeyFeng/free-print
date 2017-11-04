@@ -2,10 +2,10 @@ package com.sellercube.usermanager.server.base.service.impl;
 
 import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.collect.Maps;
 import com.sellercube.common.function.Tuples;
 import com.sellercube.common.utils.SplitUtil;
-import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.PrintConfig;
 import com.sellercube.usermanager.server.base.mapper.PrintConfigMapper;
 import com.sellercube.usermanager.server.base.service.PrintConfigService;

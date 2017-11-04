@@ -1,8 +1,8 @@
 package com.sellercube.usermanager.server.base.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sellercube.common.utils.SplitUtil;
-import com.sellercube.usermanager.common.PageInfo;
 import com.sellercube.usermanager.server.base.entity.Config;
 import com.sellercube.usermanager.server.base.mapper.ConfigMapper;
 import com.sellercube.usermanager.server.base.service.ConfigService;

@@ -5,7 +5,7 @@ package com.sellercube.usermanager.common;
  *
  * @author Chenjing
  */
-public interface BaseDao<T> {
+public interface BaseMapper<T> {
 
     int deleteByPrimaryKey(String id);
 

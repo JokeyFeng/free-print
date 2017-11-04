@@ -2,7 +2,7 @@ package com.sellercube.usermanager.server.base.service;
 
 
 import com.alibaba.fastjson.JSONArray;
-import com.sellercube.usermanager.common.PageInfo;
+import com.github.pagehelper.PageInfo;
 import com.sellercube.usermanager.server.base.entity.PrintConfig;
 import com.sellercube.usermanager.vo.PrintConfigVO;
 

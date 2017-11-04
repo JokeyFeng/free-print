@@ -1,6 +1,7 @@
 package com.sellercube.usermanager.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sellercube.common.entity.HttpStatus;
 import com.sellercube.common.utils.ResultUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,7 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
             log.error("auth fail");
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json;charset=UTF-8");
-            response.getWriter().write(JSONObject.toJSONString(ResultUtil.authFail("请先登录")));
+            response.getWriter().write(JSONObject.toJSONString(ResultUtil.create(HttpStatus.AUTH_FAIL, null)));
             return false;
         }
         return true;
