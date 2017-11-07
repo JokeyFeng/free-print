@@ -1,7 +1,9 @@
 package com.sellercube.usermanager.server.base.mapper;
 
 
+import com.sellercube.usermanager.common.BaseMapper;
 import com.sellercube.usermanager.server.base.entity.User;
+import com.sellercube.usermanager.server.base.entity.vo.UserVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -9,18 +11,9 @@ import java.util.List;
 
 @Mapper
 @Component
-public interface UserMapper {
-    int deleteByPrimaryKey(Integer userid);
+public interface UserMapper extends BaseMapper<User> {
 
-    int insert(User record);
+    List<UserVO> list();
 
-    int insertSelective(User record);
-
-    User selectByPrimaryKey(Integer userid);
-
-    int updateByPrimaryKeySelective(User record);
-
-    int updateByPrimaryKey(User record);
-
-    List<User> list();
+    List<UserVO> search(String userName);
 }

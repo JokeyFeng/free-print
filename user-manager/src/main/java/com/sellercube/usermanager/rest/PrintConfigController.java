@@ -9,39 +9,54 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 /**
  * Created by Chenjing on 2017/8/25.
+ *
+ * @author Chenjing
  */
 @RestController
-@RequestMapping("/android/ip")
+@RequestMapping("/print")
 @Api(tags = "手持IP配置")
-public class AndroidConfigController {
+public class PrintConfigController {
+
+    private PrintConfigService printConfigService;
+
+
+    public PrintConfigController() {
+    }
 
     @Autowired
-    private PrintConfigService printConfigService;
+    public PrintConfigController(PrintConfigService var1) {
+        this.printConfigService = var1;
+    }
 
     @GetMapping("/config/list")
     @ApiOperation(value = "获取手持的IP配置信息")
-    public Result list(@RequestParam(value = "pageNum", required = false) String pageNum,
-                       @RequestParam(value = "limit", required = false) String limit) {
+    public Result list(@RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
+                       @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit) {
         return ResultUtil.success(printConfigService.list(pageNum, limit));
     }
 
     @PostMapping("/config")
     @ApiOperation(value = "插入手持的IP配置信息")
     public Result post(@RequestBody PrintConfig printConfig) {
+        printConfig.setModifyDate(new Date());
+        printConfig.setCreateDate(new Date());
         return ResultUtil.success(printConfigService.insertSelective(printConfig));
     }
 
     @PutMapping("/config")
     @ApiOperation(value = "修改手持的IP配置信息")
     public Result put(@RequestBody PrintConfig printConfig) {
+        printConfig.setModifyDate(new Date());
         return ResultUtil.success(printConfigService.updateByPrimaryKeySelective(printConfig));
     }
 
     @DeleteMapping("/config/{id}")
     @ApiOperation(value = "删除手持IP配置的信息", notes = "根据id删除手持IP配置的信息")
-    public Result deleteById(@PathVariable("id") Integer id) {
+    public Result deleteById(@PathVariable("id") String id) {
         return ResultUtil.success(printConfigService.deleteByPrimaryKey(id));
     }
 
@@ -53,17 +68,11 @@ public class AndroidConfigController {
 
     @GetMapping("/config/search")
     @ApiOperation(value = "根据条件搜索手持IP配置的信息", notes = "根据传入条件来进行搜索")
-    public Result searchByCondition(@RequestParam(value = "operateId", required = false) String operateName,
+    public Result searchByCondition(@RequestParam(value = "operateId", required = false) String operateUserId,
                                     @RequestParam(value = "ip", required = false) String ip,
                                     @RequestParam(value = "warehouseId", required = false) Integer warehouseId,
                                     @RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                     @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit) throws Exception {
-        return ResultUtil.success(printConfigService.search(operateName, ip, warehouseId, pageNum, limit));
-    }
-
-    @GetMapping("/config/dropdown")
-    @ApiOperation(value = "下拉列表菜单信息")
-    public Result dropdown() {
-        return ResultUtil.success(printConfigService.dropdown());
+        return ResultUtil.success(printConfigService.search(operateUserId, ip, warehouseId, pageNum, limit));
     }
 }

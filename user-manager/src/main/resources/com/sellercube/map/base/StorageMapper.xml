@@ -26,7 +26,12 @@
     CompanyId, EnName, IsChina, IsSampleStorage, IsPurchase, IsEnable, Sort, Type, IsStockUp, 
     IsFBA, IsSeawayDelivery, SyncKey
   </sql>
-    <select id="list" resultMap="BaseResultMap">
+    <select id="search" resultType="com.sellercube.usermanager.server.base.entity.vo.StorageVO">
+        select
+        StorageId,StorageName
+        from storage WHERE StorageName LIKE CONCAT('%',#{storageName},'%')
+    </select>
+    <select id="list" resultType="com.sellercube.usermanager.server.base.entity.vo.StorageVO">
         select
         StorageId,StorageName
         from storage

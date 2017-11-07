@@ -1,7 +1,9 @@
 package com.sellercube.usermanager.server.base.mapper;
 
 
+import com.sellercube.usermanager.common.BaseMapper;
 import com.sellercube.usermanager.server.base.entity.Storage;
+import com.sellercube.usermanager.server.base.entity.vo.StorageVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
@@ -9,18 +11,9 @@ import java.util.List;
 
 @Mapper
 @Component
-public interface StorageMapper {
-    int deleteByPrimaryKey(Integer storageid);
+public interface StorageMapper extends BaseMapper<Storage> {
 
-    int insert(Storage record);
+    List<StorageVO> list();
 
-    int insertSelective(Storage record);
-
-    Storage selectByPrimaryKey(Integer storageid);
-
-    int updateByPrimaryKeySelective(Storage record);
-
-    int updateByPrimaryKey(Storage record);
-
-    List<Storage> list();
+    List<StorageVO> search(String storageName);
 }

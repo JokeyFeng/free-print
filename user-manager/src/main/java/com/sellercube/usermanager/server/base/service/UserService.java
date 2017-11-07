@@ -1,30 +1,16 @@
 package com.sellercube.usermanager.server.base.service;
 
+import com.github.pagehelper.PageInfo;
+import com.sellercube.usermanager.common.BaseService;
 import com.sellercube.usermanager.server.base.entity.User;
-
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
+import com.sellercube.usermanager.server.base.entity.vo.UserVO;
 
 /**
  * Created by Chenjing on 2017/6/20.
  */
-public interface UserService {
-    int deleteByPrimaryKey(Integer id);
+public interface UserService extends BaseService<User> {
 
-    int deleteByPrimaryKey(String ids);
+    PageInfo<UserVO> list(Integer var1, Integer var2);
 
-    int insert(User record) throws UnsupportedEncodingException, NoSuchAlgorithmException;
-
-    int insertSelective(User record) throws UnsupportedEncodingException, NoSuchAlgorithmException;
-
-    User selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(User record) throws Exception;
-
-    int updateByPrimaryKey(User record);
-
-    List<User> list();
-
-
+    PageInfo<UserVO> search(String var1, Integer var2, Integer var3);
 }

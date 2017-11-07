@@ -1,31 +1,16 @@
 package com.sellercube.usermanager.server.base.service;
 
 
-import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageInfo;
+import com.sellercube.usermanager.common.BaseService;
 import com.sellercube.usermanager.server.base.entity.PrintConfig;
-import com.sellercube.usermanager.vo.PrintConfigVO;
+import com.sellercube.usermanager.server.base.entity.vo.PrintConfigVO;
 
-import java.util.Map;
-
-public interface PrintConfigService {
-    int deleteByPrimaryKey(Integer printConfigId);
-
-    int insert(PrintConfig record);
-
-    int insertSelective(PrintConfig record);
-
-    PrintConfig selectByPrimaryKey(Integer printConfigId);
-
-    int updateByPrimaryKeySelective(PrintConfig record);
-
-    int updateByPrimaryKey(PrintConfig record);
+public interface PrintConfigService extends BaseService<PrintConfig> {
 
     int deleteByPrimaryKeyALL(String ids);
 
-    PageInfo<PrintConfigVO> list(String pageNum, String limit);
+    PageInfo<PrintConfigVO> list(Integer pageNum, Integer limit);
 
-    PageInfo<PrintConfigVO> search(String operateName, String ip, Integer warehouseId, Integer pageNum, Integer limit);
-
-    Map<String,JSONArray> dropdown();
+    PageInfo<PrintConfigVO> search(String operateUserId, String ip, Integer warehouseId, Integer pageNum, Integer limit);
 }

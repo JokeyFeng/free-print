@@ -1,20 +1,10 @@
 package com.sellercube.usermanager.server.base.service;
 
 
+import com.sellercube.usermanager.common.BaseService;
 import com.sellercube.usermanager.server.base.entity.ChannelConfig;
 
-public interface ChannelConfigService {
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(ChannelConfig record);
-
-    int insertSelective(ChannelConfig record);
-
-    ChannelConfig selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(ChannelConfig record);
-
-    int updateByPrimaryKey(ChannelConfig record);
+public interface ChannelConfigService extends BaseService<ChannelConfig> {
 
     /**
      * 根据渠道名称获取属性

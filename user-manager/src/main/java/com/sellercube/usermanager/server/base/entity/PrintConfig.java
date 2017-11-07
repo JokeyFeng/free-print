@@ -28,6 +28,26 @@ public class PrintConfig implements Serializable {
 
     private Boolean isDeleted;
 
+    private Integer printTypeId;
+
+    private Boolean isEnable;
+
+    public Integer getPrintTypeId() {
+        return printTypeId;
+    }
+
+    public void setPrintTypeId(Integer printTypeId) {
+        this.printTypeId = printTypeId;
+    }
+
+    public Boolean getIsEnable() {
+        return isEnable;
+    }
+
+    public void setIsEnable(Boolean enable) {
+        isEnable = enable;
+    }
+
     public Integer getPrintConfigId() {
         return printConfigId;
     }

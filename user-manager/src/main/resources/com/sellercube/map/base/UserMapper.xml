@@ -24,17 +24,21 @@
     TestUserType
   </sql>
 
-    <select id="list" resultMap="BaseResultMap">
+    <select id="search" resultType="com.sellercube.usermanager.server.base.entity.vo.UserVO">
+        select UserId, UserName from users WHERE UserName LIKE CONCAT('%',#{userName},'%')
+    </select>
+
+    <select id="list" resultType="com.sellercube.usermanager.server.base.entity.vo.UserVO">
         select UserId, UserName from users
     </select>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" resultType="com.sellercube.usermanager.server.base.entity.User">
         select
         UserId, UserName
         from users
         where UserId = #{userid,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey">
         delete from users
         where UserId = #{userid,jdbcType=INTEGER}
     </delete>

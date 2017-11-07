@@ -1,4 +1,4 @@
-package com.sellercube.usermanager.vo;
+package com.sellercube.usermanager.server.base.entity.vo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -27,6 +27,26 @@ public class PrintConfigVO implements Serializable {
     private String deleteUserName;
 
     private Boolean isDeleted;
+
+    private Boolean isEnable;
+
+    private String printType;
+
+    public boolean getIsEnable() {
+        return isEnable;
+    }
+
+    public void setIsEnable(boolean enabled) {
+        isEnable = enabled;
+    }
+
+    public String getPrintType() {
+        return printType;
+    }
+
+    public void setPrintType(String printType) {
+        this.printType = printType;
+    }
 
     public Integer getPrintConfigId() {
         return printConfigId;

@@ -14,10 +14,13 @@
         <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate"/>
         <result column="delete_userId" jdbcType="INTEGER" property="deleteUserid"/>
         <result column="is_deleted" jdbcType="BIT" property="isDeleted"/>
+        <result column="print_type_id" jdbcType="INTEGER" property="printTypeId"/>
+        <result column="is_enable" jdbcType="BIT" property="isEnable"/>
     </resultMap>
     <sql id="Base_Column_List">
     print_config_id, machine_ip, storage_id, machine_port, operate_user_id, create_date, 
-    create_user_id, modify_date, modify_user_id, delete_date, delete_userId, is_deleted
+    create_user_id, modify_date, modify_user_id, delete_date, delete_userId, is_deleted,
+        print_type_id, is_enable
   </sql>
     <select id="distinctByIP" resultType="java.lang.String">
         SELECT DISTINCT(machine_ip) FROM print_config
@@ -27,8 +30,8 @@
         <include refid="Base_Column_List"/>
         from print_config
         WHERE 1=1
-        <if test="username != null">
-            AND operate_user_id = #{username}
+        <if test="operateUserId != null">
+            AND operate_user_id = #{operateUserId}
         </if>
         <if test="ip != null">
             AND machine_ip = #{ip}
@@ -45,13 +48,13 @@
         from print_config
     </select>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from print_config
         where print_config_id = #{printConfigId,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey">
     delete from print_config
     where print_config_id = #{printConfigId,jdbcType=INTEGER}
   </delete>
@@ -64,7 +67,8 @@
     values (#{printConfigId,jdbcType=INTEGER}, #{machineIp,jdbcType=VARCHAR}, #{storageId,jdbcType=INTEGER}, 
       #{machinePort,jdbcType=INTEGER}, #{operateUserId,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
       #{createUserId,jdbcType=INTEGER}, #{modifyDate,jdbcType=TIMESTAMP}, #{modifyUserId,jdbcType=INTEGER}, 
-      #{deleteDate,jdbcType=TIMESTAMP}, #{deleteUserid,jdbcType=INTEGER}, #{isDeleted,jdbcType=BIT}
+      #{deleteDate,jdbcType=TIMESTAMP}, #{deleteUserid,jdbcType=INTEGER}, #{isDeleted,jdbcType=BIT},
+      #{printTypeId,jdbcType=INTEGER}, #{isEnable,jdbcType=BIT})
       )
   </insert>
     <insert id="insertSelective" parameterType="com.sellercube.usermanager.server.base.entity.PrintConfig">
@@ -106,6 +110,12 @@
             <if test="isDeleted != null">
                 is_deleted,
             </if>
+            <if test="printTypeId != null">
+                print_type_id,
+            </if>
+            <if test="isEnable != null">
+                is_enable,
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="printConfigId != null">
@@ -143,6 +153,12 @@
             </if>
             <if test="isDeleted != null">
                 #{isDeleted,jdbcType=BIT},
+            </if>
+            <if test="printTypeId != null">
+                #{printTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null">
+                #{isEnable,jdbcType=BIT},
             </if>
         </trim>
     </insert>
@@ -182,6 +198,12 @@
             <if test="isDeleted != null">
                 is_deleted = #{isDeleted,jdbcType=BIT},
             </if>
+            <if test="printTypeId != null">
+                print_type_id = #{printTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="isEnable != null">
+                is_enable = #{isEnable,jdbcType=BIT},
+            </if>
         </set>
         where print_config_id = #{printConfigId,jdbcType=INTEGER}
     </update>
@@ -197,7 +219,9 @@
       modify_user_id = #{modifyUserId,jdbcType=INTEGER},
       delete_date = #{deleteDate,jdbcType=TIMESTAMP},
       delete_userId = #{deleteUserid,jdbcType=INTEGER},
-      is_deleted = #{isDeleted,jdbcType=BIT}
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      print_type_id = #{printTypeId,jdbcType=INTEGER},
+      is_enable = #{isEnable,jdbcType=BIT}
     where print_config_id = #{printConfigId,jdbcType=INTEGER}
   </update>
 </mapper>

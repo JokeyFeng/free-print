@@ -1,6 +1,7 @@
 package com.sellercube.usermanager.server.base.mapper;
 
 
+import com.sellercube.usermanager.common.BaseMapper;
 import com.sellercube.usermanager.server.base.entity.PrintType;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
@@ -9,19 +10,7 @@ import java.util.List;
 
 @Mapper
 @Component
-public interface PrintTypeMapper {
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(PrintType record);
-
-    int insertSelective(PrintType record);
-
-    PrintType selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(PrintType record);
-
-    int updateByPrimaryKey(PrintType record);
-
+public interface PrintTypeMapper extends BaseMapper<PrintType> {
     List<PrintType> searchByName(String name);
 
     List<PrintType> list();

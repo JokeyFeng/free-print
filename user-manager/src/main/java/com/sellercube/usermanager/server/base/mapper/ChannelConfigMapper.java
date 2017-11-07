@@ -1,23 +1,13 @@
 package com.sellercube.usermanager.server.base.mapper;
 
+import com.sellercube.usermanager.common.BaseMapper;
 import com.sellercube.usermanager.server.base.entity.ChannelConfig;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Component;
 
 @Mapper
 @Component
-public interface ChannelConfigMapper {
-    int deleteByPrimaryKey(Integer id);
-
-    int insert(ChannelConfig record);
-
-    int insertSelective(ChannelConfig record);
-
-    ChannelConfig selectByPrimaryKey(Integer id);
-
-    int updateByPrimaryKeySelective(ChannelConfig record);
-
-    int updateByPrimaryKey(ChannelConfig record);
+public interface ChannelConfigMapper extends BaseMapper<ChannelConfig> {
 
     /**
      * 根据渠道名称获取属性

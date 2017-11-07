@@ -1,23 +1,15 @@
 package com.sellercube.usermanager.server.base.service;
 
 
+import com.github.pagehelper.PageInfo;
+import com.sellercube.usermanager.common.BaseService;
 import com.sellercube.usermanager.server.base.entity.Storage;
+import com.sellercube.usermanager.server.base.entity.vo.StorageVO;
 
-import java.util.List;
 
+public interface StorageService extends BaseService<Storage>{
 
-public interface StorageService {
-    int deleteByPrimaryKey(Integer storageid);
+    PageInfo<StorageVO> list(Integer var1, Integer var2);
 
-    int insert(Storage record);
-
-    int insertSelective(Storage record);
-
-    Storage selectByPrimaryKey(Integer storageid);
-
-    int updateByPrimaryKeySelective(Storage record);
-
-    int updateByPrimaryKey(Storage record);
-
-    List<Storage> list();
+    PageInfo<StorageVO> search(String var1, Integer var2, Integer var3);
 }
