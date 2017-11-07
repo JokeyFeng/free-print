@@ -87,7 +87,7 @@ public class PrintConfigServiceImpl extends BaseServiceImpl<PrintConfig> impleme
         PageInfo<PrintConfigVO> pageInfoVO = new PageInfo<>();
         //设置返回的pageInfo的属性
         BeanUtils.copyProperties(pageInfo, pageInfoVO);
-        pageInfoVO.setList(this.resultTrans(printConfigList));
+        pageInfoVO.setList(this.resultConvert(printConfigList));
         return pageInfoVO;
     }
 
@@ -98,7 +98,7 @@ public class PrintConfigServiceImpl extends BaseServiceImpl<PrintConfig> impleme
         PageInfo<PrintConfig> pageInfo = new PageInfo<>(printConfigList);
         PageInfo<PrintConfigVO> pageInfoVO = new PageInfo<>();
         BeanUtils.copyProperties(pageInfo, pageInfoVO);
-        pageInfoVO.setList(this.resultTrans(printConfigList));
+        pageInfoVO.setList(this.resultConvert(printConfigList));
         return pageInfoVO;
     }
 
@@ -106,7 +106,7 @@ public class PrintConfigServiceImpl extends BaseServiceImpl<PrintConfig> impleme
     /**
      * 对返回结果PrintConfig转换成PrintConfigVO
      */
-    private List<PrintConfigVO> resultTrans(List<PrintConfig> printConfigs) {
+    private List<PrintConfigVO> resultConvert(List<PrintConfig> printConfigs) {
         return printConfigs.stream().map(x -> {
             PrintConfigVO printConfigVO = new PrintConfigVO();
             BeanUtils.copyProperties(x, printConfigVO);
