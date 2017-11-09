@@ -92,9 +92,9 @@ public class PrintConfigServiceImpl extends BaseServiceImpl<PrintConfig> impleme
     }
 
     @Override
-    public PageInfo<PrintConfigVO> search(String operateUserId, String ip, Integer warehouseId, Integer pageNum, Integer limit) {
+    public PageInfo<PrintConfigVO> search(String operateUserId, Integer warehouseId, Integer pageNum, Integer limit) {
         PageHelper.startPage(pageNum, limit);
-        List<PrintConfig> printConfigList = printConfigMapper.searchByCondition(operateUserId, ip, warehouseId);
+        List<PrintConfig> printConfigList = printConfigMapper.searchByCondition(operateUserId, warehouseId);
         PageInfo<PrintConfig> pageInfo = new PageInfo<>(printConfigList);
         PageInfo<PrintConfigVO> pageInfoVO = new PageInfo<>();
         BeanUtils.copyProperties(pageInfo, pageInfoVO);

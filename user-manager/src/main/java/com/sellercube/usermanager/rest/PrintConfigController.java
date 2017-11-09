@@ -69,10 +69,9 @@ public class PrintConfigController {
     @GetMapping("/config/search")
     @ApiOperation(value = "根据条件搜索手持IP配置的信息", notes = "根据传入条件来进行搜索")
     public Result searchByCondition(@RequestParam(value = "operateId", required = false) String operateUserId,
-                                    @RequestParam(value = "ip", required = false) String ip,
                                     @RequestParam(value = "warehouseId", required = false) Integer warehouseId,
                                     @RequestParam(value = "pageNum", required = false, defaultValue = "1") Integer pageNum,
                                     @RequestParam(value = "limit", required = false, defaultValue = "10") Integer limit) throws Exception {
-        return ResultUtil.success(printConfigService.search(operateUserId, ip, warehouseId, pageNum, limit));
+        return ResultUtil.success(printConfigService.search(operateUserId, warehouseId, pageNum, limit));
     }
 }

@@ -34,11 +34,10 @@ public interface PrintConfigService extends BaseService<PrintConfig> {
      * 根据条件查询手持打印配置
      *
      * @param operateUserId 操作员id
-     * @param ip            ip
      * @param warehouseId   仓库id
      * @param pageNum       page number
      * @param limit         limit size
      * @return {@link PageInfo<PrintConfigVO>}
      */
-    PageInfo<PrintConfigVO> search(String operateUserId, String ip, Integer warehouseId, Integer pageNum, Integer limit);
+    PageInfo<PrintConfigVO> search(String operateUserId, Integer warehouseId, Integer pageNum, Integer limit);
 }

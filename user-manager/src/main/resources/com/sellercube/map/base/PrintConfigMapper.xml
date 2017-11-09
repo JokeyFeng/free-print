@@ -33,9 +33,6 @@
         <if test="operateUserId != null">
             AND operate_user_id = #{operateUserId}
         </if>
-        <if test="ip != null">
-            AND machine_ip = #{ip}
-        </if>
         <if test="warehouseId != null">
             AND storage_id = #{warehouseId}
         </if>
