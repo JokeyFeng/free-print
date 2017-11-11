@@ -9,11 +9,10 @@
     <packaging>pom</packaging>
 
     <name>free-print</name>
-    <description>Demo project for Spring Boot</description>
+    <description>java print service</description>
 
     <modules>
         <module>common</module>
-        <module>api-gateway</module>
         <module>print-server</module>
         <module>user-manager</module>
     </modules>

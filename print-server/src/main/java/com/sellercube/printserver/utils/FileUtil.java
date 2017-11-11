@@ -2,6 +2,7 @@ package com.sellercube.printserver.utils;
 
 import com.google.common.collect.Lists;
 import com.sellercube.common.utils.Base64Util;
+import lombok.Cleanup;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
@@ -44,15 +45,10 @@ public class FileUtil {
             dir.mkdirs();
         }
         String path = pdfDir + UUID.randomUUID().toString() + "." + suffix;
-        FileOutputStream fileOutputStream = new FileOutputStream(path);
-        try {
-            fileOutputStream.write(bytes);
-            fileOutputStream.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            fileOutputStream.close();
-        }
+        @Cleanup FileOutputStream fileOutputStream = new FileOutputStream(path);
+        fileOutputStream.write(bytes);
+        fileOutputStream.flush();
+
         return path;
     }
 
@@ -61,7 +57,7 @@ public class FileUtil {
      * @param suffix 文件后缀名
      * @return 文件路径
      */
-    public synchronized static String downloadFile(String url, String suffix) throws Exception {
+    public static String downloadFile(String url, String suffix) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         List<MediaType> list = Lists.newArrayList(MediaType.valueOf(APPLICATION_PDF));
@@ -73,15 +69,9 @@ public class FileUtil {
             dir.mkdirs();
         }
         String path = pdfDir + UUID.randomUUID().toString() + "." + suffix;
-        FileOutputStream fileOutputStream = new FileOutputStream(path);
-        try {
-            fileOutputStream.write(result);
-            fileOutputStream.flush();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            fileOutputStream.close();
-        }
+        @Cleanup FileOutputStream fileOutputStream = new FileOutputStream(path);
+        fileOutputStream.write(result);
+        fileOutputStream.flush();
         return path;
     }
 }

@@ -1,154 +1,152 @@
 package com.sellercube.usermanager.server.base.service.impl;
 
-import com.alibaba.fastjson.JSONArray;
 import com.github.pagehelper.PageHelper;
-import com.google.common.collect.Maps;
-import com.sellercube.common.function.Tuples;
+import com.github.pagehelper.PageInfo;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 import com.sellercube.common.utils.SplitUtil;
-import com.sellercube.usermanager.common.PageInfo;
+import com.sellercube.usermanager.common.BaseServiceImpl;
 import com.sellercube.usermanager.server.base.entity.PrintConfig;
+import com.sellercube.usermanager.server.base.entity.PrintType;
+import com.sellercube.usermanager.server.base.entity.vo.PrintConfigVO;
 import com.sellercube.usermanager.server.base.mapper.PrintConfigMapper;
+import com.sellercube.usermanager.server.base.mapper.PrintTypeMapper;
+import com.sellercube.usermanager.server.base.mapper.StorageMapper;
+import com.sellercube.usermanager.server.base.mapper.UserMapper;
 import com.sellercube.usermanager.server.base.service.PrintConfigService;
-import com.sellercube.usermanager.server.base.service.StorageService;
-import com.sellercube.usermanager.server.base.service.UserService;
-import com.sellercube.usermanager.vo.PrintConfigVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
  * Created by Chenjing on 2017/8/24.
+ *
+ * @author Chenjing
  */
 @Service
-public class PrintConfigServiceImpl implements PrintConfigService {
+public class PrintConfigServiceImpl extends BaseServiceImpl<PrintConfig> implements PrintConfigService {
 
-    @Autowired
     private PrintConfigMapper printConfigMapper;
 
+    private UserMapper userMapper;
+
+    private StorageMapper storageMapper;
+
+    private PrintTypeMapper printTypeMapper;
+
+    public PrintConfigServiceImpl() {
+    }
+
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private StorageService storageService;
-
-    @Override
-    @CacheEvict(value = "redisCache", allEntries = true)
-    public int deleteByPrimaryKey(Integer printConfigId) {
-        return printConfigMapper.deleteByPrimaryKey(printConfigId);
+    public PrintConfigServiceImpl(PrintConfigMapper var1, UserMapper var2,
+                                  StorageMapper var3, PrintTypeMapper var4) {
+        super.baseMapper = var1;
+        this.printConfigMapper = var1;
+        this.userMapper = var2;
+        this.storageMapper = var3;
+        this.printTypeMapper = var4;
     }
 
-    @Override
-    @CacheEvict(value = "redisCache", allEntries = true)
-    public int insert(PrintConfig record) {
-        record.setCreateDate(new Date());
-        record.setModifyDate(new Date());
-        return printConfigMapper.insert(record);
-    }
+    /**
+     * 用户缓存
+     */
+    private static Cache<Integer, String> userCache = CacheBuilder.newBuilder()
+            .maximumSize(20000)
+            .expireAfterAccess(12, TimeUnit.HOURS)
+            .build();
+    /**
+     * 仓库缓存
+     */
+    private static Cache<Integer, String> storageCache = CacheBuilder.newBuilder()
+            .maximumSize(1000)
+            .expireAfterAccess(12, TimeUnit.HOURS)
+            .build();
+    /**
+     * 打印类型缓存
+     */
+    private static Cache<Integer, String> printTypeCache = CacheBuilder.newBuilder()
+            .maximumSize(50)
+            .expireAfterAccess(12, TimeUnit.HOURS)
+            .build();
 
     @Override
-    @CacheEvict(value = "redisCache", allEntries = true)
-    public int insertSelective(PrintConfig record) {
-        record.setCreateDate(new Date());
-        record.setModifyDate(new Date());
-        return printConfigMapper.insertSelective(record);
-    }
-
-    @Override
-    public PrintConfig selectByPrimaryKey(Integer printConfigId) {
-        return printConfigMapper.selectByPrimaryKey(printConfigId);
-    }
-
-    @Override
-    @CacheEvict(value = "redisCache", allEntries = true)
-    public int updateByPrimaryKeySelective(PrintConfig record) {
-        record.setModifyDate(new Date());
-        return printConfigMapper.updateByPrimaryKeySelective(record);
-    }
-
-    @Override
-    @CacheEvict(value = "redisCache", allEntries = true)
-    public int updateByPrimaryKey(PrintConfig record) {
-        record.setModifyDate(new Date());
-        return printConfigMapper.updateByPrimaryKey(record);
-    }
-
-    @Override
-    @CacheEvict(value = "redisCache", allEntries = true)
     public int deleteByPrimaryKeyALL(String ids) {
-        SplitUtil.split(",", ids).forEach(x -> printConfigMapper.deleteByPrimaryKey(Integer.valueOf(x)));
+        SplitUtil.split(",", ids).forEach(x -> printConfigMapper.deleteByPrimaryKey(x));
         return 1;
     }
 
     @Override
-    @Cacheable(value = "redisCache", keyGenerator = "keyGenerator", cacheManager = "cacheManager")
-    public PageInfo<PrintConfigVO> list(String pageNum, String limit) {
-        Optional<String> pageNum1 = Optional.ofNullable(pageNum);
-        Optional<String> limit1 = Optional.ofNullable(limit);
-        PageHelper.startPage(Integer.valueOf(pageNum1.orElse("1")), Integer.valueOf(limit1.orElse("10")));
+    public PageInfo<PrintConfigVO> list(Integer pageNum, Integer limit) {
+        PageHelper.startPage(pageNum, limit);
         List<PrintConfig> printConfigList = printConfigMapper.list();
         PageInfo<PrintConfig> pageInfo = new PageInfo<>(printConfigList);
         PageInfo<PrintConfigVO> pageInfoVO = new PageInfo<>();
+        //设置返回的pageInfo的属性
         BeanUtils.copyProperties(pageInfo, pageInfoVO);
-        pageInfoVO.setList(resultTrans(printConfigList));
+        pageInfoVO.setList(this.resultConvert(printConfigList));
         return pageInfoVO;
     }
 
     @Override
-    public PageInfo<PrintConfigVO> search(String operateName, String ip, Integer warehouseId, Integer pageNum, Integer limit) {
+    public PageInfo<PrintConfigVO> search(String operateUserId, Integer warehouseId, Integer pageNum, Integer limit) {
         PageHelper.startPage(pageNum, limit);
-        List<PrintConfig> printConfigList = printConfigMapper.searchByCondition(operateName, ip, warehouseId);
+        List<PrintConfig> printConfigList = printConfigMapper.searchByCondition(operateUserId, warehouseId);
         PageInfo<PrintConfig> pageInfo = new PageInfo<>(printConfigList);
         PageInfo<PrintConfigVO> pageInfoVO = new PageInfo<>();
         BeanUtils.copyProperties(pageInfo, pageInfoVO);
-        pageInfoVO.setList(resultTrans(printConfigList));
+        pageInfoVO.setList(this.resultConvert(printConfigList));
         return pageInfoVO;
     }
 
-    /**
-     * TODO 需要解决速度慢的问题
-     */
     @Override
-    @Cacheable(value = "redisCache", keyGenerator = "keyGenerator", cacheManager = "cacheManager")
-    public Map<String, JSONArray> dropdown() {
-        JSONArray var1 = new JSONArray();
-        JSONArray var2 = new JSONArray();
-        JSONArray var3 = new JSONArray();
-        Map<String, JSONArray> map = Maps.newHashMap();
-        userService.list().forEach(x -> var3.add(Tuples.of(x.getUserid().toString(), x.getUsername())));
-        storageService.list().forEach(x -> var1.add(Tuples.of(x.getStorageid().toString(), x.getStoragename())));
-        map.put("userName", var3);
-        List<String> ips = printConfigMapper.distinctByIP();
-        ips.remove(null);
-        ips.remove("");
-        ips.forEach(x->var2.add(x));
-        map.put("ip", var2);
-        map.put("warehouse", var1);
-        return map;
+    public String findIpByCondition(String userId, String printType) throws Exception {
+        PrintType printTypeResult = printTypeMapper.selectByName(printType);
+
+        if (null == printTypeResult) {
+            throw new Exception("获取打印类型id失败，请确保打印类型名称唯一和存在");
+        }
+        String printTypeId = printTypeResult.getId().toString();
+        String ip;
+        List<String> ipList = printConfigMapper.findIpByCondition(userId, printTypeId);
+        if (null != ipList && !ipList.isEmpty() && ipList.size() == 1) {
+            ip = ipList.get(0);
+        } else {
+            throw new Exception("获取IP失败，请确保IP不会被重复或存在");
+        }
+        return ip;
     }
 
+
     /**
-     * 对返回结果进行封装
+     * 对返回结果PrintConfig转换成PrintConfigVO
      */
-    private List<PrintConfigVO> resultTrans(List<PrintConfig> printConfigs) {
-        Map<Integer, String> userMap = Maps.newHashMap();
-        Map<Integer, String> storageMap = Maps.newHashMap();
-        userService.list().forEach(x -> userMap.put(x.getUserid(), x.getUsername()));
-        storageService.list().forEach(x -> storageMap.put(x.getStorageid(), x.getStoragename()));
+    private List<PrintConfigVO> resultConvert(List<PrintConfig> printConfigs) {
         return printConfigs.stream().map(x -> {
             PrintConfigVO printConfigVO = new PrintConfigVO();
             BeanUtils.copyProperties(x, printConfigVO);
-            printConfigVO.setCreateUserName(userMap.get(x.getCreateUserId()));
-            printConfigVO.setModifyUserName(userMap.get(x.getModifyUserId()));
-            printConfigVO.setOperateUserName(userMap.get(x.getOperateUserId()));
-            printConfigVO.setStorageId(storageMap.get(x.getStorageId()));
+            try {
+                printConfigVO.setCreateUserName(userCache.get(x.getCreateUserId(),
+                        () -> userMapper.selectByPrimaryKey(x.getCreateUserId().toString()).getUsername()));
+
+                printConfigVO.setModifyUserName(userCache.get(x.getModifyUserId(),
+                        () -> userMapper.selectByPrimaryKey(x.getModifyUserId().toString()).getUsername()));
+
+                printConfigVO.setOperateUserName(userCache.get(x.getOperateUserId(),
+                        () -> userMapper.selectByPrimaryKey(x.getOperateUserId().toString()).getUsername()));
+
+                printConfigVO.setStorageId(storageCache.get(x.getStorageId(),
+                        () -> storageMapper.selectByPrimaryKey(x.getStorageId().toString()).getStoragename()));
+
+                printConfigVO.setPrintType(printTypeCache.get(x.getPrintTypeId(),
+                        () -> printTypeMapper.selectByPrimaryKey(x.getPrintTypeId().toString()).getTypeName()));
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
             return printConfigVO;
         }).collect(Collectors.toList());
     }

@@ -21,6 +21,8 @@ import java.sql.SQLException;
 
 /**
  * Created by Chenjing on 2017/5/3.
+ *
+ * @author Chenjing
  */
 @Configuration
 @MapperScan(basePackages = MySqlDataSource.PACKAGE, sqlSessionFactoryRef = "mysqlSqlSessionFactory")

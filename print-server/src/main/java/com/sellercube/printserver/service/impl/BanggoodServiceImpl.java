@@ -3,23 +3,25 @@ package com.sellercube.printserver.service.impl;
 import com.alibaba.fastjson.JSON;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.sellercube.common.entity.ChannelConfig;
+import com.google.common.collect.ImmutableMap;
 import com.sellercube.common.entity.HttpStatus;
-import com.sellercube.common.entity.PrintParam;
 import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
+import com.sellercube.printserver.entity.ChannelConfig;
+import com.sellercube.printserver.entity.DotNetFba;
+import com.sellercube.printserver.entity.PrintParam;
 import com.sellercube.printserver.executors.BackToEds;
+import com.sellercube.printserver.http.RestRequest;
 import com.sellercube.printserver.service.BanggoodService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.Method;
+import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
@@ -30,11 +32,12 @@ import java.util.concurrent.TimeUnit;
  * @author Chenjing
  */
 @Service
+@Slf4j
 public class BanggoodServiceImpl implements BanggoodService {
 
     private static Cache<String, ChannelConfig> cache = CacheBuilder.newBuilder()
             .maximumSize(100)
-            .expireAfterAccess(3, TimeUnit.HOURS)
+            .expireAfterAccess(8, TimeUnit.HOURS)
             .build();
 
     @Autowired
@@ -51,8 +54,9 @@ public class BanggoodServiceImpl implements BanggoodService {
 
     @Override
     public Result process(PrintParam printParam) throws Exception {
-        String pdfUrl = printParam.getContent();
-        String shipType = printParam.getShipType();
+        DotNetFba dotnetFba = printParam.getData();
+        String pdfUrl = dotnetFba.getPdfUrl();
+        String shipType = dotnetFba.getShipType();
         Objects.requireNonNull(shipType, "棒谷渠道shipType为null");
         if (Objects.equals(null, pdfUrl) || Objects.equals("", pdfUrl)) {
             return ResultUtil.error("打印失败，PDFUrl内容为空");
@@ -63,17 +67,16 @@ public class BanggoodServiceImpl implements BanggoodService {
 
         //从缓存中获取打印的方法
         ChannelConfig channelConfig = cache.get(shipType, () -> {
+            RestRequest restRequest = new RestRequest(restTemplate);
             //请求数据库接口查询
-            HttpHeaders headers = new HttpHeaders();
-            headers.add("Authorization", token);
-            HttpEntity<String> requestEntity = new HttpEntity<>(null, headers);
-            String result = restTemplate.exchange(url + "/db/channel?channelName=" + shipType,
-                    HttpMethod.GET, requestEntity, String.class).getBody();
+            Map<String, ?> param = ImmutableMap.of("channelName", shipType);
+            Map<String, String> header = ImmutableMap.of("Authorization", token);
+            String result = restRequest.get(url + "/db/channel", param, String.class, header).getBody();
             Result jsonResult = JSON.parseObject(result, Result.class);
             if (Objects.equals(HttpStatus.SUCCESS.getCode(), jsonResult.getCode())) {
                 ChannelConfig channelConfig1 = JSON.parseObject(JSON.toJSONString(jsonResult.getData()), ChannelConfig.class);
                 if (channelConfig1 == null) {
-                    throw new Exception("不支持" + shipType + "渠道");
+                    throw new Exception("不支持" + shipType + "渠道打印");
                 }
                 return channelConfig1;
             } else {
@@ -86,7 +89,7 @@ public class BanggoodServiceImpl implements BanggoodService {
         Method method = clazz.getMethod(channelConfig.getMethod(), String.class);
         Object object = clazz.newInstance();
         method.invoke(object, pdfUrl);
-        backToEds.backFbaCode(printParam.getFbaCode(), printParam.getUserId());
+        backToEds.backFbaCode(dotnetFba.getFbaCode(), printParam.getUserId());
         return ResultUtil.success("打印成功");
     }
 

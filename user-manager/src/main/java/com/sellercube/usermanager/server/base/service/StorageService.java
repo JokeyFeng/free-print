@@ -1,23 +1,33 @@
 package com.sellercube.usermanager.server.base.service;
 
 
+import com.github.pagehelper.PageInfo;
+import com.sellercube.usermanager.common.BaseService;
 import com.sellercube.usermanager.server.base.entity.Storage;
+import com.sellercube.usermanager.server.base.entity.vo.StorageVO;
 
-import java.util.List;
+/**
+ * Created by Chenjing on 2017/11/7
+ *
+ * @author Chenjing
+ */
+public interface StorageService extends BaseService<Storage> {
+    /**
+     * 分页获取仓库
+     *
+     * @param var1 page number
+     * @param var2 limit size
+     * @return {@link PageInfo<StorageVO>}
+     */
+    PageInfo<StorageVO> list(Integer var1, Integer var2);
 
-
-public interface StorageService {
-    int deleteByPrimaryKey(Integer storageid);
-
-    int insert(Storage record);
-
-    int insertSelective(Storage record);
-
-    Storage selectByPrimaryKey(Integer storageid);
-
-    int updateByPrimaryKeySelective(Storage record);
-
-    int updateByPrimaryKey(Storage record);
-
-    List<Storage> list();
+    /**
+     * 分页搜索仓库
+     *
+     * @param var1 storage name
+     * @param var2 page number
+     * @param var3 limit size
+     * @return {@link PageInfo<StorageVO>}
+     */
+    PageInfo<StorageVO> search(String var1, Integer var2, Integer var3);
 }

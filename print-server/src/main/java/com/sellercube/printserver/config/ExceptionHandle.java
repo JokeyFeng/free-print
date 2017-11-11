@@ -2,8 +2,7 @@ package com.sellercube.printserver.config;
 
 import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,12 +12,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author Chenjing
  */
 @ControllerAdvice
+@Slf4j
 public class ExceptionHandle {
-    private  final  static Logger log= LoggerFactory.getLogger(ExceptionHandle.class);
+
     @ExceptionHandler(value=Exception.class)
     @ResponseBody
     public Result handle(Exception e){
-        log.error("【系统异常】：{}",e);
+        log.error("【系统异常】=>{}",e);
         return ResultUtil.error(e.getMessage());
     }
 }

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by Chenjing on 2017/6/20.
+ *
+ * @author Chenjing
  */
 @ControllerAdvice
 public class ExceptionHandle {
