@@ -22,9 +22,15 @@
     create_user_id, modify_date, modify_user_id, delete_date, delete_userId, is_deleted,
         print_type_id, is_enable
   </sql>
-    <select id="distinctByIP" resultType="java.lang.String">
-        SELECT DISTINCT(machine_ip) FROM print_config
+    <select id="findIpByCondition" resultType="java.lang.String">
+        select
+        machine_ip
+        from print_config
+        WHERE operate_user_id = #{userId}
+        AND print_type_id=#{printTypeId}
+        AND is_enable=1
     </select>
+
     <select id="searchByCondition" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

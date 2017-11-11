@@ -25,6 +25,14 @@ public interface PrintTypeMapper extends BaseMapper<PrintType> {
     List<PrintType> searchByName(String name);
 
     /**
+     * 根据打印类型名称查询
+     *
+     * @param name 打印类型名称
+     * @return {@link List<PrintType>}
+     */
+    PrintType selectByName(String name);
+
+    /**
      * 分页获取打印类型
      *
      * @return {@link List<PrintType>}

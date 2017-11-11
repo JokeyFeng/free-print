@@ -7,6 +7,7 @@ import com.google.common.cache.CacheBuilder;
 import com.sellercube.common.utils.SplitUtil;
 import com.sellercube.usermanager.common.BaseServiceImpl;
 import com.sellercube.usermanager.server.base.entity.PrintConfig;
+import com.sellercube.usermanager.server.base.entity.PrintType;
 import com.sellercube.usermanager.server.base.entity.vo.PrintConfigVO;
 import com.sellercube.usermanager.server.base.mapper.PrintConfigMapper;
 import com.sellercube.usermanager.server.base.mapper.PrintTypeMapper;
@@ -100,6 +101,24 @@ public class PrintConfigServiceImpl extends BaseServiceImpl<PrintConfig> impleme
         BeanUtils.copyProperties(pageInfo, pageInfoVO);
         pageInfoVO.setList(this.resultConvert(printConfigList));
         return pageInfoVO;
+    }
+
+    @Override
+    public String findIpByCondition(String userId, String printType) throws Exception {
+        PrintType printTypeResult = printTypeMapper.selectByName(printType);
+
+        if (null == printTypeResult) {
+            throw new Exception("获取打印类型id失败，请确保打印类型名称唯一和存在");
+        }
+        String printTypeId = printTypeResult.getId().toString();
+        String ip;
+        List<String> ipList = printConfigMapper.findIpByCondition(userId, printTypeId);
+        if (null != ipList && !ipList.isEmpty() && ipList.size() == 1) {
+            ip = ipList.get(0);
+        } else {
+            throw new Exception("获取IP失败，请确保IP不会被重复或存在");
+        }
+        return ip;
     }
 
 

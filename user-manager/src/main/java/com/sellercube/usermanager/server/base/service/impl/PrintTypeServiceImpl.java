@@ -39,6 +39,11 @@ public class PrintTypeServiceImpl extends BaseServiceImpl<PrintType> implements 
     }
 
     @Override
+    public PrintType selectByName(String name) {
+        return printTypeMapper.selectByName(name);
+    }
+
+    @Override
     public PageInfo<PrintType> searchByName(String var1, String var2, String var3) {
         Optional<String> pageNum = Optional.ofNullable(var2);
         Optional<String> limit = Optional.ofNullable(var3);

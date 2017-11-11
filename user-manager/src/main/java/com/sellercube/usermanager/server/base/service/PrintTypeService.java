@@ -44,4 +44,12 @@ public interface PrintTypeService extends BaseService<PrintType> {
      * @return 1
      */
     int deleteByPrimaryKeyALL(String ids);
+
+    /**
+     * 根据名称查找
+     *
+     * @param name 打印类型名称
+     * @return {@link PrintType}
+     */
+    PrintType selectByName(String name);
 }

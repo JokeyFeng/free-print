@@ -24,6 +24,13 @@
         from print_type
     </select>
 
+    <select id="selectByName" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from print_type
+        where type_name=#{name}
+    </select>
+
     <select id="searchByName" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

@@ -32,4 +32,13 @@ public interface PrintConfigMapper extends BaseMapper<PrintConfig> {
      * @return {@link List<PrintConfig>}
      */
     List<PrintConfig> searchByCondition(@Param("operateUserId") String operateUserId, @Param("warehouseId") Integer warehouseId);
+
+    /**
+     * 根据用户名和打印类型进行查询
+     *
+     * @param userId      操作员id
+     * @param printTypeId 打印类型 id
+     * @return ip
+     */
+    List<String> findIpByCondition(@Param("userId") String userId, @Param("printTypeId") String printTypeId);
 }

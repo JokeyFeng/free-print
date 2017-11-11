@@ -2,7 +2,9 @@ package com.sellercube.usermanager.rest;
 
 import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
+import com.sellercube.usermanager.server.base.entity.ChannelConfig;
 import com.sellercube.usermanager.server.base.service.ChannelConfigService;
+import com.sellercube.usermanager.server.base.service.PrintConfigService;
 import com.sellercube.usermanager.server.base.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -23,13 +25,16 @@ public class DaoController {
 
     private UserService userService;
 
+    private PrintConfigService printConfigService;
+
     public DaoController() {
     }
 
     @Autowired
-    public DaoController(ChannelConfigService var1, UserService var2) {
+    public DaoController(ChannelConfigService var1, UserService var2, PrintConfigService var3) {
         this.channelConfigService = var1;
         this.userService = var2;
+        this.printConfigService = var3;
     }
 
 
@@ -39,9 +44,21 @@ public class DaoController {
         return ResultUtil.success(channelConfigService.selectByChannelName(name));
     }
 
+    @PostMapping("/channel")
+    @ApiOperation(value = "插入渠道配置打印方法")
+    public Result insert(@RequestBody ChannelConfig channelConfig) {
+        return ResultUtil.success(channelConfigService.insertSelective(channelConfig));
+    }
+
     @GetMapping("/users/{id}")
     @ApiOperation(value = "根据用户id获取用户信息")
     public Result getUser(@PathVariable("id") String id) {
         return ResultUtil.success(userService.selectByPrimaryKey(id));
+    }
+
+    @GetMapping("/users/{id}/ip")
+    @ApiOperation(value = "根据用户id获取用户信息")
+    public Result getIp(@PathVariable("id") String id, @RequestParam("printType") String printType) throws Exception {
+        return ResultUtil.success(printConfigService.findIpByCondition(id, printType));
     }
 }
