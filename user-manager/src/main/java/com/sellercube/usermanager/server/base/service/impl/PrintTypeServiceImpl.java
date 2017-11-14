@@ -34,8 +34,7 @@ public class PrintTypeServiceImpl extends BaseServiceImpl<PrintType> implements 
 
     @Override
     public int deleteByPrimaryKeyALL(String ids) {
-        SplitUtil.split(",", ids).forEach(x -> printTypeMapper.deleteByPrimaryKey(x));
-        return 1;
+        return SplitUtil.split(",", ids).stream().mapToInt(x -> printTypeMapper.deleteByPrimaryKey(x)).sum();
     }
 
     @Override

@@ -76,8 +76,7 @@ public class PrintConfigServiceImpl extends BaseServiceImpl<PrintConfig> impleme
 
     @Override
     public int deleteByPrimaryKeyALL(String ids) {
-        SplitUtil.split(",", ids).forEach(x -> printConfigMapper.deleteByPrimaryKey(x));
-        return 1;
+        return SplitUtil.split(",", ids).stream().mapToInt(x -> printConfigMapper.deleteByPrimaryKey(x)).sum();
     }
 
     @Override
@@ -126,7 +125,7 @@ public class PrintConfigServiceImpl extends BaseServiceImpl<PrintConfig> impleme
      * 对返回结果PrintConfig转换成PrintConfigVO
      */
     private List<PrintConfigVO> resultConvert(List<PrintConfig> printConfigs) {
-        return printConfigs.stream().map(x -> {
+        return printConfigs.stream().map((PrintConfig x) -> {
             PrintConfigVO printConfigVO = new PrintConfigVO();
             BeanUtils.copyProperties(x, printConfigVO);
             try {
