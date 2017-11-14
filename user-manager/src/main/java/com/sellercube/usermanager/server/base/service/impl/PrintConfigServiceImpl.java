@@ -123,6 +123,9 @@ public class PrintConfigServiceImpl extends BaseServiceImpl<PrintConfig> impleme
 
     /**
      * 对返回结果PrintConfig转换成PrintConfigVO
+     *
+     * @param printConfigs {@link List<PrintConfig>}
+     * @return {@link List<PrintConfigVO>}
      */
     private List<PrintConfigVO> resultConvert(List<PrintConfig> printConfigs) {
         return printConfigs.stream().map((PrintConfig x) -> {
@@ -138,10 +141,10 @@ public class PrintConfigServiceImpl extends BaseServiceImpl<PrintConfig> impleme
                 printConfigVO.setOperateUserName(userCache.get(x.getOperateUserId(),
                         () -> userMapper.selectByPrimaryKey(x.getOperateUserId().toString()).getUsername()));
 
-                printConfigVO.setStorageId(storageCache.get(x.getStorageId(),
+                printConfigVO.setStorageName(storageCache.get(x.getStorageId(),
                         () -> storageMapper.selectByPrimaryKey(x.getStorageId().toString()).getStoragename()));
 
-                printConfigVO.setPrintType(printTypeCache.get(x.getPrintTypeId(),
+                printConfigVO.setPrintTypeName(printTypeCache.get(x.getPrintTypeId(),
                         () -> printTypeMapper.selectByPrimaryKey(x.getPrintTypeId().toString()).getTypeName()));
             } catch (ExecutionException e) {
                 e.printStackTrace();

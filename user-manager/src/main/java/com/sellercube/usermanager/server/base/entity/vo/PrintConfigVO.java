@@ -1,9 +1,9 @@
 package com.sellercube.usermanager.server.base.entity.vo;
 
+import com.sellercube.usermanager.server.base.entity.PrintConfig;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * Created by Chenjing on 2017/11/7
@@ -11,32 +11,18 @@ import java.util.Date;
  * @author Chenjing
  */
 @Data
-public class PrintConfigVO implements Serializable {
-    private Integer printConfigId;
+public class PrintConfigVO extends PrintConfig implements Serializable {
 
-    private String machineIp;
-
-    private String storageId;
-
-    private Integer machinePort;
+    private String storageName;
 
     private String operateUserName;
 
-    private Date createDate;
-
     private String createUserName;
-
-    private Date modifyDate;
 
     private String modifyUserName;
 
-    private Date deleteDate;
-
     private String deleteUserName;
 
-    private Boolean isDeleted;
+    private String printTypeName;
 
-    private Boolean isEnable;
-
-    private String printType;
 }
