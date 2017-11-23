@@ -2,9 +2,9 @@ package com.sellercube.printserver.rest;
 
 import com.sellercube.common.entity.Result;
 import com.sellercube.printserver.entity.PrintParam;
-import com.sellercube.printserver.entity.PrintReqBody;
+import com.sellercube.printserver.entity.Printer;
 import com.sellercube.printserver.service.BanggoodService;
-import com.sellercube.printserver.service.TmsService;
+import com.sellercube.printserver.service.PrintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,14 +23,14 @@ public class RestfulController {
     }
 
     @Autowired
-    public RestfulController(BanggoodService var1, TmsService var2) {
+    public RestfulController(BanggoodService var1, PrintService var2) {
         this.banggoodService = var1;
-        this.tmsService = var2;
+        this.printService = var2;
     }
 
     private BanggoodService banggoodService;
 
-    private TmsService tmsService;
+    private PrintService printService;
 
     /**
      * 针对棒谷FBA渠道调拨进行打印
@@ -45,14 +45,14 @@ public class RestfulController {
     }
 
     /**
-     * TMS打印
+     * 打印
      *
      * @param var 请求实体类
      * @return 是否打印成功
      */
-    @PostMapping(value = "/hand/print")
-    public Result print(@RequestBody PrintReqBody var) throws Exception {
-        return tmsService.print(var);
+    @PostMapping(value = "/print")
+    public Result print(@RequestBody Printer var) throws Exception {
+        return printService.print(var);
     }
 
 }
