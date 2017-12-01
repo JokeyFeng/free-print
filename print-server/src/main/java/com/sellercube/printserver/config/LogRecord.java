@@ -1,13 +1,12 @@
 package com.sellercube.printserver.config;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -17,14 +16,15 @@ import java.util.Arrays;
 
 /**
  * Created by chenjing on 2017/7/7.
+ *
  * @author Chenjing
  */
 @Component
 @Aspect
+@Slf4j
 public class LogRecord {
-    private Logger logger = LoggerFactory.getLogger(LogRecord.class);
 
-    ThreadLocal<Long> startTime = new ThreadLocal<>();
+    private ThreadLocal<Long> startTime = new ThreadLocal<>();
 
     @Pointcut("execution(public * com.sellercube.printserver.rest.*.*(..))")
     public void log() {
@@ -36,7 +36,7 @@ public class LogRecord {
         startTime.set(System.currentTimeMillis());
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        logger.info("【request url : " + request.getRequestURL().toString() + ",http_method : " + request.getMethod()
+        log.info("【request url : " + request.getRequestURL().toString() + ",http_method : " + request.getMethod()
                 + ",IP : " + request.getRemoteAddr() + ",class_method : "
                 + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName() + ",args : "
                 + Arrays.toString(joinPoint.getArgs()) + "】");
@@ -44,8 +44,8 @@ public class LogRecord {
     }
 
     @AfterReturning(returning = "ret", pointcut = "log()")
-    public void doAfterReturning(Object ret) throws Throwable {
-        logger.info("{result : " + ret + "\nspend time : " + (System.currentTimeMillis() - startTime.get()) + " milliseconds}");
+    public void doAfterReturning(Object ret) {
+        log.info("{result : " + ret + "\nspend time : " + (System.currentTimeMillis() - startTime.get()) + " milliseconds}");
         startTime.remove();
     }
 }

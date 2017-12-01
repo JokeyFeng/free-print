@@ -22,22 +22,26 @@ public class DeleteFile implements CommandLineRunner {
     private String pdfDir;
 
     @Override
-    public void run(String... strings) throws Exception {
+    public void run(String... strings) {
         log.info("开始检查过期的文件");
         File file = new File(pdfDir);
+        boolean isExist = true;
         if (!file.exists()) {
-            file.mkdirs();
+            isExist = file.mkdirs();
         }
-        String[] fileList = file.list();
-        if (null != fileList) {
-            Stream.of(fileList).forEach(x -> {
-                String path = pdfDir + x;
-                File tempFile = new File(path);
-                if (System.currentTimeMillis() > tempFile.lastModified()) {
-                    log.info("删除文件====>>>>>" + tempFile.getName());
-                    tempFile.delete();
-                }
-            });
+        if (isExist) {
+            String[] fileList = file.list();
+            if (null != fileList) {
+                Stream.of(fileList).forEach(x -> {
+                    String path = pdfDir + x;
+                    File tempFile = new File(path);
+                    if (System.currentTimeMillis() > tempFile.lastModified()) {
+                        String deleteOperation = tempFile.delete() ? "删除成功" : "删除失败";
+                        log.info("删除文件==>>" + tempFile.getName() + "==>>" + deleteOperation);
+                    }
+                });
+            }
         }
+
     }
 }

@@ -55,14 +55,17 @@ public class PrintUtil {
      * @param width    宽度 mm
      * @param height   高度 mm
      */
+    @SuppressWarnings("all")
     public static void printImage(String fileName, Integer width, Integer height) throws Exception {
-        DocFlavor dof = null;
+        DocFlavor dof;
         if (fileName.toLowerCase().endsWith(GIF)) {
             dof = DocFlavor.INPUT_STREAM.GIF;
         } else if (fileName.toLowerCase().endsWith(JPG)) {
             dof = DocFlavor.INPUT_STREAM.JPEG;
         } else if (fileName.toLowerCase().endsWith(PNG)) {
             dof = DocFlavor.INPUT_STREAM.PNG;
+        } else {
+            dof = DocFlavor.INPUT_STREAM.JPEG;
         }
         PrintService ps = PrintServiceLookup.lookupDefaultPrintService();
         PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();
@@ -84,6 +87,7 @@ public class PrintUtil {
      *
      * @param fileName 文件路径
      */
+    @SuppressWarnings("unused")
     public static void printImage(String fileName) throws Exception {
         printImage(fileName, 100, 150);
     }
@@ -96,14 +100,17 @@ public class PrintUtil {
      * @param height      高度 mm
      * @param type        图片的格式
      */
+    @SuppressWarnings("all")
     public static void printImage(InputStream inputStream, Integer width, Integer height, String type) throws Exception {
-        DocFlavor dof = null;
+        DocFlavor dof;
         if (type.toLowerCase().endsWith(GIF)) {
             dof = DocFlavor.INPUT_STREAM.GIF;
         } else if (type.toLowerCase().endsWith(JPG)) {
             dof = DocFlavor.INPUT_STREAM.JPEG;
         } else if (type.toLowerCase().endsWith(PNG)) {
             dof = DocFlavor.INPUT_STREAM.PNG;
+        } else {
+            dof = DocFlavor.INPUT_STREAM.JPEG;
         }
         PrintService ps = PrintServiceLookup.lookupDefaultPrintService();
         PrintRequestAttributeSet pras = new HashPrintRequestAttributeSet();

@@ -53,6 +53,7 @@ public class Base64PrintUtil {
     /**
      * 打印下载的pdf文件
      */
+    @SuppressWarnings("unused")
     public static void downloadPdf(String var) throws Exception {
         PrintUtil.printPDF(FileUtil.downloadFile(var, "pdf"));
     }
