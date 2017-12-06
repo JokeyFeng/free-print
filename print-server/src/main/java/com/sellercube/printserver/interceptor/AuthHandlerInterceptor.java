@@ -15,6 +15,7 @@ import java.util.Objects;
 
 /**
  * Created by chenjing on 2017/7/7.
+ *
  * @author Chenjing
  */
 @Component
@@ -28,6 +29,7 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
 
     private static final String SWAGGER_URI = "/v2/api-docs";
 
+    @SuppressWarnings("all")
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (request.getRequestURI().contains(SWAGGER) || request.getRequestURI().contains(SWAGGER_URI)) {
@@ -46,12 +48,12 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) {
         // 处理器执行完毕之后
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {
         // 请求处理完成之后
     }
 }

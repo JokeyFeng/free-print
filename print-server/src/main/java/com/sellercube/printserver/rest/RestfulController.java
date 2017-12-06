@@ -37,7 +37,7 @@ public class RestfulController {
      *
      * @param var 打印实体类
      * @return 是否打印成功
-     * @throws Exception
+     * @throws Exception 异常
      */
     @PostMapping("/bg/fba/print")
     public Result handle(@RequestBody PrintParam var) throws Exception {

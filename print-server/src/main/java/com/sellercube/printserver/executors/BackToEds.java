@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 数据回传到EDS
@@ -27,16 +28,28 @@ public class BackToEds {
     @Value("${eds.url}")
     private String url;
 
+    @Value("${process.center.id:0}")
+    private String processCenterId;
+
     /**
      * 打印成功回传FBA单号给EDS
      *
      * @param fbaCode fba单号
      * @param userId  用户id
      */
+    @SuppressWarnings("all")
     @Async
-    public void backFbaCode(String fbaCode, String userId)  {
+    public void backFbaCode(String fbaCode, String userId) {
         RestRequest restRequest = new RestRequest(restTemplate);
-        Map<String, ?> param = ImmutableMap.of("ProductShiftBoxCodes", fbaCode, "UserName", userId);
-        log.info(fbaCode + "=>" + restRequest.get(url + "/api/ProductShift/ExecutePrint", param, String.class, null));
+        if (Objects.equals("0", processCenterId)) {
+            //国内
+            Map<String, ?> param = ImmutableMap.of("ProductShiftBoxCodes", fbaCode, "UserName", userId);
+            log.info(fbaCode + "=>" + restRequest.get(url, param, String.class, null));
+        } else {
+            //国外
+            Map<String, ?> param = ImmutableMap.of("ProductShiftBoxCodes", fbaCode, "UserName", userId, "ProcessCenterID", processCenterId);
+            log.info(fbaCode + "=>" + restRequest.get(url, param, String.class, null));
+        }
+
     }
 }

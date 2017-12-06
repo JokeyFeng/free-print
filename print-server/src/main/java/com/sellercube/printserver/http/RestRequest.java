@@ -73,6 +73,7 @@ public class RestRequest {
      * @param headerMap 请求头 如果没有 可以为null
      * @return {@link ResponseEntity}
      */
+    @SuppressWarnings("unused")
     public <T> ResponseEntity<T> postForm(@NonNull String url, Map<String, Object> paramMap, @NonNull Class<T> clazz,
                                           Map<String, String> headerMap) throws RestClientException {
         LinkedMultiValueMap<String, Object> linkedMultiValueMap = new LinkedMultiValueMap<>();
@@ -97,6 +98,7 @@ public class RestRequest {
      * @param headerMap http请求头 如果没有可以为null
      * @return {@link ResponseEntity}
      */
+    @SuppressWarnings("all")
     public <T> ResponseEntity<T> postJson(@NonNull String url, String param, @NonNull Class<T> clazz, Map<String, String> headerMap) {
         if (null == param) {
             param = "";
@@ -110,6 +112,7 @@ public class RestRequest {
         return restTemplate.exchange(url, HttpMethod.POST, httpEntity, clazz, param);
     }
 
+    @SuppressWarnings("all")
     public static void main(String[] args) {
         RestTemplate restTemplate = new RestTemplate();
         RestRequest restRequest = new RestRequest(restTemplate);

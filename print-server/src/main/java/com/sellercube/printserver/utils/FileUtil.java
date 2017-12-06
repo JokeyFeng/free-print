@@ -38,6 +38,7 @@ public class FileUtil {
      * @param suffix 后缀名=文件类型
      * @return 文件路径
      */
+    @SuppressWarnings("all")
     public static String base64ToFile(String str, String suffix) throws Exception {
         byte[] bytes = Base64Util.decodeData(str);
         File dir = new File(pdfDir);
@@ -57,6 +58,7 @@ public class FileUtil {
      * @param suffix 文件后缀名
      * @return 文件路径
      */
+    @SuppressWarnings("all")
     public static String downloadFile(String url, String suffix) throws Exception {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
