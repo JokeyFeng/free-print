@@ -23,7 +23,7 @@ public class Printer {
      */
     private String printType;
     /**
-     * 打印方法枚举
+     * 打印方法常量
      * {@link PrintMethodConstant}
      */
     private String printMethod;

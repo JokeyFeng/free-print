@@ -26,7 +26,11 @@ public class PrintServiceImpl implements PrintService {
                 base64Pdf(param.getBase64Str());
                 break;
             case BASE64_IMG:
-                base64Img(param.getBase64Str());
+                if (param.getLength() != 0 && param.getLength() != 0) {
+                    base64Img(param.getBase64Str(), param.getWidth(), param.getLength(), param.getPrintType());
+                } else {
+                    base64Img(param.getBase64Str());
+                }
                 break;
             case BASE64_CMD:
                 base64PrintCmd(param.getBase64Str());

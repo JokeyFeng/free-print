@@ -23,6 +23,14 @@ public class Base64PrintUtil {
     }
 
     /**
+     * 打印base64 图片
+     */
+    public static void base64Img(String var, int width, int height, String type) throws Exception {
+        InputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(var));
+        PrintUtil.printImage(inputStream, width, height, type);
+    }
+
+    /**
      * 打印base64 pdf
      */
     public static void base64Pdf(String var) throws Exception {
