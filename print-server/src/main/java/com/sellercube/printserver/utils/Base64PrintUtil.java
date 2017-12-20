@@ -19,15 +19,17 @@ public class Base64PrintUtil {
      */
     public static void base64Img(String var) throws Exception {
         InputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(var));
+        FileUtil.base64ToFile(var,"jpg");
         PrintUtil.printImage(inputStream, "jpg");
     }
 
     /**
-     * 打印base64 图片
+     * 打印base64图片
      */
-    public static void base64Img(String var, int width, int height, String type) throws Exception {
+    public static void base64Img(String var, int width, int length, String printType) throws Exception {
         InputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(var));
-        PrintUtil.printImage(inputStream, width, height, type);
+        FileUtil.base64ToFile(var,"jpg");
+        PrintUtil.printImage(inputStream, width, length, printType);
     }
 
     /**
