@@ -19,8 +19,8 @@ public class Base64PrintUtil {
      */
     public static void base64Img(String var) throws Exception {
         InputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(var));
-        FileUtil.base64ToFile(var,"jpg");
-        PrintUtil.printImage(inputStream, "jpg");
+        FileUtil.base64ToFile(var,"png");
+        PrintUtil.printImage(inputStream, "png");
     }
 
     /**
@@ -28,7 +28,7 @@ public class Base64PrintUtil {
      */
     public static void base64Img(String var, int width, int length, String printType) throws Exception {
         InputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(var));
-        FileUtil.base64ToFile(var,"jpg");
+        FileUtil.base64ToFile(var,"png");
         PrintUtil.printImage(inputStream, width, length, printType);
     }
 

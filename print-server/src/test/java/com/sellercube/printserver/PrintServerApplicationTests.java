@@ -31,7 +31,7 @@ public class PrintServerApplicationTests {
                 "AwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSEx\n" +
                 "BhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElK\n" +
                 "U1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3\n" +
-                "uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDs6KKK\n" +
+                "uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwDjKKKK\n" +
                 "ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA\n" +
                 "KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAo\n" +
                 "oooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACii\n" +
@@ -39,133 +39,20 @@ public class PrintServerApplicationTests {
                 "ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA\n" +
                 "KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAo\n" +
                 "oooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACii\n" +
-                "igAooooAKKKKACqC6rA2pSWISTzY3VCcDblkZx39FP41frmYv+Rvuv8Ar5h/9J5aANeTVYI7WxuC\n" +
-                "kmy9eNIwAMguMjPP+NR3Wu21rfRWkiTGSWbyQVAxuwh9enzj9azLr/kC+G/+vm1/9BqlrX/IyWP/\n" +
-                "AGER/wCgQUAdBYa7bX98bSFJlkEKzZYADawUjv1+YVEviSzbTZL4Rz+VGiuRtG7DOyDv6qfwrE8L\n" +
-                "/wDIyP8A9g6L/wBAiqlF/wAihdf9e0P/AKUS0AdQ3iSzWPUHMc+LBwkvyjklivy8+o74qWTXbaO+\n" +
-                "vLRkm8y0hM0hAGCoAPHPXkVyU3/Hp4r/AOvlP/RrVdu/+Rk8Q/8AYOf/ANASgDoJ9dtrea1idJi1\n" +
-                "1M8KYAwGV9hzz0zRDrttNYrdqkwjaGWYAgZ2xkBu/Xniuf1P/j/0P/sIz/8Ao8Uaf/yLcP8A2Dr3\n" +
-                "/wBDWgDbHiSzNrbXHlz7LhJXQbRkCMEtnn24qL/hK7H7P53lXG3yfOxtXO3zPL9euf0rnF/5Auj/\n" +
-                "APXtff8AoLVS/wCYV/3Dv/bqgDtbjxJZ29gLx45zGXRMBRnLRhx39D+dSza7bQ3zWjJMZFmihJAG\n" +
-                "N0gJXv045rktV/5FZP8Ar5g/9JUq7qH/ACMk/wD2EbL/ANAagDoINdtria6iRJg1rMkL5AwWZ9gx\n" +
-                "z0zUUviSzhkgRo5yZrU3S4UcLtLYPPXCmsTTP+P/AFz/ALCMH/o81Svv+PvTf+wKf/RUlAHUS+JL\n" +
-                "OGSBGjnJmtTdLhRwu0tg89cKaIPElnPdfZ0jnD7InyVGMSFAO/8AtjP41y99/wAfem/9gU/+ipKN\n" +
-                "N/5DQ/69rL/0KCgDqF8SWbXUluI598d0tqTtGNzFgD16fKaLnxJZ2trNcSRzlIrprVgqjJYDORz0\n" +
-                "rl4v+Q1df9hqH/0KWjWf+QLf/wDYak/9BNAHYzarBDJcoySE26O7YA5CqjHHPpIP1qsPElmbW2uP\n" +
-                "Ln2XCSug2jIEYJbPPtxVHUP+PvV/+va5/wDRVvWKv/IF0f8A69r7/wBBagDqJfElnDJAjRzkzWpu\n" +
-                "lwo4XaWweeuFNS3Wu21p9v8AMSY/YfL8zaBzv6Y5/wAK5K+/4+9N/wCwKf8A0VJV3W/+Zn/7dP6U\n" +
-                "Abd34ks7O1juJI5ykiRuAqjOHDEd/wDYOfwqyNVgN1bW+yTfcPKiHAwDGSGzz7cVx2v/APIFtP8A\n" +
-                "r2s//QZq2l/5DWj/APXzff8AoTUAXm8SWa6bHfGOfynRnA2jdhXVD39WH4US+JLOGSBGjnJmtTdL\n" +
-                "hRwu0tg89cKa5eX/AJFC1/69pv8A0oiovv8Aj703/sCn/wBFSUAdG/iuxTzcxXH7qFJm+Vfuttxj\n" +
-                "nr84/WrUmu20d9eWjJN5lpCZpCAMFQAeOevIrhZ/+X7/ALB1t/7Rrau/+Rk8Q/8AYOf/ANASgDoJ\n" +
-                "9dtrea1idJi11M8KYAwGV9hzz0zRDrttNfLaKkwkaaWEEgY3RgFu/Tniuf1P/j/0P/sIz/8Ao8Ua\n" +
-                "f/yMkP8A2Eb3/wBAWgDb/wCEks/Mu08ufNq7I/yjkhXY459Iz+YrTtZ1urWG4jBCSorqG6gEZ5rh\n" +
-                "B/x967/18y/+iriuz0b/AJAth/17R/8AoIoAu0UUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFF\n" +
-                "FFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAVzMX/I33X/XzD/6Ty101czF/wAjfdf9fMP/\n" +
-                "AKTy0AF1/wAgXw3/ANfNr/6DVLWv+Rksf+wiP/QIKu3X/IF8N/8AXza/+g1S1r/kZLH/ALCI/wDQ\n" +
-                "IKADwv8A8jI//YOi/wDQIqpRf8ihdf8AXtD/AOlEtXfC/wDyMj/9g6L/ANAiqlF/yKF1/wBe0P8A\n" +
-                "6US0AE3/AB6eK/8Ar5T/ANGtV27/AORk8Q/9g5//AEBKpTf8eniv/r5T/wBGtV27/wCRk8Q/9g5/\n" +
-                "/QEoANT/AOP/AEP/ALCM/wD6PFGn/wDItw/9g69/9DWjU/8Aj/0P/sIz/wDo8Uaf/wAi3D/2Dr3/\n" +
-                "ANDWgCkv/IF0f/r2vv8A0Fqpf8wr/uHf+3VXV/5Auj/9e19/6C1Uv+YV/wBw7/26oAu6r/yKyf8A\n" +
-                "XzB/6SpV3UP+Rkn/AOwjZf8AoDVS1X/kVk/6+YP/AElSruof8jJP/wBhGy/9AagA0z/j/wBc/wCw\n" +
-                "jB/6PNUr7/j703/sCn/0VJV3TP8Aj/1z/sIwf+jzVK+/4+9N/wCwKf8A0VJQAX3/AB96b/2BT/6K\n" +
-                "ko03/kND/r2sv/QoKL7/AI+9N/7Ap/8ARUlGm/8AIaH/AF7WX/oUFABF/wAhq6/7DUP/AKFLRrP/\n" +
-                "ACBb/wD7DUn/AKCaIv8AkNXX/Yah/wDQpaNZ/wCQLf8A/Yak/wDQTQBtah/x96v/ANe1z/6Kt6xV\n" +
-                "/wCQLo//AF7X3/oLVtah/wAfer/9e1z/AOiresVf+QLo/wD17X3/AKC1ABff8fem/wDYFP8A6Kkq\n" +
-                "7rf/ADM//bp/SqV9/wAfem/9gU/+ipKu63/zM/8A26f0oApa/wD8gW0/69rP/wBBmraX/kNaP/18\n" +
-                "33/oTVi6/wD8gW0/69rP/wBBmraX/kNaP/1833/oTUAYsv8AyKFr/wBe03/pRFRff8fem/8AYFP/\n" +
-                "AKKkol/5FC1/69pv/SiKi+/4+9N/7Ap/9FSUAUp/+X7/ALB1t/7Rrau/+Rk8Q/8AYOf/ANASsWf/\n" +
-                "AJfv+wdbf+0a2rv/AJGTxD/2Dn/9ASgA1P8A4/8AQ/8AsIz/APo8Uaf/AMjJD/2Eb3/0BaNT/wCP\n" +
-                "/Q/+wjP/AOjxRp//ACMkP/YRvf8A0BaAKQ/4+9d/6+Zf/RVxXZ6N/wAgWw/69o//AEEVxg/4+9d/\n" +
-                "6+Zf/RVxXZ6N/wAgWw/69o//AEEUAXaKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooo\n" +
-                "oAKKKKACiiigAooooAKKKKACiiigAooooAK5mL/kb7r/AK+Yf/SeWumrmYv+Rvuv+vmH/wBJ5aAC\n" +
-                "6/5Avhv/AK+bX/0GqWtf8jJY/wDYRH/oEFXbr/kC+G/+vm1/9BqlrX/IyWP/AGER/wCgQUAHhf8A\n" +
-                "5GR/+wdF/wCgRVSi/wCRQuv+vaH/ANKJau+F/wDkZH/7B0X/AKBFVKL/AJFC6/69of8A0oloAJv+\n" +
-                "PTxX/wBfKf8Ao1qu3f8AyMniH/sHP/6AlUpv+PTxX/18p/6Nart3/wAjJ4h/7Bz/APoCUAGp/wDH\n" +
-                "/of/AGEZ/wD0eKNP/wCRbh/7B17/AOhrRqf/AB/6H/2EZ/8A0eKNP/5FuH/sHXv/AKGtAFJf+QLo\n" +
-                "/wD17X3/AKC1Uv8AmFf9w7/26q6v/IF0f/r2vv8A0Fqpf8wr/uHf+3VAF3Vf+RWT/r5g/wDSVKu6\n" +
-                "h/yMk/8A2EbL/wBAaqWq/wDIrJ/18wf+kqVd1D/kZJ/+wjZf+gNQAaZ/x/65/wBhGD/0eapX3/H3\n" +
-                "pv8A2BT/AOipKu6Z/wAf+uf9hGD/ANHmqV9/x96b/wBgU/8AoqSgAvv+PvTf+wKf/RUlGm/8hof9\n" +
-                "e1l/6FBRff8AH3pv/YFP/oqSjTf+Q0P+vay/9CgoAIv+Q1df9hqH/wBClo1n/kC3/wD2GpP/AEE0\n" +
-                "Rf8AIauv+w1D/wChS0az/wAgW/8A+w1J/wCgmgDa1D/j71f/AK9rn/0Vb1ir/wAgXR/+va+/9Bat\n" +
-                "rUP+PvV/+va5/wDRVvWKv/IF0f8A69r7/wBBagAvv+PvTf8AsCn/ANFSVd1v/mZ/+3T+lUr7/j70\n" +
-                "3/sCn/0VJV3W/wDmZ/8At0/pQBS1/wD5Atp/17Wf/oM1bS/8hrR/+vm+/wDQmrF1/wD5Atp/17Wf\n" +
-                "/oM1bS/8hrR/+vm+/wDQmoAxZf8AkULX/r2m/wDSiKi+/wCPvTf+wKf/AEVJRL/yKFr/ANe03/pR\n" +
-                "FRff8fem/wDYFP8A6KkoApT/APL9/wBg62/9o1tXf/IyeIf+wc//AKAlYs//AC/f9g62/wDaNbV3\n" +
-                "/wAjJ4h/7Bz/APoCUAGp/wDH/of/AGEZ/wD0eKNP/wCRkh/7CN7/AOgLRqf/AB/6H/2EZ/8A0eKN\n" +
-                "P/5GSH/sI3v/AKAtAFIf8feu/wDXzL/6KuK7PRv+QLYf9e0f/oIrjB/x967/ANfMv/oq4rs9G/5A\n" +
-                "th/17R/+gigC7RRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFA\n" +
-                "BRRRQAUUUUAFFFFABXMxf8jfdf8AXzD/AOk8tdNXMxf8jfdf9fMP/pPLQAXX/IF8N/8AXza/+g1S\n" +
-                "1r/kZLH/ALCI/wDQIKu3X/IF8N/9fNr/AOg1S1r/AJGSx/7CI/8AQIKADwv/AMjI/wD2Dov/AECK\n" +
-                "qUX/ACKF1/17Q/8ApRLV3wv/AMjI/wD2Dov/AECKqUX/ACKF1/17Q/8ApRLQATf8eniv/r5T/wBG\n" +
-                "tV27/wCRk8Q/9g5//QEqlN/x6eK/+vlP/RrVdu/+Rk8Q/wDYOf8A9ASgA1P/AI/9D/7CM/8A6PFG\n" +
-                "n/8AItw/9g69/wDQ1o1P/j/0P/sIz/8Ao8Uaf/yLcP8A2Dr3/wBDWgCkv/IF0f8A69r7/wBBaqX/\n" +
-                "ADCv+4d/7dVdX/kC6P8A9e19/wCgtVL/AJhX/cO/9uqALuq/8isn/XzB/wCkqVd1D/kZJ/8AsI2X\n" +
-                "/oDVS1X/AJFZP+vmD/0lSruof8jJP/2EbL/0BqADTP8Aj/1z/sIwf+jzVK+/4+9N/wCwKf8A0VJV\n" +
-                "3TP+P/XP+wjB/wCjzVK+/wCPvTf+wKf/AEVJQAX3/H3pv/YFP/oqSjTf+Q0P+vay/wDQoKL7/j70\n" +
-                "3/sCn/0VJRpv/IaH/XtZf+hQUAEX/Iauv+w1D/6FLRrP/IFv/wDsNSf+gmiL/kNXX/Yah/8AQpaN\n" +
-                "Z/5At/8A9hqT/wBBNAG1qH/H3q//AF7XP/oq3rFX/kC6P/17X3/oLVtah/x96v8A9e1z/wCiresV\n" +
-                "f+QLo/8A17X3/oLUAF9/x96b/wBgU/8AoqSrut/8zP8A9un9KpX3/H3pv/YFP/oqSrut/wDMz/8A\n" +
-                "bp/SgClr/wDyBbT/AK9rP/0Gatpf+Q1o/wD1833/AKE1Yuv/APIFtP8Ar2s//QZq2l/5DWj/APXz\n" +
-                "ff8AoTUAYsv/ACKFr/17Tf8ApRFRff8AH3pv/YFP/oqSiX/kULX/AK9pv/SiKi+/4+9N/wCwKf8A\n" +
-                "0VJQBSn/AOX7/sHW3/tGtq7/AORk8Q/9g5//AEBKxZ/+X7/sHW3/ALRrau/+Rk8Q/wDYOf8A9ASg\n" +
-                "A1P/AI/9D/7CM/8A6PFGn/8AIyQ/9hG9/wDQFo1P/j/0P/sIz/8Ao8Uaf/yMkP8A2Eb3/wBAWgCk\n" +
-                "P+PvXf8Ar5l/9FXFdno3/IFsP+vaP/0EVxg/4+9d/wCvmX/0VcV2ejf8gWw/69o//QRQBdooooAK\n" +
-                "KKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigArm\n" +
-                "Yv8Akb7r/r5h/wDSeWumrmYv+Rvuv+vmH/0nloALr/kC+G/+vm1/9BqlrX/IyWP/AGER/wCgQVdu\n" +
-                "v+QL4b/6+bX/ANBqlrX/ACMlj/2ER/6BBQAeF/8AkZH/AOwdF/6BFVKL/kULr/r2h/8ASiWrvhf/\n" +
-                "AJGR/wDsHRf+gRVSi/5FC6/69of/AEoloAJv+PTxX/18p/6Nart3/wAjJ4h/7Bz/APoCVSm/49PF\n" +
-                "f/Xyn/o1qu3f/IyeIf8AsHP/AOgJQAan/wAf+h/9hGf/ANHijT/+Rbh/7B17/wChrRqf/H/of/YR\n" +
-                "n/8AR4o0/wD5FuH/ALB17/6GtAFJf+QLo/8A17X3/oLVS/5hX/cO/wDbqrq/8gXR/wDr2vv/AEFq\n" +
-                "pf8AMK/7h3/t1QBd1X/kVk/6+YP/AElSruof8jJP/wBhGy/9AaqWq/8AIrJ/18wf+kqVd1D/AJGS\n" +
-                "f/sI2X/oDUAGmf8AH/rn/YRg/wDR5qlff8fem/8AYFP/AKKkq7pn/H/rn/YRg/8AR5qlff8AH3pv\n" +
-                "/YFP/oqSgAvv+PvTf+wKf/RUlGm/8hof9e1l/wChQUX3/H3pv/YFP/oqSjTf+Q0P+vay/wDQoKAC\n" +
-                "L/kNXX/Yah/9Clo1n/kC3/8A2GpP/QTRF/yGrr/sNQ/+hS0az/yBb/8A7DUn/oJoA2tQ/wCPvV/+\n" +
-                "va5/9FW9Yq/8gXR/+va+/wDQWra1D/j71f8A69rn/wBFW9Yq/wDIF0f/AK9r7/0FqAC+/wCPvTf+\n" +
-                "wKf/AEVJV3W/+Zn/AO3T+lUr7/j703/sCn/0VJV3W/8AmZ/+3T+lAFLX/wDkC2n/AF7Wf/oM1bS/\n" +
-                "8hrR/wDr5vv/AEJqxdf/AOQLaf8AXtZ/+gzVtL/yGtH/AOvm+/8AQmoAxZf+RQtf+vab/wBKIqL7\n" +
-                "/j703/sCn/0VJRL/AMiha/8AXtN/6URUX3/H3pv/AGBT/wCipKAKU/8Ay/f9g62/9o1tXf8AyMni\n" +
-                "H/sHP/6AlYs//L9/2Drb/wBo1tXf/IyeIf8AsHP/AOgJQAan/wAf+h/9hGf/ANHijT/+Rkh/7CN7\n" +
-                "/wCgLRqf/H/of/YRn/8AR4o0/wD5GSH/ALCN7/6AtAFIf8feu/8AXzL/AOiriuz0b/kC2H/XtH/6\n" +
-                "CK4wf8feu/8AXzL/AOiriuz0b/kC2H/XtH/6CKALtFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFF\n" +
-                "ABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFczF/wAjfdf9fMP/AKTy101czF/yN91/\n" +
-                "18w/+k8tABdf8gXw3/182v8A6DVLWv8AkZLH/sIj/wBAgq7df8gXw3/182v/AKDVLWv+Rksf+wiP\n" +
-                "/QIKADwv/wAjI/8A2Dov/QIqpRf8ihdf9e0P/pRLV3wv/wAjI/8A2Dov/QIqpRf8ihdf9e0P/pRL\n" +
-                "QATf8eniv/r5T/0a1Xbv/kZPEP8A2Dn/APQEqlN/x6eK/wDr5T/0a1Xbv/kZPEP/AGDn/wDQEoAN\n" +
-                "T/4/9D/7CM//AKPFGn/8i3D/ANg69/8AQ1o1P/j/AND/AOwjP/6PFGn/APItw/8AYOvf/Q1oApL/\n" +
-                "AMgXR/8Ar2vv/QWql/zCv+4d/wC3VXV/5Auj/wDXtff+gtVL/mFf9w7/ANuqALuq/wDIrJ/18wf+\n" +
-                "kqVd1D/kZJ/+wjZf+gNVLVf+RWT/AK+YP/SVKu6h/wAjJP8A9hGy/wDQGoANM/4/9c/7CMH/AKPN\n" +
-                "Ur7/AI+9N/7Ap/8ARUlXdM/4/wDXP+wjB/6PNUr7/j703/sCn/0VJQAX3/H3pv8A2BT/AOipKNN/\n" +
-                "5DQ/69rL/wBCgovv+PvTf+wKf/RUlGm/8hof9e1l/wChQUAEX/Iauv8AsNQ/+hS0az/yBb//ALDU\n" +
-                "n/oJoi/5DV1/2Gof/QpaNZ/5At//ANhqT/0E0AbWof8AH3q//Xtc/wDoq3rFX/kC6P8A9e19/wCg\n" +
-                "tW1qH/H3q/8A17XP/oq3rFX/AJAuj/8AXtff+gtQAX3/AB96b/2BT/6Kkq7rf/Mz/wDbp/SqV9/x\n" +
-                "96b/ANgU/wDoqSrut/8AMz/9un9KAKWv/wDIFtP+vaz/APQZq2l/5DWj/wDXzff+hNWLr/8AyBbT\n" +
-                "/r2s/wD0Gatpf+Q1o/8A1833/oTUAYsv/IoWv/XtN/6URUX3/H3pv/YFP/oqSiX/AJFC1/69pv8A\n" +
-                "0oiovv8Aj703/sCn/wBFSUAUp/8Al+/7B1t/7Rrau/8AkZPEP/YOf/0BKxZ/+X7/ALB1t/7Rrau/\n" +
-                "+Rk8Q/8AYOf/ANASgA1P/j/0P/sIz/8Ao8Uaf/yMkP8A2Eb3/wBAWjU/+P8A0P8A7CM//o8Uaf8A\n" +
-                "8jJD/wBhG9/9AWgCkP8Aj713/r5l/wDRVxXZ6N/yBbD/AK9o/wD0EVxg/wCPvXf+vmX/ANFXFdno\n" +
-                "3/IFsP8Ar2j/APQRQBdooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKK\n" +
-                "ACiiigAooooAKKKKACiiigArmYv+Rvuv+vmH/wBJ5a6aohbQCYzCGPzSQS+wbiQCAc/QkfQ0Ac9d\n" +
-                "f8gXw3/182v/AKDVLWv+Rksf+wiP/QIK6420DJEhhjKREGNSgwhHQj0xTXs7aSVZZLeF5FbeGZAS\n" +
-                "G45z68D8hQByfhf/AJGR/wDsHRf+gRVSi/5FC6/69of/AEolruYrO2hl82G3hjk2hNyoAdoxgZ9O\n" +
-                "B+VILCzEJhFrB5RABTyxtIBJAx9ST9TQBw83/Hp4r/6+U/8ARrVdu/8AkZPEP/YOf/0BK6s2FmRK\n" +
-                "DawETHMo8sfOc5y3rz60ps7ZpZJWt4TJKuyRigy6+hPccCgDk9T/AOP/AEP/ALCM/wD6PFGn/wDI\n" +
-                "tw/9g69/9DWusaztnZGe3hZo2LoSgJVickj0JPNC2dskQiW3hWMKyBQgACt94Y9D3oA4Zf8AkC6P\n" +
-                "/wBe19/6C1Uv+YV/3Dv/AG6r0X7BZ7ET7LBsQMEXyxhQ33gPTPf1pv8AZtjs2fYrfbt2Y8pcbc7s\n" +
-                "dOmefrQBxOq/8isn/XzB/wCkqVd1D/kZJ/8AsI2X/oDV1b2Fm8XlPawNGCDsMYIyBgHH04+lK1nb\n" +
-                "PKZWt4WkLK5YoCSy/dOfUdqAOT0z/j/1z/sIwf8Ao81Svv8Aj703/sCn/wBFSV3K2dsjOyW8KtIw\n" +
-                "dyEALMDkE+pB5pGsLNipa1gJRPLUmMcLjG0e2CePegDh77/j703/ALAp/wDRUlGm/wDIaH/XtZf+\n" +
-                "hQV3DWFmxUtawEonlqTGOFxjaPbBPHvQthZo+9LWBXwo3CMA4GMD8MDH0FAHDxf8hq6/7DUP/oUt\n" +
-                "Gs/8gW//AOw1J/6Ca7gWFmHLi1g3lxIW8sZLDOG+vJ596HsLORGSS1gZGcyMrRggt/ePv70AYOof\n" +
-                "8fer/wDXtc/+iresVf8AkC6P/wBe19/6C1d21tA5ctDGxcEMSg+YEAEH1yAPyFM+wWexE+ywbEDB\n" +
-                "F8sYUN94D0z39aAOHvv+PvTf+wKf/RUlXdb/AOZn/wC3T+ldW1hZsVLWsBKJ5akxjhcY2j2wTx70\n" +
-                "r2dtJ5vmW8L+djzNyA78dM+uKAOG1/8A5Atp/wBe1n/6DNW0v/Ia0f8A6+b7/wBCat6Sws5UCSWs\n" +
-                "DooACtGCABnA/DJx9TT/ALNBvR/Jj3oWKNsGVLfeI9M9/WgDhJf+RQtf+vab/wBKIqL7/j703/sC\n" +
-                "n/0VJXcGwszCITaweUAQE8sbQCQSMfUA/UUNYWbFS1rASieWpMY4XGNo9sE8e9AHnU//AC/f9g62\n" +
-                "/wDaNbV3/wAjJ4h/7Bz/APoCV1J02xO7NlbncoRv3S8qMYB46DA/IU82ds0skrW8JklXZIxQZdfQ\n" +
-                "nuOBQByep/8AH/of/YRn/wDR4o0//kZIf+wje/8AoC11jWds7Iz28LNGxdCUBKsTkkehJ5oWztkl\n" +
-                "Eq28KyBmcMEAIZvvHPqe9AHDD/j713/r5l/9FXFdno3/ACBbD/r2j/8AQRUv2CzzIfssGZCS58sf\n" +
-                "MSCCT68MfzPrUyIsaKkahUUAKqjAA9BQA6iiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA\n" +
+                "igAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKK\n" +
+                "ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA\n" +
+                "KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAo\n" +
+                "oooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACii\n" +
+                "igAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKK\n" +
+                "ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA\n" +
+                "KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAo\n" +
+                "oooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACii\n" +
+                "igAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKK\n" +
+                "ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA\n" +
+                "KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAo\n" +
+                "oooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACii\n" +
+                "igAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKK\n" +
+                "ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA\n" +
                 "KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAo\n" +
                 "oooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACii\n" +
                 "igAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKK\n" +
@@ -192,7 +79,9 @@ public class PrintServerApplicationTests {
                 "ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA\n" +
                 "KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAo\n" +
                 "oooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACii\n" +
-                "igAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA/9k=";
+                "igAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKK\n" +
+                "ACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooA\n" +
+                "KKKKACiiigAooooAKKKKACiiigD/2Q==\n";
         System.out.println(FileUtil.base64ToFile(aaa,"jpg"));
         Thread.sleep(3000);
     }
