@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Check Out') {
             steps {                
-                git url: "http://192.168.1.122:3000/JAVA/free-print.git"
+             git branch: 'master', credentialsId: '34bef64d-39ab-4f2f-af46-6f69ee6079a0', url: 'http://192.168.1.122:3000/JAVA/free-print.git'
             }        
         }        
         stage('Build and Install') {
