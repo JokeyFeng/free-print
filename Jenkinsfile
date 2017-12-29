@@ -13,12 +13,17 @@ pipeline {
         }
         stage('Docker build images') {
             steps {                
-                echo 'docker bilud'
+                sh """
+                docker rm -f usernameger
+                docker rmi usermanager:1.0
+                cd /root/.jenkins/workspace/移动打印/user-manager/target/
+                docker build -t usermanager:1.0 -f /root/.jenkins/workspace/移动打印/user-manager/Dockerfile /root/.jenkins/workspace/移动打印/user-manager
+                """
             }        
         }        
         stage('Docker run') {
             steps {                
-                echo 'running!'
+                docker run -d -p 9001:9001 --name usermanager
             }        
         }
     }
