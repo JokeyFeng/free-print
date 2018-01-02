@@ -15,21 +15,20 @@ import java.util.Map;
  * @author Chenjing
  */
 public class JasperUtil {
+
     public static void main(String[] args) throws Exception {
         Map<String, Object> rptParameters = new HashMap<>();
-        rptParameters.put("code", "11111");
-        ClassPathResource resource=new ClassPathResource("template/report1.jasper");
+        rptParameters.put("poaOrSku", "POA10000");
+        rptParameters.put("size", "Black XL（黑色XL）");
+        rptParameters.put("boxNo", "A-A-01-01");
+        ClassPathResource resource = new ClassPathResource("template/poa.jasper");
 
         //传入报表源文件绝对路径，外部参数对象，DB连接，得到JasperPring对象
-/*        JasperPrint jasperPrint = JasperFillManager.fillReport("C:/Users/Administrator/Desktop/report1.jasper",
-                rptParameters,
-                new JREmptyDataSource());*/
         JasperPrint jasperPrint = JasperFillManager.fillReport(resource.getInputStream(),
-                rptParameters,
-                new JREmptyDataSource());
+                rptParameters, new JREmptyDataSource());
         //导出PDF文件
-        JasperExportManager.exportReportToPdfFile(jasperPrint, "C:/Users/Administrator/Desktop/test.pdf");
-
+        JasperExportManager.exportReportToPdfFile(jasperPrint,
+                "C:/Users/Administrator/Desktop/test.pdf");
         //执行结束
         System.out.println("Export success!!");
     }

@@ -3,7 +3,12 @@ package com.sellercube.printserver.utils;
 import com.google.common.collect.Lists;
 import com.sellercube.common.utils.Base64Util;
 import lombok.Cleanup;
+import net.sf.jasperreports.engine.JREmptyDataSource;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -11,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -52,6 +58,26 @@ public class FileUtil {
 
         return path;
     }
+
+    /**
+     * 根据参数生成pdf文件（按照Jasper模板）
+     *
+     * @param param map 参数
+     * @return 文件路径
+     */
+    public static String jasperToPdf(Map<String, Object> param) throws Exception {
+        if (param == null || param.isEmpty()) {
+            throw new RuntimeException("参数为空");
+        }
+        ClassPathResource resource = new ClassPathResource("template/report1.jasper");
+        JasperPrint jasperPrint = JasperFillManager.fillReport(resource.getInputStream(),
+                param, new JREmptyDataSource());
+        //导出PDF文件
+        String path = pdfDir + UUID.randomUUID().toString() + ".pdf";
+        JasperExportManager.exportReportToPdfFile(jasperPrint, path);
+        return path;
+    }
+
 
     /**
      * @param url    url路径
