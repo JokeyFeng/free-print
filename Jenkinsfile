@@ -21,7 +21,7 @@ pipeline {
         }        
         stage('Docker run') {
             steps {
-                sh 'docker run -d -p 9001:9001 --name usermanager'
+                sh 'docker run -d -p 9001:9001 --name usermanager usermanager:1.0'
             }        
         }
     }
