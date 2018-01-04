@@ -1,8 +1,6 @@
 package com.sellercube.printserver.service.impl;
 
 import com.google.common.collect.Maps;
-import com.sellercube.common.entity.Result;
-import com.sellercube.common.utils.ResultUtil;
 import com.sellercube.printserver.entity.DotNetFba;
 import com.sellercube.printserver.entity.PrintParam;
 import com.sellercube.printserver.executors.BackToEds;
@@ -64,13 +62,13 @@ public class BanggoodServiceImpl implements BanggoodService {
     private BackToEds backToEds;
 
     @Override
-    public Result process(PrintParam printParam) throws Exception {
+    public String process(PrintParam printParam) throws Exception {
         DotNetFba dotnetFba = printParam.getData();
         String pdfUrl = dotnetFba.getPdfUrl();
         String shipType = dotnetFba.getShipType();
         Objects.requireNonNull(shipType, "棒谷渠道shipType为null");
         if (Objects.equals(null, pdfUrl) || Objects.equals("", pdfUrl)) {
-            return ResultUtil.error("打印失败，PDFUrl内容为空");
+            throw new Exception("打印失败，PDFUrl内容为空");
         }
 
         //还原特殊字符串
@@ -82,7 +80,7 @@ public class BanggoodServiceImpl implements BanggoodService {
         }
         consumer.accept(pdfUrl);
         backToEds.backFbaCode(dotnetFba.getFbaCode(), printParam.getUserId());
-        return ResultUtil.success("打印成功");
+        return "打印成功";
     }
 
     /**

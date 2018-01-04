@@ -1,6 +1,5 @@
 package com.sellercube.printserver.service;
 
-import com.sellercube.common.entity.Result;
 import com.sellercube.printserver.entity.PrintParam;
 
 /**
@@ -13,8 +12,8 @@ public interface BanggoodService {
     /**
      * 对棒谷渠道的打印进行处理
      * @param printParam 打印的参数实体类
-     * @return 项目的统一返回结果
+     * @return 打印成功
      * @throws Exception 向上抛异常
      */
-    Result process(PrintParam printParam) throws Exception;
+    String process(PrintParam printParam) throws Exception;
 }

@@ -1,6 +1,8 @@
 package com.sellercube.printserver.rest;
 
 import com.sellercube.common.entity.Result;
+import com.sellercube.common.utils.ResultUtil;
+import com.sellercube.printserver.entity.OpenBox;
 import com.sellercube.printserver.entity.PrintParam;
 import com.sellercube.printserver.entity.Printer;
 import com.sellercube.printserver.service.BanggoodService;
@@ -35,24 +37,37 @@ public class RestfulController {
     /**
      * 针对棒谷FBA渠道调拨进行打印
      *
-     * @param var 打印实体类
+     * @param printParam 打印实体类
      * @return 是否打印成功
      * @throws Exception 异常
      */
     @PostMapping("/bg/fba/print")
-    public Result handle(@RequestBody PrintParam var) throws Exception {
-        return banggoodService.process(var);
+    public Result handle(@RequestBody PrintParam printParam) throws Exception {
+        return ResultUtil.success(banggoodService.process(printParam));
     }
 
     /**
      * 打印
      *
-     * @param var 请求实体类
+     * @param printer 请求实体类
      * @return 是否打印成功
+     * @throws Exception 异常
      */
     @PostMapping(value = "/print")
-    public Result print(@RequestBody Printer var) throws Exception {
-        return printService.print(var);
+    public Result print(@RequestBody Printer printer) throws Exception {
+        return ResultUtil.success(printService.print(printer));
+    }
+
+    /**
+     * 打印项目提供的模板
+     *
+     * @param openBox 开箱入库实体类
+     * @return 打印是否成
+     * @throws Exception 异常
+     */
+    @PostMapping(value = "/print/model")
+    public Result printModel(@RequestBody OpenBox openBox) throws Exception {
+        return ResultUtil.success(printService.printModel(openBox));
     }
 
 }

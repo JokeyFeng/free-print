@@ -62,14 +62,15 @@ public class FileUtil {
     /**
      * 根据参数生成pdf文件（按照Jasper模板）
      *
-     * @param param map 参数
+     * @param param     map 参数
+     * @param modelPath 模板路径
      * @return 文件路径
      */
-    public static String jasperToPdf(Map<String, Object> param) throws Exception {
+    public static String jasperToPdf(Map<String, Object> param, String modelPath) throws Exception {
         if (param == null || param.isEmpty()) {
             throw new RuntimeException("参数为空");
         }
-        ClassPathResource resource = new ClassPathResource("template/report1.jasper");
+        ClassPathResource resource = new ClassPathResource(modelPath);
         JasperPrint jasperPrint = JasperFillManager.fillReport(resource.getInputStream(),
                 param, new JREmptyDataSource());
         //导出PDF文件
