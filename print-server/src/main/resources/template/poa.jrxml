@@ -12,9 +12,9 @@
 	<pageHeader>
 		<band height="55" splitType="Stretch">
 			<textField>
-				<reportElement x="18" y="22" width="195" height="33" uuid="60249dd2-73da-4313-a220-5f65d1cde3bc"/>
+				<reportElement x="18" y="11" width="195" height="44" uuid="60249dd2-73da-4313-a220-5f65d1cde3bc"/>
 				<textElement>
-					<font size="22" isBold="true"/>
+					<font size="26" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{poaOrSku}]]></textFieldExpression>
 			</textField>
