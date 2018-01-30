@@ -1,0 +1,1190 @@
+= JAVA打印用户服务RESTful APIs
+
+
+[[_overview]]
+== Overview
+任何疑问请联系：QQ：1134991001
+
+
+=== Version information
+[%hardbreaks]
+__Version__ : 1.0
+
+
+=== Contact information
+[%hardbreaks]
+__Contact__ : 陈静（仓储）
+__Contact Email__ : chenjing@banggood.com
+
+
+=== URI scheme
+[%hardbreaks]
+__Host__ : localhost:9001
+__BasePath__ : /
+
+
+=== Tags
+
+* 仓库 : Storage Controller
+* 仓库移动打印服务调用接口访问数据库 : Dao Controller
+* 手持IP配置 : Print Config Controller
+* 打印类型 : Print Type Controller
+* 用户 : User Controller
+
+
+
+
+[[_paths]]
+== Paths
+
+[[_insertusingpost]]
+=== 插入渠道配置打印方法
+....
+POST /db/channel
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Body**|**channelConfig** +
+__required__|channelConfig|<<_channelconfig,ChannelConfig>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 仓库移动打印服务调用接口访问数据库
+
+
+[[_reflectusingget]]
+=== 根据渠道名称获取渠道的打印方法
+....
+GET /db/channel
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Query**|**channelName** +
+__required__|channelName|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 仓库移动打印服务调用接口访问数据库
+
+
+[[_getuserusingget]]
+=== 根据用户id获取用户信息
+....
+GET /db/users/{id}
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Path**|**id** +
+__required__|id|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 仓库移动打印服务调用接口访问数据库
+
+
+[[_getipusingget]]
+=== 根据用户id获取用户信息
+....
+GET /db/users/{id}/ip
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Path**|**id** +
+__required__|id|string
+|**Query**|**printType** +
+__required__|printType|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 仓库移动打印服务调用接口访问数据库
+
+
+[[_postusingpost]]
+=== 插入手持的IP配置信息
+....
+POST /print/config
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Body**|**printConfig** +
+__required__|printConfig|<<_printconfig,PrintConfig>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 手持IP配置
+
+
+[[_putusingput]]
+=== 修改手持的IP配置信息
+....
+PUT /print/config
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Body**|**printConfig** +
+__required__|printConfig|<<_printconfig,PrintConfig>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 手持IP配置
+
+
+[[_deletebyidsusingdelete]]
+=== 删除手持IP配置的信息
+....
+DELETE /print/config
+....
+
+
+==== Description
+批量删除手持IP配置的信息,多个id用英文逗号分隔
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Body**|**ids** +
+__required__|ids|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 手持IP配置
+
+
+[[_listusingget]]
+=== 获取手持的IP配置信息
+....
+GET /print/config/list
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**authorization** +
+__required__|app secret|string|
+|**Query**|**limit** +
+__optional__|limit|integer (int32)|`10`
+|**Query**|**pageNum** +
+__optional__|pageNum|integer (int32)|`1`
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 手持IP配置
+
+
+[[_searchbyconditionusingget]]
+=== 根据条件搜索手持IP配置的信息
+....
+GET /print/config/search
+....
+
+
+==== Description
+根据传入条件来进行搜索
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**authorization** +
+__required__|app secret|string|
+|**Query**|**limit** +
+__optional__|limit|integer (int32)|`10`
+|**Query**|**operateId** +
+__optional__|operateId|string|
+|**Query**|**pageNum** +
+__optional__|pageNum|integer (int32)|`1`
+|**Query**|**warehouseId** +
+__optional__|warehouseId|integer (int32)|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 手持IP配置
+
+
+[[_deletebyidusingdelete]]
+=== 删除手持IP配置的信息
+....
+DELETE /print/config/{id}
+....
+
+
+==== Description
+根据id删除手持IP配置的信息
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Path**|**id** +
+__required__|id|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 手持IP配置
+
+
+[[_insertusingpost_1]]
+=== 新增打印类型
+....
+POST /printtype
+....
+
+
+==== Description
+传入json对象进行新增操作
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Body**|**printType** +
+__required__|printType|<<_printtype,PrintType>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 打印类型
+
+
+[[_insertusingget_1]]
+=== 获取所有的打印机类型
+....
+GET /printtypes
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Query**|**limit** +
+__optional__|limit|string
+|**Query**|**pageNum** +
+__optional__|pageNum|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 打印类型
+
+
+[[_busingdelete]]
+=== 删除打印机类型
+....
+DELETE /printtypes
+....
+
+
+==== Description
+批量删除打印机类型，多个id用逗号分隔
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Body**|**ids** +
+__required__|ids|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 打印类型
+
+
+[[_ausingget]]
+=== 判断是否重复
+....
+GET /printtypes/repeat
+....
+
+
+==== Description
+根据打印类型名称判断是否重复
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Query**|**printTypeName** +
+__required__|printTypeName|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 打印类型
+
+
+[[_insertusingget]]
+=== 根据名称查询打印机类型
+....
+GET /printtypes/search
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Query**|**limit** +
+__optional__|limit|string
+|**Query**|**name** +
+__required__|name|string
+|**Query**|**pageNum** +
+__optional__|pageNum|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 打印类型
+
+
+[[_putusingput_1]]
+=== 修改打印机类型
+....
+PUT /printtypes/{id}
+....
+
+
+==== Description
+根据id修改打印机类型，传入json对象
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Path**|**id** +
+__required__|id|string
+|**Body**|**printType** +
+__required__|printType|<<_printtype,PrintType>>
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**201**|Created|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 打印类型
+
+
+[[_delusingdelete]]
+=== 删除打印机类型
+....
+DELETE /printtypes/{id}
+....
+
+
+==== Description
+根据id删除打印机类型
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4"]
+|===
+|Type|Name|Description|Schema
+|**Header**|**authorization** +
+__required__|app secret|string
+|**Path**|**id** +
+__required__|id|string
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**204**|No Content|No Content
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 打印类型
+
+
+[[_searchusingget]]
+=== 根据仓库名进行搜索
+....
+GET /storage/search
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**authorization** +
+__required__|app secret|string|
+|**Query**|**limit** +
+__optional__|limit|integer (int32)|`10`
+|**Query**|**pageNum** +
+__optional__|pageNum|integer (int32)|`1`
+|**Query**|**storageName** +
+__required__|storageName|string|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 仓库
+
+
+[[_getusingget]]
+=== 获取所有的仓库
+....
+GET /storages
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**authorization** +
+__required__|app secret|string|
+|**Query**|**limit** +
+__optional__|limit|integer (int32)|`10`
+|**Query**|**pageNum** +
+__optional__|pageNum|integer (int32)|`1`
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 仓库
+
+
+[[_searchusingget_1]]
+=== 根据用户名进行搜索
+....
+GET /user/search
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**authorization** +
+__required__|app secret|string|
+|**Query**|**limit** +
+__optional__|limit|integer (int32)|`10`
+|**Query**|**pageNum** +
+__optional__|pageNum|integer (int32)|`1`
+|**Query**|**userName** +
+__required__|userName|string|
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 用户
+
+
+[[_getusingget_1]]
+=== 获取所有的用户
+....
+GET /users
+....
+
+
+==== Parameters
+
+[options="header", cols=".^2,.^3,.^9,.^4,.^2"]
+|===
+|Type|Name|Description|Schema|Default
+|**Header**|**authorization** +
+__required__|app secret|string|
+|**Query**|**limit** +
+__optional__|limit|integer (int32)|`10`
+|**Query**|**pageNum** +
+__optional__|pageNum|integer (int32)|`1`
+|===
+
+
+==== Responses
+
+[options="header", cols=".^2,.^14,.^4"]
+|===
+|HTTP Code|Description|Schema
+|**200**|OK|<<_result,Result>>
+|**401**|Unauthorized|No Content
+|**403**|Forbidden|No Content
+|**404**|Not Found|No Content
+|===
+
+
+==== Consumes
+
+* `application/json`
+
+
+==== Produces
+
+* `*/*`
+
+
+==== Tags
+
+* 用户
+
+
+
+
+[[_definitions]]
+== Definitions
+
+[[_channelconfig]]
+=== ChannelConfig
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**clazz** +
+__optional__|string
+|**createTime** +
+__optional__|string (date-time)
+|**creator** +
+__optional__|string
+|**delTime** +
+__optional__|string (date-time)
+|**deletor** +
+__optional__|string
+|**id** +
+__optional__|integer (int32)
+|**isDelete** +
+__optional__|boolean
+|**method** +
+__optional__|string
+|**name** +
+__optional__|string
+|**updateTime** +
+__optional__|string (date-time)
+|**updator** +
+__optional__|string
+|===
+
+
+[[_printconfig]]
+=== PrintConfig
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**createDate** +
+__optional__|string (date-time)
+|**createUserId** +
+__optional__|integer (int32)
+|**deleteDate** +
+__optional__|string (date-time)
+|**deleteUserid** +
+__optional__|integer (int32)
+|**isDeleted** +
+__optional__|boolean
+|**isEnable** +
+__optional__|boolean
+|**machineIp** +
+__optional__|string
+|**machinePort** +
+__optional__|integer (int32)
+|**modifyDate** +
+__optional__|string (date-time)
+|**modifyUserId** +
+__optional__|integer (int32)
+|**operateUserId** +
+__optional__|integer (int32)
+|**printConfigId** +
+__optional__|integer (int32)
+|**printTypeId** +
+__optional__|integer (int32)
+|**storageId** +
+__optional__|integer (int32)
+|===
+
+
+[[_printtype]]
+=== PrintType
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**createTime** +
+__optional__|string (date-time)
+|**creator** +
+__optional__|string
+|**delTime** +
+__optional__|string (date-time)
+|**deletor** +
+__optional__|string
+|**id** +
+__optional__|integer (int32)
+|**isDelete** +
+__optional__|boolean
+|**typeName** +
+__optional__|string
+|**updateTime** +
+__optional__|string (date-time)
+|**updator** +
+__optional__|string
+|===
+
+
+[[_result]]
+=== Result
+
+[options="header", cols=".^3,.^4"]
+|===
+|Name|Schema
+|**code** +
+__optional__|integer (int32)
+|**data** +
+__optional__|object
+|**msg** +
+__optional__|string
+|===
+
+
+
+
+
