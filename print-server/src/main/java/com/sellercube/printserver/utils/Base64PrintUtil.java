@@ -14,12 +14,14 @@ import java.io.InputStream;
 public class Base64PrintUtil {
     private static final String IMG_BASE64_START = "iVBORw0KGgo";
 
+    private static final String PDF = "pdf";
+
     /**
      * 打印base64图片
      */
     public static void base64Img(String var) throws Exception {
         InputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(var));
-        FileUtil.base64ToFile(var,"png");
+        FileUtil.base64ToFile(var, "png");
         PrintUtil.printImage(inputStream, "png");
     }
 
@@ -28,7 +30,7 @@ public class Base64PrintUtil {
      */
     public static void base64Img(String var, int width, int length, String printType) throws Exception {
         InputStream inputStream = new ByteArrayInputStream(Base64.decodeBase64(var));
-        FileUtil.base64ToFile(var,"png");
+        FileUtil.base64ToFile(var, "png");
         PrintUtil.printImage(inputStream, width, length, printType);
     }
 
@@ -63,8 +65,11 @@ public class Base64PrintUtil {
     /**
      * 打印下载的pdf文件
      */
-    @SuppressWarnings("unused")
-    public static void downloadPdf(String var) throws Exception {
-        PrintUtil.printPDF(FileUtil.downloadFile(var, "pdf"));
+    public static void downloadPdf(String var, String suffix) throws Exception {
+        if (PDF.equalsIgnoreCase(suffix)) {
+            PrintUtil.printPDF(FileUtil.downloadFile(var, suffix));
+        } else {
+            PrintUtil.printImage(FileUtil.downloadFile(var, suffix));
+        }
     }
 }

@@ -47,10 +47,6 @@ public class FileUtil {
     @SuppressWarnings("all")
     public static String base64ToFile(String str, String suffix) throws Exception {
         byte[] bytes = Base64Util.decodeData(str);
-        File dir = new File(pdfDir);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
         String path = pdfDir + UUID.randomUUID().toString() + "." + suffix;
         @Cleanup FileOutputStream fileOutputStream = new FileOutputStream(path);
         fileOutputStream.write(bytes);
@@ -93,10 +89,6 @@ public class FileUtil {
         headers.setAccept(list);
         ResponseEntity<byte[]> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity<byte[]>(headers), byte[].class);
         byte[] result = response.getBody();
-        File dir = new File(pdfDir);
-        if (!dir.exists()) {
-            dir.mkdirs();
-        }
         String path = pdfDir + UUID.randomUUID().toString() + "." + suffix;
         @Cleanup FileOutputStream fileOutputStream = new FileOutputStream(path);
         fileOutputStream.write(result);

@@ -1,17 +1,15 @@
 package com.sellercube.printserver.service.impl;
 
-import com.google.common.collect.Maps;
 import com.sellercube.printserver.entity.DotNetFba;
+import com.sellercube.printserver.entity.LocalMap;
 import com.sellercube.printserver.entity.PrintParam;
 import com.sellercube.printserver.executors.BackToEds;
 import com.sellercube.printserver.service.BanggoodService;
-import com.sellercube.printserver.utils.Base64PrintUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;
 
@@ -33,32 +31,6 @@ public class BanggoodServiceImpl implements BanggoodService {
         this.backToEds = backToEds;
     }
 
-    private static Map<String, Consumer<String>> map = Maps.newHashMap();
-
-    static {
-        map.put("Fedex", x -> {
-            try {
-                Base64PrintUtil.base64ImgCmd(x);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        map.put("DHL", x -> {
-            try {
-                Base64PrintUtil.base64Pdf(x);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        map.put("DPD", x -> {
-            try {
-                Base64PrintUtil.base64PrintCmd(x);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-    }
-
     private BackToEds backToEds;
 
     @Override
@@ -74,7 +46,7 @@ public class BanggoodServiceImpl implements BanggoodService {
         //还原特殊字符串
         pdfUrl = this.convertStr(pdfUrl);
 
-        Consumer<String> consumer = map.get(shipType);
+        Consumer<String> consumer = LocalMap.channelPrintMap.get(shipType);
         if (consumer == null) {
             throw new Exception("不支持" + shipType + "渠道打印");
         }
