@@ -24,3 +24,10 @@
 - swagger-ui:http://localhost:port/swagger-ui.html (对外提供接口地址)
 - druid:http://localhost:port/druid/login.html (数据源监控页面)
 - monitor:http://localhost:port/metrics (详情：https://segmentfault.com/a/1190000004318360?_ea=568366，对项目进行监控)
+
+
+* hz 杭州
+* gz 广州
+* hzgl 杭州瓜沥
+* us 美仓加州
+* us2 美仓新泽西
