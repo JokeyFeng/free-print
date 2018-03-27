@@ -1,6 +1,7 @@
 package com.sellercube.printserver.utils;
 
 import org.apache.commons.codec.binary.Base64;
+import org.springframework.stereotype.Component;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -11,6 +12,7 @@ import java.io.InputStream;
  *
  * @author Chenjing
  */
+@Component
 public class Base64PrintUtil {
     private static final String IMG_BASE64_START = "iVBORw0KGgo";
 
@@ -46,6 +48,13 @@ public class Base64PrintUtil {
      */
     public static void base64PrintCmd(String var) throws Exception {
         PrintUtil.printByString(new String(Base64.decodeBase64(var)));
+    }
+
+    /**
+     * 打印base64的指令--该方法解决base64PrintCmd方法打印DPD渠道指令调用失败的问题
+     */
+    public static void base64PrintCommand(String var) throws Exception {
+        PrintUtil.printByString(var);
     }
 
     /**

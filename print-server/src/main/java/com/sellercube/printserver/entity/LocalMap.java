@@ -25,6 +25,23 @@ public final class LocalMap {
                 e.printStackTrace();
             }
         });
+
+        channelPrintMap.put("Fedex空派", x -> {
+            try {
+                Base64PrintUtil.base64ImgCmd(x);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        channelPrintMap.put("Fedex一票多件", x -> {
+            try {
+                Base64PrintUtil.base64ImgCmd(x);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
         channelPrintMap.put("DHL", x -> {
             try {
                 Base64PrintUtil.base64Pdf(x);
@@ -32,12 +49,43 @@ public final class LocalMap {
                 e.printStackTrace();
             }
         });
-        channelPrintMap.put("DPD", x -> {
+
+        channelPrintMap.put("DHL空派", x -> {
             try {
-                Base64PrintUtil.base64PrintCmd(x);
+                Base64PrintUtil.base64Pdf(x);
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        });
+
+        channelPrintMap.put("DHL一票多件", x -> {
+            try {
+                Base64PrintUtil.base64Pdf(x);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
+        channelPrintMap.put("DPD", x -> {
+            try {
+                Base64PrintUtil.base64ImgCmd(x);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        channelPrintMap.put("DPD一票多件", x -> {
+                    try {
+                        Base64PrintUtil.base64PrintCommand(x);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+        });
+        channelPrintMap.put("DPD空派", x -> {
+                    try {
+                        Base64PrintUtil.base64PrintCommand(x);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
         });
 
         channelPrintMap.put("加拿大UPS", x -> {
@@ -49,6 +97,20 @@ public final class LocalMap {
                     //base64 PDF
                     Base64PrintUtil.base64Pdf(x);
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        channelPrintMap.put("UPS空派", x -> {
+            try {
+                Base64PrintUtil.base64Img(x,1000,1300,"png");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+        channelPrintMap.put("UPS一票多件", x -> {
+            try {
+                Base64PrintUtil.base64Img(x,1000,1300,"png");
             } catch (Exception e) {
                 e.printStackTrace();
             }

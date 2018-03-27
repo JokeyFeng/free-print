@@ -85,5 +85,4 @@ public class PrintServerApplicationTests {
         System.out.println(FileUtil.base64ToFile(aaa,"jpg"));
         Thread.sleep(3000);
     }
-
 }

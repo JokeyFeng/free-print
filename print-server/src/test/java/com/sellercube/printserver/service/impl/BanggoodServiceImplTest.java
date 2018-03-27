@@ -17,11 +17,11 @@ public class BanggoodServiceImplTest {
 
     @Test
     public void process() throws Exception {
-        cache.put("a", "shabi");
+       /* cache.put("a", "shabi");
         String resultVal = cache.get("jerry", () -> {
             return "a";
         });
-        System.out.println(resultVal);
+        System.out.println(resultVal);*/
     }
 
 }
