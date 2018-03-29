@@ -18,7 +18,7 @@ public final class LocalMap {
     private static final String HTTP = "http";
 
     static {
-        channelPrintMap.put("Fedex", x -> {
+        channelPrintMap.put("FedEx", x -> {
             try {
                 Base64PrintUtil.base64ImgCmd(x);
             } catch (Exception e) {
@@ -26,7 +26,7 @@ public final class LocalMap {
             }
         });
 
-        channelPrintMap.put("Fedex空派", x -> {
+        channelPrintMap.put("FedEx空派", x -> {
             try {
                 Base64PrintUtil.base64ImgCmd(x);
             } catch (Exception e) {
@@ -34,7 +34,7 @@ public final class LocalMap {
             }
         });
 
-        channelPrintMap.put("Fedex一票多件", x -> {
+        channelPrintMap.put("FedEx一票多件", x -> {
             try {
                 Base64PrintUtil.base64ImgCmd(x);
             } catch (Exception e) {
