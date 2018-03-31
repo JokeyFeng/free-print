@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import com.sellercube.printserver.utils.Base64PrintUtil;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -19,7 +20,7 @@ public final class LocalMap {
 
     static {
         channelPrintMap.put("FedEx", x -> {
-            try {
+                try {
                 Base64PrintUtil.base64ImgCmd(x);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -116,4 +117,24 @@ public final class LocalMap {
             }
         });
     }
+
+   /* public static void main(String[] args) {
+        String shipType="DPD邮政";
+
+        Consumer<String> consumer = LocalMap.channelPrintMap.get(shipType);
+        //临时添加渠道,
+        if (consumer == null) {
+            Set<String> keySet = LocalMap.channelPrintMap.keySet();
+            for (String key : keySet) {
+                if (key.contains(shipType.substring(0,3))){
+                    LocalMap.channelPrintMap.put(shipType,LocalMap.channelPrintMap.get(key));
+                    break;
+                }
+            }
+            consumer = LocalMap.channelPrintMap.get(shipType);
+            if (consumer==null) {
+                System.out.println("不支持" + shipType + "渠道打印");
+            }
+        }
+    }*/
 }

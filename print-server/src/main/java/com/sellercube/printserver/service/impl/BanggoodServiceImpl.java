@@ -8,9 +8,11 @@ import com.sellercube.printserver.service.BanggoodService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import java.util.Objects;
+import java.util.Set;
 import java.util.function.Consumer;
 
 /**
@@ -45,10 +47,20 @@ public class BanggoodServiceImpl implements BanggoodService {
 
         //还原特殊字符串
         pdfUrl = this.convertStr(pdfUrl);
-
+        //首次匹配渠道
         Consumer<String> consumer = LocalMap.channelPrintMap.get(shipType);
         if (consumer == null) {
-            throw new Exception("不支持" + shipType + "渠道打印");
+            //临时添加渠道,取邮寄方式的首3个字符进行匹配
+            Set<String> keySet = LocalMap.channelPrintMap.keySet();
+            for (String key : keySet) {
+                if (key.contains(shipType.substring(0,3))){
+                    LocalMap.channelPrintMap.put(shipType,LocalMap.channelPrintMap.get(key));
+                    break;
+                }
+            }
+            //再次去获取
+            consumer = LocalMap.channelPrintMap.get(shipType);
+            Assert.notNull(consumer,"不支持" + shipType + "渠道打印");
         }
         consumer.accept(pdfUrl);
         backToEds.backFbaCode(dotnetFba.getFbaCode(), printParam.getUserId());
