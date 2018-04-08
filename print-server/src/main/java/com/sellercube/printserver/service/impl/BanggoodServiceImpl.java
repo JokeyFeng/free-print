@@ -47,10 +47,10 @@ public class BanggoodServiceImpl implements BanggoodService {
 
         //还原特殊字符串
         pdfUrl = this.convertStr(pdfUrl);
-        //首次匹配渠道
+        //首次匹配邮寄方式
         Consumer<String> consumer = LocalMap.channelPrintMap.get(shipType);
         if (consumer == null) {
-            //临时添加渠道,取邮寄方式的首3个字符进行匹配
+            //临时添加渠道的邮寄方式,取邮寄方式的首3个字符进行匹配
             Set<String> keySet = LocalMap.channelPrintMap.keySet();
             for (String key : keySet) {
                 if (key.contains(shipType.substring(0,3))){
