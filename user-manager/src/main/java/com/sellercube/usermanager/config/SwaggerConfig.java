@@ -31,7 +31,7 @@ public class SwaggerConfig {
                         .description("app secret")
                         .modelRef(new ModelRef("string"))
                         .parameterType("header")
-                        .required(true)
+                        .required(false)
                         .build()))
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.sellercube.usermanager.rest"))

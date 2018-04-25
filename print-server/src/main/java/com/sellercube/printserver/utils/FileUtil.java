@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.*;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.File;
@@ -63,9 +64,7 @@ public class FileUtil {
      * @return 文件路径
      */
     public static String jasperToPdf(Map<String, Object> param, String modelPath) throws Exception {
-        if (param == null || param.isEmpty()) {
-            throw new RuntimeException("参数为空");
-        }
+        Assert.notEmpty(param,"参数不能为空!");
         ClassPathResource resource = new ClassPathResource(modelPath);
         JasperPrint jasperPrint = JasperFillManager.fillReport(resource.getInputStream(),
                 param, new JREmptyDataSource());

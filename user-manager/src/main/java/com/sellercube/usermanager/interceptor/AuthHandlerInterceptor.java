@@ -37,14 +37,14 @@ public class AuthHandlerInterceptor extends HandlerInterceptorAdapter {
             return true;
         }
 
-        String token = request.getHeader("Authorization");
+       /* String token = request.getHeader("Authorization");
         if (!Objects.equals(secret, token)) {
             log.error("auth fail");
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json;charset=UTF-8");
             response.getWriter().write(JSONObject.toJSONString(ResultUtil.create(HttpStatus.AUTH_FAIL, null)));
             return false;
-        }
+        }*/
         return true;
     }
 
