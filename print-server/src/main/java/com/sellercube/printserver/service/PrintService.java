@@ -1,6 +1,7 @@
 package com.sellercube.printserver.service;
 
 import com.sellercube.common.entity.Result;
+import com.sellercube.printserver.entity.IbnBox;
 import com.sellercube.printserver.entity.OpenBox;
 import com.sellercube.printserver.entity.Printer;
 
@@ -27,4 +28,12 @@ public interface PrintService {
      * @throws Exception 异常
      */
     String printModel(OpenBox openBox) throws Exception;
+
+    /**
+     * 对手持的binCode进行模板打印
+     * @param ibnBox
+     * @return
+     * @throws Exception
+     */
+    String printBinBox(IbnBox ibnBox) throws Exception;
 }

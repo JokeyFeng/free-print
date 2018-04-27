@@ -2,6 +2,7 @@ package com.sellercube.printserver.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.sellercube.printserver.entity.IbnBox;
 import com.sellercube.printserver.entity.OpenBox;
 import com.sellercube.printserver.entity.Printer;
 import com.sellercube.printserver.service.PrintService;
@@ -65,6 +66,21 @@ public class PrintServiceImpl implements PrintService {
         PrintUtil.printPDF(numberPath);
         //生成第二个pdf
         String detailPath = FileUtil.jasperToPdf(paramDetail, "template/poa.jasper");
+        PrintUtil.printPDF(detailPath);
+        return "打印成功";
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public String printBinBox(IbnBox ibnBox) throws Exception {
+        Objects.requireNonNull(ibnBox, "实体为空");
+        Map<String, Object> paramNumber = JSONObject.parseObject(JSON.toJSONString(ibnBox.getIbnObject()), Map.class);
+        Map<String, Object> paramDetail = JSONObject.parseObject(JSON.toJSONString(ibnBox.getProductDetail()), Map.class);
+        //生成第一个pdf
+        String numberPath = FileUtil.jasperToPdf(paramNumber, "template/......");
+        PrintUtil.printPDF(numberPath);
+        //生成第二个pdf
+        String detailPath = FileUtil.jasperToPdf(paramDetail, "template/......");
         PrintUtil.printPDF(detailPath);
         return "打印成功";
     }

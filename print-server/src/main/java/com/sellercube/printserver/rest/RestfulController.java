@@ -2,6 +2,7 @@ package com.sellercube.printserver.rest;
 
 import com.sellercube.common.entity.Result;
 import com.sellercube.common.utils.ResultUtil;
+import com.sellercube.printserver.entity.IbnBox;
 import com.sellercube.printserver.entity.OpenBox;
 import com.sellercube.printserver.entity.PrintParam;
 import com.sellercube.printserver.entity.Printer;
@@ -68,6 +69,17 @@ public class RestfulController {
     @PostMapping(value = "/print/model")
     public Result printModel(@RequestBody OpenBox openBox) throws Exception {
         return ResultUtil.success(printService.printModel(openBox));
+    }
+
+    /**
+     * 打印手持提供的IBN信息
+     * @param ibnBox
+     * @return
+     * @throws Exception
+     */
+    @PostMapping(value = "/print/binCode")
+    public Result printBinBox(@RequestBody IbnBox ibnBox) throws Exception {
+        return ResultUtil.success(printService.printBinBox(ibnBox));
     }
 
 }
