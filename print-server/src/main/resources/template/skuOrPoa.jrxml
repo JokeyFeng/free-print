@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="bbn" language="groovy" pageWidth="213" pageHeight="113" columnWidth="213" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="06393a78-f207-4687-9eb8-bba300a4c408">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="shelfNumber" class="java.lang.String"/>
+	<parameter name="userId" class="java.lang.String"/>
+	<parameter name="skuOrPoa" class="java.lang.String"/>
+	<parameter name="color" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="67" splitType="Stretch">
+			<componentElement>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="5" width="213" height="57" uuid="4bda66a8-c77e-41b2-8f98-92e939a64403">
+					<property name="net.sf.jasperreports.export.pdf.tag.table" value="full"/>
+				</reportElement>
+				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false" barWidth="0" barHeight="40">
+					<jr:codeExpression><![CDATA[$P{skuOrPoa}]]></jr:codeExpression>
+				</jr:barbecue>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="36" splitType="Stretch">
+			<textField>
+				<reportElement x="23" y="0" width="75" height="16" uuid="8a4c2b6e-d9db-4c29-9312-481d4a2c3339"/>
+				<textFieldExpression><![CDATA[$P{skuOrPoa}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="0" width="88" height="16" uuid="fcde024d-74f9-45f5-b43f-ecd193cef0ab"/>
+				<textElement textAlignment="Center">
+					<font fontName="宋体" pdfFontName="STSong-Light" pdfEncoding="UniGB-UCS2-H" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{color}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="23" y="16" width="75" height="20" uuid="3d2a6ec7-c5e2-49c5-8834-eaeca4237d0f"/>
+				<textFieldExpression><![CDATA[$P{userId}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="115" y="16" width="88" height="20" uuid="3a22adf5-28d1-4276-88ae-8986a94cb11c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{shelfNumber}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

@@ -24,7 +24,7 @@ public class IbnBox {
      * 包含sku poa的实体
      */
     @NonNull
-    private ProductDetail productDetail;
+    private ProductInfo productInfo;
 
     @Data
     @NoArgsConstructor
@@ -53,7 +53,7 @@ public class IbnBox {
 
     @Data
     @NoArgsConstructor
-    private class ProductDetail {
+    private class ProductInfo {
         /**
          * sku或者poa SKU00001
          */
@@ -73,7 +73,6 @@ public class IbnBox {
         /**
          * 货架号 A-A-01-01
          */
-        @NonNull
         private String shelfNumber;
     }
 }

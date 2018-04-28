@@ -75,12 +75,12 @@ public class PrintServiceImpl implements PrintService {
     public String printBinBox(IbnBox ibnBox) throws Exception {
         Objects.requireNonNull(ibnBox, "实体为空");
         Map<String, Object> paramNumber = JSONObject.parseObject(JSON.toJSONString(ibnBox.getIbnObject()), Map.class);
-        Map<String, Object> paramDetail = JSONObject.parseObject(JSON.toJSONString(ibnBox.getProductDetail()), Map.class);
+        Map<String, Object> paramDetail = JSONObject.parseObject(JSON.toJSONString(ibnBox.getProductInfo()), Map.class);
         //生成第一个pdf
-        String numberPath = FileUtil.jasperToPdf(paramNumber, "template/......");
+        String numberPath = FileUtil.jasperToPdf(paramNumber, "template/bbn.jasper");
         PrintUtil.printPDF(numberPath);
         //生成第二个pdf
-        String detailPath = FileUtil.jasperToPdf(paramDetail, "template/......");
+        String detailPath = FileUtil.jasperToPdf(paramDetail, "template/skuOrPoa.jasper");
         PrintUtil.printPDF(detailPath);
         return "打印成功";
     }

@@ -1,6 +1,7 @@
 package com.sellercube.printserver.config;
 
 
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -36,10 +37,10 @@ public class LogRecord {
         startTime.set(System.currentTimeMillis());
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
-        log.info("【request url : " + request.getRequestURL().toString() + ",http_method : " + request.getMethod()
-                + ",IP : " + request.getRemoteAddr() + ",class_method : "
-                + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName() + ",args : "
-                + Arrays.toString(joinPoint.getArgs()) + "】");
+        log.info("request url : " + request.getRequestURL().toString() + "\nhttp_method : " + request.getMethod()
+                + "\nIP : " + request.getRemoteAddr() + "\nclass_method : "
+                + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName() + "\nargs : "
+                + JSONObject.toJSONString(joinPoint.getArgs()));
 
     }
 
