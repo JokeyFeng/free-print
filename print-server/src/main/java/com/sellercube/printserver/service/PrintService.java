@@ -21,19 +21,10 @@ public interface PrintService {
     String print(Printer var) throws Exception;
 
     /**
-     * 对手持的开箱入库进行模板打印
-     *
-     * @param openBox 实体
-     * @return 打印成功
-     * @throws Exception 异常
-     */
-    String printModel(OpenBox openBox) throws Exception;
-
-    /**
      * 对手持的binCode进行模板打印
-     * @param ibnBox
+     * @param object
      * @return
      * @throws Exception
      */
-    String printBinBox(IbnBox ibnBox) throws Exception;
+    String printModel(Object object) throws Exception;
 }

@@ -48,40 +48,36 @@ public class PrintServiceImpl implements PrintService {
         return "打印成功";
     }
 
-    /**
-     * 对手持的开箱入库进行模板打印
-     *
-     * @param openBox 实体
-     * @return 打印成功
-     * @throws Exception 异常
-     */
-    @SuppressWarnings("unchecked")
     @Override
-    public String printModel(OpenBox openBox) throws Exception {
-        Objects.requireNonNull(openBox, "实体为空");
-        Map<String, Object> paramNumber = JSONObject.parseObject(JSON.toJSONString(openBox.getProductNumber()), Map.class);
-        Map<String, Object> paramDetail = JSONObject.parseObject(JSON.toJSONString(openBox.getProductDetail()), Map.class);
-        //生成第一个pdf
-        String numberPath = FileUtil.jasperToPdf(paramNumber, "template/sftmodel.jasper");
-        PrintUtil.printPDF(numberPath);
-        //生成第二个pdf
-        String detailPath = FileUtil.jasperToPdf(paramDetail, "template/poa.jasper");
-        PrintUtil.printPDF(detailPath);
-        return "打印成功";
-    }
+    @SuppressWarnings("unchecked")
+    public String printModel(Object object) throws Exception {
+        Objects.requireNonNull(object, "实体为空");
+        if (object instanceof IbnBox){
+            IbnBox ibnBox = (IbnBox) object;
+            Map<String, Object> paramNumber = JSONObject.parseObject(JSON.toJSONString(ibnBox.getIbnObject()), Map.class);
+            Map<String, Object> paramDetail = JSONObject.parseObject(JSON.toJSONString(ibnBox.getProductInfo()), Map.class);
+            //生成第一个pdf
+            String numberPath = FileUtil.jasperToPdf(paramNumber, "template/bbn.jasper");
+            PrintUtil.printPDF(numberPath);
+            //生成第二个pdf
+            String detailPath = FileUtil.jasperToPdf(paramDetail, "template/skuOrPoa.jasper");
+            PrintUtil.printPDF(detailPath);
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public String printBinBox(IbnBox ibnBox) throws Exception {
-        Objects.requireNonNull(ibnBox, "实体为空");
-        Map<String, Object> paramNumber = JSONObject.parseObject(JSON.toJSONString(ibnBox.getIbnObject()), Map.class);
-        Map<String, Object> paramDetail = JSONObject.parseObject(JSON.toJSONString(ibnBox.getProductInfo()), Map.class);
-        //生成第一个pdf
-        String numberPath = FileUtil.jasperToPdf(paramNumber, "template/bbn.jasper");
-        PrintUtil.printPDF(numberPath);
-        //生成第二个pdf
-        String detailPath = FileUtil.jasperToPdf(paramDetail, "template/skuOrPoa.jasper");
-        PrintUtil.printPDF(detailPath);
-        return "打印成功";
+            return "打印成功";
+        }
+
+        if (object instanceof OpenBox){
+            OpenBox openBox = (OpenBox) object;
+            Map<String, Object> paramNumber = JSONObject.parseObject(JSON.toJSONString(openBox.getProductNumber()), Map.class);
+            Map<String, Object> paramDetail = JSONObject.parseObject(JSON.toJSONString(openBox.getProductDetail()), Map.class);
+            //生成第一个pdf
+            String numberPath = FileUtil.jasperToPdf(paramNumber, "template/sftmodel.jasper");
+            PrintUtil.printPDF(numberPath);
+            //生成第二个pdf
+            String detailPath = FileUtil.jasperToPdf(paramDetail, "template/poa.jasper");
+            PrintUtil.printPDF(detailPath);
+            return "打印成功";
+        }
+        return "打印失败";
     }
 }

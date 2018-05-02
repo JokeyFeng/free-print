@@ -79,7 +79,6 @@ public class RestfulController {
      */
     @PostMapping(value = "/print/binCode")
     public Result printBinBox(@RequestBody IbnBox ibnBox) throws Exception {
-        return ResultUtil.success(printService.printBinBox(ibnBox));
+        return ResultUtil.success(printService.printModel(ibnBox));
     }
-
 }
