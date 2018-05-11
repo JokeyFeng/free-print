@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Check Out') {
             steps {                
-             git branch: 'master', credentialsId: 'z99680686', url: 'https://github.com/JokeyFeng/free-print.git'
+             git branch: 'master', credentialsId: '3997f22c-e4e5-40f0-b218-d4a24e0e79a7', url: 'https://github.com/JokeyFeng/free-print.git'
             }        
         }
          stage('Build and Install') {
