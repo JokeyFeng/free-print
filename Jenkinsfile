@@ -1,9 +1,9 @@
 pipeline {
-    agent any
+    agent 192.168.181.128
     stages {
         stage('Check Out') {
             steps {                
-             git branch: 'master', credentialsId: '34bef64d-39ab-4f2f-af46-6f69ee6079a0', url: 'http://192.168.1.122:3000/JAVA/free-print.git'
+             git branch: 'master', credentialsId: 'de872e9f5070438a93f3b1bc04ce5011', url: 'https://github.com/JokeyFeng/free-print.git'
             }        
         }        
         stage('Build and Install') {
@@ -14,14 +14,14 @@ pipeline {
         stage('Docker build images') {
             steps {                
                 sh """
-                cd /root/.jenkins/workspace/移动打印/user-manager/target/
-                docker build -t usermanager:1.0 -f /root/.jenkins/workspace/移动打印/user-manager/Dockerfile /root/.jenkins/workspace/移动打印/user-manager
+                cd /root/.jenkins/workspace/移动打印/print-server/target/
+                docker build -t print-server:1.0 -f /root/.jenkins/workspace/移动打印/print-server/Dockerfile /root/.jenkins/workspace/移动打印/print-server
                 """
             }        
         }        
         stage('Docker run') {
             steps {
-                sh 'docker run -d -p 9001:9001 --name usermanager usermanager:1.0'
+                sh 'docker run -d -p 2897:2897 --name print-server --restart=always -v /logs/free-print/print-server/:/logs/print-server/ print-server:1.0'
             }        
         }
     }
