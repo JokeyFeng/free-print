@@ -6,11 +6,12 @@ pipeline {
              git branch: 'master', credentialsId: 'de872e9f5070438a93f3b1bc04ce5011', url: 'https://github.com/JokeyFeng/free-print.git'
             }        
         }
-        stage('Build and Install') {
-            steps {                
-                sh 'mvn clean install package -Dmaven.test.skip=true'
-            }        
-        }
+         stage('打包后端') {
+              sh """
+                 mvn clean compile
+                 mvn package -DskipTests
+                  """
+         }
         stage('Docker build images') {
             steps {                
                 sh """
