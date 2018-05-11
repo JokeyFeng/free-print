@@ -1,5 +1,5 @@
 pipeline {
-    agent 192.168.181.128
+    agent any
     stages {
         stage('Check Out') {
             steps {                
