@@ -14,9 +14,8 @@ pipeline {
         stage('Docker build images') {
             steps {                
                 sh """
-                docker stop print-server
-                docker rm print-server
-                docker rmi print-server:1.0
+                docker rm -f print-server | true
+                docker rmi print-server:1.0 | true
                 cd /root/.jenkins/workspace/移动打印/print-server/target/
                 docker build -t print-server:1.0 -f /root/.jenkins/workspace/移动打印/print-server/Dockerfile /root/.jenkins/workspace/移动打印/print-server
                 """
