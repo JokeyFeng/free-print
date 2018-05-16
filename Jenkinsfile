@@ -17,7 +17,7 @@ pipeline {
                 docker rm -f print-server | true
                 docker rmi print-server:1.0 | true
                 cd /root/.jenkins/workspace/移动打印/print-server/target/
-                docker build -t print-server:1.0 -f /root/.jenkins/workspace/移动打印/print-server/Dockerfile /root/.jenkins/workspace/移动打印/print-server
+                docker build -t print-server:1.0 -f /root/.jenkins/workspace/free-print/print-server/Dockerfile /root/.jenkins/workspace/free-print/print-server
                 """
             }        
         }        
