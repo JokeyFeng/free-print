@@ -33,13 +33,13 @@ pipeline {
             echo 'One way or another, I have finished'
         }
         success {
-            echo 'I succeeeded!'        
+            echo 'Happily, I succeeeded!'        
         }        
         unstable {
             echo 'I am unstable :/'        
         }        
         failure {
-            echo 'I failed :('        
+            echo 'Sadly, I failed :('        
         }        
         changed {
             echo 'Things were different before...'        
