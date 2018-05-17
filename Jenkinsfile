@@ -30,7 +30,7 @@ pipeline {
  
     post {        
         always {
-            echo 'One way or another, I have finished'
+            echo 'Well done, I have finished!'
         }
         success {
             echo 'Happily, I succeeeded!'        
