@@ -81,4 +81,9 @@ public class RestfulController {
     public Result printBinBox(@RequestBody IbnBox ibnBox) throws Exception {
         return ResultUtil.success(printService.printModel(ibnBox));
     }
+    
+    @GetMapping(value = "/test/print")
+    public Result testMethod() {
+        return ResultUtil.success("Welcome to Use Print Method!");
+    }
 }
