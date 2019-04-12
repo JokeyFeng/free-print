@@ -1,17 +1,17 @@
 pipeline {
     agent any
     stages {
-        stage('Check Out') {
+        stage('检出代码') {
             steps {                
              git branch: 'master', credentialsId: 'a674a86f-d183-4f78-ab1c-7ede4f09197c', url: 'https://github.com/JokeyFeng/free-print.git'
             }        
         }
-         stage('Build and Install') {
+         stage('编译代码') {
             steps {                
-                sh 'clean install package -Dmaven.test.skip=true'
+                sh 'mvn clean install package -Dmaven.test.skip=true'
             }        
         }
-        stage('Docker build images') {
+        stage('生成docker镜像') {
             steps {                
                 sh """
                 docker rm -f print-server | true
@@ -21,7 +21,7 @@ pipeline {
                 """
             }        
         }        
-        stage('Docker run') {
+        stage('运行docker镜像->生成容器') {
             steps {
                 sh 'docker run -d -p 2897:2897 --name print-server --restart=always -v /logs/free-print/print-server/:/logs/print-server/ print-server:1.0'
             }        
