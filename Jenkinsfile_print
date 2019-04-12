@@ -8,7 +8,7 @@ pipeline {
         }
          stage('Build and Install') {
             steps {                
-                sh 'mvn clean install package -Dmaven.test.skip=true'
+                sh 'clean install package -Dmaven.test.skip=true'
             }        
         }
         stage('Docker build images') {
