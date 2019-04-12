@@ -1,4 +1,4 @@
-FROM centos
+FROM java:8-jre
 MAINTAINER Chenjing <1134991001@qq.com>
 
 ADD /target/print-server-1.0.jar /app/
